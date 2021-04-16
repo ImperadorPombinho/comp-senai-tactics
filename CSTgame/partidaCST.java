@@ -1,5 +1,7 @@
 package CSTgame;
 
+import CSTgame.personagensCST.leao;
+import tabuleiroGame.posicao;
 import tabuleiroGame.tabuleiro;
 
 public class partidaCST {
@@ -7,6 +9,7 @@ public class partidaCST {
 
     public partidaCST(int linha, int coluna) {
         tabuleiro = new tabuleiro(linha, coluna);
+        setupInicial();
     }
 
     public CSTpeca[][] getPecas(){
@@ -19,4 +22,9 @@ public class partidaCST {
         return matriz;
     }
     
+
+
+    private void setupInicial(){
+        tabuleiro.colocarPeca(new leao(tabuleiro, time.TROPA, 40, 78, 100), new posicao(0, 4));
+    }
 }
