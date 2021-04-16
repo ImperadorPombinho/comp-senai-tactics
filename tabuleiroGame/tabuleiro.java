@@ -5,7 +5,7 @@ public class tabuleiro {
     private int linha;
     private int coluna;
     public tabuleiro(int linha, int coluna) {
-        if(linha < 1 || coluna > 1){
+        if(linha < 1 || coluna < 1){
             throw new exececaotabul("erro ao criar mapa, precisa de pelo menos 1 linha e 1 coluna");
         } 
         this.linha = linha;

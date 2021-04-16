@@ -1,6 +1,8 @@
 package CSTgame;
 
-import CSTgame.personagensCST.leao;
+
+import CSTgame.personagensCST.obstaculo;
+import tabuleiroGame.peca;
 import tabuleiroGame.posicao;
 import tabuleiroGame.tabuleiro;
 
@@ -22,9 +24,14 @@ public class partidaCST {
         return matriz;
     }
     
-
+    private void colocarNovaPeca(peca peca, posicao posicao){
+        tabuleiro.colocarPeca(peca, posicao);
+    }
 
     private void setupInicial(){
-        tabuleiro.colocarPeca(new leao(tabuleiro, time.TROPA, 40, 78, 100), new posicao(0, 4));
+        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14), new posicao(15, 7));
+        colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 14), new posicao(10, 15));
+        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14), new posicao(6, 14));
+        colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 14), new posicao(9, 10));
     }
 }
