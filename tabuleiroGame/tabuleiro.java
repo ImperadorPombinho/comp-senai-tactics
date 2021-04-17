@@ -46,6 +46,9 @@ public class tabuleiro {
         peca.posicao = posicao;
     }
     public peca removerPeca(posicao posicao){
+        if(!posicaoExiste(posicao)){
+            throw new exececaotabul("nao existe essa posicao");
+        }
         if(!istoEhUmaPeca(posicao)){
             return null;
         }
@@ -68,7 +71,7 @@ public class tabuleiro {
         }
         return peca(posicao) != null;
     }
-    
+
 
 
 
