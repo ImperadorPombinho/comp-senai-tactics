@@ -7,8 +7,9 @@ import CSTgame.CSTposicao;
 import CSTgame.partidaCST;
 
 
-public class maizada {
+public class mainzada {
     public static void main(String[] args) {
+        
         Scanner scan = new Scanner(System.in);
         partidaCST partidaCST = new partidaCST(20, 20);
         while(true){
