@@ -17,7 +17,7 @@ public class obstaculo extends CSTpeca{
 
     @Override
     public boolean[][] possiveisMovimentos() {
-        boolean[][] matAux = new boolean[posicao.getLinha()][posicao.getColuna()];
+        boolean[][] matAux = new boolean[getTabul().getLinha()][getTabul().getColuna()];
 
         return matAux;
     }
