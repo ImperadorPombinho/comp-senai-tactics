@@ -58,15 +58,15 @@ public class UI {
             
             System.out.println();
         }
-        System.out.print("  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20");
+       
         System.out.println();
         
     }
-    public static void printarTabuleiro(CSTpeca[][] pecas, int numeroLinhas, boolean[][] possiveisMovimentos){
+    public static void printarTabuleiro(CSTpeca[][] pecas, int numeroLinhas, boolean[][] possiveisAtaques){
         for (int i = 0; i < pecas.length; i++) {
             System.out.print((numeroLinhas - i) + " ");
             for (int j = 0; j < pecas.length; j++) {
-                printarPeca(pecas[i][j], possiveisMovimentos[i][j]);
+                printarPeca(pecas[i][j], possiveisAtaques[i][j]);
             }
             System.out.println();
         }
@@ -83,10 +83,11 @@ public class UI {
             System.out.print("-" + ANSI_RESET);
         }else{
             if(peca.getTiminho() == time.ORACULO){
-                System.out.print(ANSI_BLUE+peca+ANSI_RESET);
+                System.out.print(ANSI_BLUE + peca + ANSI_RESET);
             }else{
-                System.out.print(ANSI_RED+peca+ANSI_RESET);
+                System.out.print(ANSI_BLACK + peca + ANSI_RESET);
             }
+           
                 
         }
         System.out.print(" ");

@@ -50,8 +50,12 @@ public abstract class CSTpeca extends peca{
         CSTpeca peca = (CSTpeca) getTabul().peca(posicao);
         return peca != null && peca.getTiminho() != getTiminho();
     }
+    
 
-
+    public CSTpeca(tabuleiro tabul) {
+        super(tabul);
+        
+    }
     
 
 }

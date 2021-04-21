@@ -4,6 +4,7 @@ package aplicacao;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
 import CSTgame.CSTposicao;
 import CSTgame.exececaoCST;
 import CSTgame.partidaCST;
@@ -16,21 +17,23 @@ public class mainzada {
         partidaCST partidaCST = new partidaCST(20, 20);
         while(true){
             try{
-            UI.limparTelaConsole();
+            //UI.limparTelaConsole();
             UI.printarTabuleiro(partidaCST.getPecas(), 20);
             System.out.println();
+            System.out.println("Ataque");
             System.out.print("posicao origem: ");
             CSTposicao origem = UI.lerPosicao(scan, 20, 20);
-            boolean[][] possiveisMovimentos = partidaCST.possiveisMovimentos(origem);
+            boolean[][] possiveisAtaques = partidaCST.possiveisAtaques(origem);
             UI.limparTelaConsole();
-            UI.printarTabuleiro(partidaCST.getPecas(), 20, possiveisMovimentos);
+            UI.printarTabuleiro(partidaCST.getPecas(), 20, possiveisAtaques);
 
             System.out.println();
             System.out.print("posicao destino: ");
             CSTposicao destino = UI.lerPosicao(scan, 20, 20);
                 //alou; 
                 //alou
-            partidaCST.perfomaceFazerMovimento(origem, destino);
+            partidaCST.perfomaceAtaque(origem, destino);
+             
             }
             catch(exececaoCST e){
                 System.out.println(e.getMessage());

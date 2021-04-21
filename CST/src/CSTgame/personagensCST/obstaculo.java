@@ -21,5 +21,11 @@ public class obstaculo extends CSTpeca{
 
         return matAux;
     }
+
+    @Override
+    public boolean[][] possiveisAtaques() {
+        // TODO Auto-generated method stub
+        return null;
+    }
     
 }
