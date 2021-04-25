@@ -10,6 +10,19 @@ public abstract class CSTpeca extends peca{
     private int vida;
     private int defesa;
     private int rangeMovimento;
+    private int contTomarAtq;
+    public int getContTomarAtq() {
+        return contTomarAtq;
+    }
+    public void setContTomarAtq(int contTomarAtq) {
+        this.contTomarAtq = contTomarAtq;
+    }
+    public void contarAtqTomado(){
+        setContTomarAtq(getContTomarAtq() + 1);
+    }
+    public void diminuirAtqTomado(){
+        setContTomarAtq(getContTomarAtq() - 1);
+    }
     public int getRangeMovimento() {
         return rangeMovimento;
     }
