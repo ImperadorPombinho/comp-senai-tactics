@@ -17,7 +17,7 @@ public class mainzada {
         partidaCST partidaCST = new partidaCST(20, 20);
         while(true){
             try{
-            //UI.limparTelaConsole();
+            UI.limparTelaConsole();
             UI.printarTabuleiro(partidaCST.getPecas(), 20);
             System.out.println();
             System.out.println("Ataque");
