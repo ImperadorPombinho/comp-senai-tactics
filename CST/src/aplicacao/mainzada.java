@@ -17,22 +17,22 @@ public class mainzada {
         partidaCST partidaCST = new partidaCST(20, 20);
         while(true){
             try{
-            UI.limparTelaConsole();
+            //UI.limparTelaConsole();
             UI.printarTabuleiro(partidaCST.getPecas(), 20);
             System.out.println();
             System.out.println("Ataque");
             System.out.print("posicao origem: ");
             CSTposicao origem = UI.lerPosicao(scan, 20, 20);
-            boolean[][] possiveisAtaques = partidaCST.possiveisAtaques(origem);
+            
             UI.limparTelaConsole();
-            UI.printarTabuleiro(partidaCST.getPecas(), 20, possiveisAtaques);
+            UI.printarTabuleiro(partidaCST.getPecas(), 20);
 
             System.out.println();
             System.out.print("posicao destino: ");
             CSTposicao destino = UI.lerPosicao(scan, 20, 20);
                 //alou; 
                 //alou
-            partidaCST.perfomaceAtaque(origem, destino);
+            partidaCST.perfomaceHabilidade(origem, destino);
              
             }
             catch(exececaoCST e){

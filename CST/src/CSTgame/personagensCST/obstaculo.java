@@ -27,5 +27,11 @@ public class obstaculo extends CSTpeca{
         // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public void habilidade(CSTpeca aliado) {
+        
+        
+    }
     
 }

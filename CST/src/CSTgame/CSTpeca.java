@@ -44,7 +44,7 @@ public abstract class CSTpeca extends peca{
     public int getDefesa() {
         return defesa;
     }
-    protected void setDefesa(int defesa) {
+    public void setDefesa(int defesa) {
         this.defesa = defesa;
     }
     public CSTpeca(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento) {
@@ -69,6 +69,7 @@ public abstract class CSTpeca extends peca{
         super(tabul);
         
     }
+    public abstract void habilidade(CSTpeca aliado);
     
 
 }

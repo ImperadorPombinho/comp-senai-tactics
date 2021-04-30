@@ -75,6 +75,14 @@ public class partidaCST {
         }
         
     }
+    public void perfomaceHabilidade(CSTposicao posicaoVoce, CSTposicao posicaoAliado){
+        posicao posicaooVoce = posicaoVoce.toPosicao();
+        posicao posicaooAliado = posicaoAliado.toPosicao();
+        CSTpeca voce = (CSTpeca) tabuleiro.peca(posicaooVoce);
+        CSTpeca aliado = (CSTpeca) tabuleiro.peca(posicaooAliado);
+        habilidade(voce, aliado);
+
+    }
 
     private void fazerMovimento(posicao origem, posicao destino){
         peca naOrigem = tabuleiro.removerPeca(origem);
@@ -84,6 +92,10 @@ public class partidaCST {
         atacado.setVida(atacado.getVida() - (atacante.getAtaque() - atacado.getDefesa()));
         System.out.println("vida atacado: " + atacado.getVida());
         
+    }
+    private void habilidade(CSTpeca voce, CSTpeca aliado){
+        voce.habilidade(aliado);
+        System.out.println("defesa aliado: " + aliado.getDefesa());
     }
     private void validacaoOrigem(posicao origem){
         if(!tabuleiro.istoEhUmaPeca(origem)){
@@ -139,5 +151,6 @@ public class partidaCST {
         colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5), 7, 14);
         colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 14,5), 1, 1);
         colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 2, 500, 5), 14, 5);
+        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5), 1, 2);
     }
 }

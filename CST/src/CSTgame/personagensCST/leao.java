@@ -1,5 +1,8 @@
 package CSTgame.personagensCST;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import CSTgame.CSTpeca;
 
 import CSTgame.time;
@@ -7,7 +10,34 @@ import tabuleiroGame.posicao;
 import tabuleiroGame.tabuleiro;
 
 public class leao extends CSTpeca{
+    private boolean travaratq; 
+    private List<CSTpeca> aliados = new ArrayList<>();
+    public boolean isTravaratq() {
+        return travaratq;
+    }
+
+
+
+    public void setTravaratq(boolean travaratq) {
+        this.travaratq = travaratq;
+    }
+
+
+
+    public boolean isHabAtivado() {
+        return habAtivado;
+    }
+
+
+
+    public void setHabAtivado(boolean habAtivado) {
+        this.habAtivado = habAtivado;
+    }
+
+
+
     private int contSurtez;
+    private boolean habAtivado;
    public int getContSurtez() {
         return contSurtez;
     }
@@ -20,10 +50,11 @@ public class leao extends CSTpeca{
 
 
 
-private boolean travaratq;
+
     public leao(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento) {
         super(tabul, timinho, ataque, defesa, vida, rangeMovimento);
-        travaratq = true;
+        setTravaratq(true);
+        setHabAtivado(false);
     }
 
     
@@ -39,11 +70,11 @@ private boolean travaratq;
 
     private boolean modoSurtado(){
         setContSurtez(getContTomarAtq());
-        if(getContSurtez() == 3 && travaratq){
+        if(getContSurtez() == 3 && isTravaratq() == true){
             setAtaque(getAtaque() + 100);
-            travaratq = false;
+            setTravaratq(false);
             return true;
-        }else if(getContSurtez() > 3 || travaratq == false){
+        }else if(getContSurtez() > 3 || isTravaratq() == false){
             return true;
         }else{
             return false;
@@ -120,6 +151,28 @@ private boolean travaratq;
         }
 
         return matAux;
+    }
+
+
+
+    @Override
+    public void habilidade(CSTpeca aliado) {
+        CSTpeca auxaliado;
+        if(isHabAtivado() == false){
+            aliado.setDefesa(aliado.getDefesa() + 5);
+            aliados.add(aliado);
+            setHabAtivado(true);
+        }
+        if(isHabAtivado() == true){
+            auxaliado = aliados.get(0);
+            auxaliado.setDefesa(auxaliado.getDefesa() - 5);
+            aliado.setDefesa(aliado.getDefesa() + 5);
+            aliados.remove(0);
+            aliados.add(aliado);
+            setHabAtivado(true);
+        }
+        
+        
     }
 
 
