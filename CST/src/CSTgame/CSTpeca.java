@@ -11,6 +11,7 @@ public abstract class CSTpeca extends peca{
     private int defesa;
     private int rangeMovimento;
     private int contTomarAtq;
+    
     public int getContTomarAtq() {
         return contTomarAtq;
     }
@@ -63,7 +64,10 @@ public abstract class CSTpeca extends peca{
         CSTpeca peca = (CSTpeca) getTabul().peca(posicao);
         return peca != null && peca.getTiminho() != getTiminho();
     }
-    
+    protected boolean haUmaPecaAliada(posicao posicao){
+        CSTpeca peca = (CSTpeca) getTabul().peca(posicao);
+        return peca != null && peca.getTiminho() == getTiminho();
+    }
 
     public CSTpeca(tabuleiro tabul) {
         super(tabul);

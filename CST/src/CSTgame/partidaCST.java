@@ -13,6 +13,8 @@ public class partidaCST {
     private int linhaMax;
     private int ColunaMax;
     private boolean trava;
+    private jogador jogador = new jogador();
+    private int turno;
     public boolean isTrava() {
         return trava;
     }
@@ -25,6 +27,8 @@ public class partidaCST {
         tabuleiro = new tabuleiro(linha, coluna);
         this.linhaMax = linha;
         this.ColunaMax = coluna;
+        turno = 1;
+        jogador.setTimeAtual(time.ORACULO);
         setupInicial();
     }
 
@@ -80,6 +84,7 @@ public class partidaCST {
         posicao posicaooAliado = posicaoAliado.toPosicao();
         CSTpeca voce = (CSTpeca) tabuleiro.peca(posicaooVoce);
         CSTpeca aliado = (CSTpeca) tabuleiro.peca(posicaooAliado);
+        validacaoHabilidade(voce, aliado);
         habilidade(voce, aliado);
 
     }
@@ -124,6 +129,15 @@ public class partidaCST {
             throw new exececaoCST("nao ha ataques disponiveis para essa peca");
         }
     }
+    private void validacaoHabilidade(CSTpeca voce, CSTpeca aliado){
+        if(!tabuleiro.istoEhUmaPeca(aliado.getPosicao())){
+            throw new exececaoCST("isto nao eh uma peca do tabuleiro");
+        }
+        if(!voce.haUmaPecaAliada(aliado.getPosicao())){
+            throw new exececaoCST("nao eh aliado para ajudar");
+        }
+
+    }
     private void validacaoAtaqueOD(posicao destino, posicao origem){
         if(!tabuleiro.peca(origem).possivelAtaque(destino)){
             throw new exececaoCST("essa peca escolhida nao pode atacar nessa direção");
@@ -143,6 +157,10 @@ public class partidaCST {
     
     private void colocarNovaPeca(peca peca, int linha, int coluna){
         tabuleiro.colocarPeca(peca, new CSTposicao(coluna, linha, linhaMax, ColunaMax).toPosicao());
+    }
+    private void proximoTurno(){
+        turno++;
+        jogador.setTimeAtual((jogador.getTimeAtual() == time.ORACULO) ? time.TROPA : time.ORACULO);
     }
 
     private void setupInicial(){
