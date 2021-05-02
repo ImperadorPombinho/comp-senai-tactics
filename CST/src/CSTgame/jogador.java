@@ -15,7 +15,7 @@ public class jogador {
     public void setTimeAtual(time timeAtual) {
         this.timeAtual = timeAtual;
     }
-
+    //aaa
     
     
 }
