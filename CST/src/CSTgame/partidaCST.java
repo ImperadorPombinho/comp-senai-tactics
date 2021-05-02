@@ -1,7 +1,11 @@
 package CSTgame;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import CSTgame.personagensCST.leao;
+
 import CSTgame.personagensCST.obstaculo;
 
 import tabuleiroGame.peca;
@@ -14,6 +18,9 @@ public class partidaCST {
     private int ColunaMax;
     private boolean trava;
     private jogador jogador = new jogador();
+    private List<CSTpeca> pecasNoTabuleiro = new ArrayList<>();
+    private List<CSTpeca> pecasOraculo= new ArrayList<>();
+    private List<CSTpeca> pecasTropa = new ArrayList<>();
     private int turno;
     public boolean isTrava() {
         return trava;
@@ -164,10 +171,18 @@ public class partidaCST {
     
     private void colocarNovaPeca(peca peca, int linha, int coluna){
         tabuleiro.colocarPeca(peca, new CSTposicao(coluna, linha, linhaMax, ColunaMax).toPosicao());
+        if(!(peca instanceof obstaculo) && ((CSTpeca)peca).getTiminho() == time.ORACULO){
+            pecasOraculo.add((CSTpeca)peca);
+        }
+        if(!(peca instanceof obstaculo) && ((CSTpeca)peca).getTiminho() == time.TROPA){
+            pecasTropa.add((CSTpeca)peca);
+        }
     }
     private void proximoTurno(){
         turno++;
         jogador.setTimeAtual((jogador.getTimeAtual() == time.ORACULO) ? time.TROPA : time.ORACULO);
+        
+
     }
 
     private void setupInicial(){
@@ -177,5 +192,7 @@ public class partidaCST {
         colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 14,5), 1, 1);
         colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 2, 500, 5), 14, 5);
         colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5), 1, 2);
+        
+        
     }
 }
