@@ -162,6 +162,7 @@ public class leao extends CSTpeca{
             aliado.setDefesa(aliado.getDefesa() + 5);
             aliados.add(aliado);
             setHabAtivado(true);
+            
         }
         if(isHabAtivado() == true){
             auxaliado = aliados.get(0);
