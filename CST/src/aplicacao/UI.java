@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import CSTgame.CSTpeca;
 import CSTgame.CSTposicao;
+import CSTgame.partidaCST;
 import CSTgame.time;
 
 
@@ -32,6 +33,33 @@ public class UI {
     public static void limparTelaConsole(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+    public static String[] lerNomes(Scanner scan){
+        String[] nomes = new String[2];
+        for (int i = 0; i < nomes.length; i++) {
+            System.out.print("Digite o seu nome jogador #" + (i+1) + ":");
+            nomes[i] = scan.next();
+        }
+        return nomes;
+    }
+
+    public static int printarPartida(partidaCST partidaCST, String[] nomes, int numeroLinhas, Scanner scan){
+        int selec;
+        printarTabuleiro(partidaCST.getPecas(), numeroLinhas);
+        System.out.println();
+        System.out.println("Turno: " + partidaCST.getTurno());
+        if(partidaCST.getJogador().getTimeAtual() == time.ORACULO){
+            partidaCST.getJogador().setNome(nomes[0]);
+            System.out.println("Esperando " + partidaCST.getJogador().getNome() + " jogar");
+        }else{
+            partidaCST.getJogador().setNome(nomes[1]);
+            System.out.println("Esperando " + partidaCST.getJogador().getNome() + " jogar");
+        }
+        System.out.println("Escolha a acao abaixo: ");
+        System.out.println("1-Atacar");
+        System.out.println("2-Movimentar");
+        selec = scan.nextInt();
+        return selec;
     }
     public static CSTposicao lerPosicao(Scanner scan, int linhaMax, int ColunaMax){
         try{

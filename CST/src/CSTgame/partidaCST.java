@@ -19,12 +19,42 @@ public class partidaCST {
     private int ColunaMax;
     private boolean trava;
     private jogador jogador = new jogador();
-    private List<CSTpeca> pecasNoTabuleiro = new ArrayList<>();
+    
     private List<CSTpeca> pecasOraculo= new ArrayList<>();
     private List<CSTpeca> pecasTropa = new ArrayList<>();
     private int turno;
     private int indOraculo;
     private int indTropa;
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
+
+    public int getIndOraculo() {
+        return indOraculo;
+    }
+
+    public void setIndOraculo(int indOraculo) {
+        this.indOraculo = indOraculo;
+    }
+
+    public int getIndTropa() {
+        return indTropa;
+    }
+
+    public void setIndTropa(int indTropa) {
+        this.indTropa = indTropa;
+    }
+
+    public jogador getJogador() {
+        return jogador;
+    }
+
+
+
     public boolean isTrava() {
         return trava;
     }
@@ -37,13 +67,14 @@ public class partidaCST {
         tabuleiro = new tabuleiro(linha, coluna);
         this.linhaMax = linha;
         this.ColunaMax = coluna;
-        turno = 1;
+        setTurno(1);
         jogador.setTimeAtual(time.ORACULO);
         setupInicial();
         Collections.shuffle(pecasOraculo);
         Collections.shuffle(pecasTropa);
-        indOraculo = 0;
-        indTropa = 0;
+        setIndOraculo(0);
+        setIndTropa(0);
+        jogador.setPecaAtual(pecasOraculo.get(getIndOraculo()));
     }
 
     public CSTpeca[][] getPecas(){
@@ -124,6 +155,9 @@ public class partidaCST {
         if(jogador.getTimeAtual() != ((CSTpeca)tabuleiro.peca(origem)).getTiminho()){
             throw new exececaoCST("nao pode mover pecas adversarias");
         }
+        if(jogador.getPecaAtual() != ((CSTpeca)tabuleiro.peca(origem))){
+            throw new exececaoCST("nao eh essa peca para ser jogada");
+        }
         if(!tabuleiro.peca(origem).haAlgumMovimentoPossivel() || tabuleiro.peca(origem) instanceof obstaculo){
             throw new exececaoCST("nao ha movimento possivel para essa peca ou essa peca eh um obstaculo");
         }
@@ -143,6 +177,7 @@ public class partidaCST {
         if(!atacante.haUmaPecaDoOponente(atacado.getPosicao())){
             throw new exececaoCST("nao eh inimigo para atacar");
         }
+        
         if(!tabuleiro.peca(atacante.getPosicao()).haAlgumAtaquePossivel()){
             throw new exececaoCST("nao ha ataques disponiveis para essa peca");
         }
@@ -159,6 +194,9 @@ public class partidaCST {
     private void validacaoAtaqueOD(posicao destino, posicao origem){
         if(jogador.getTimeAtual() != ((CSTpeca)tabuleiro.peca(origem)).getTiminho()){
             throw new exececaoCST("esta peça escolhida nao eh do seu campo");
+        }
+        if(jogador.getPecaAtual() != ((CSTpeca)tabuleiro.peca(origem))){
+            throw new exececaoCST("nao eh essa peca para ser jogada");
         }
         if(!tabuleiro.peca(origem).possivelAtaque(destino)){
             throw new exececaoCST("essa peca escolhida nao pode atacar nessa direção");
@@ -186,9 +224,24 @@ public class partidaCST {
         }
     }
     private void proximoTurno(){
-        turno++;
+
+        setTurno(getTurno() + 1);
         jogador.setTimeAtual((jogador.getTimeAtual() == time.ORACULO) ? time.TROPA : time.ORACULO);
-        
+        if(jogador.getTimeAtual() == time.ORACULO){
+            jogador.setPecaAtual(pecasOraculo.get(getIndOraculo()));
+            if(getIndOraculo() + 1 == pecasOraculo.size()){
+                setIndOraculo(0);
+            }else{
+                setIndOraculo(getIndOraculo() + 1);
+            }
+        }else{
+            jogador.setPecaAtual(pecasTropa.get(getIndTropa()));
+            if(getIndTropa() + 1 == pecasTropa.size()){
+                setIndTropa(0);
+            }else{
+                setIndTropa(getIndTropa() + 1);
+            }
+        }
 
 
     }
