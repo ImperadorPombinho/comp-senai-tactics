@@ -2,6 +2,7 @@ package CSTgame;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import CSTgame.personagensCST.leao;
@@ -22,6 +23,8 @@ public class partidaCST {
     private List<CSTpeca> pecasOraculo= new ArrayList<>();
     private List<CSTpeca> pecasTropa = new ArrayList<>();
     private int turno;
+    private int indOraculo;
+    private int indTropa;
     public boolean isTrava() {
         return trava;
     }
@@ -37,6 +40,10 @@ public class partidaCST {
         turno = 1;
         jogador.setTimeAtual(time.ORACULO);
         setupInicial();
+        Collections.shuffle(pecasOraculo);
+        Collections.shuffle(pecasTropa);
+        indOraculo = 0;
+        indTropa = 0;
     }
 
     public CSTpeca[][] getPecas(){
@@ -182,6 +189,7 @@ public class partidaCST {
         turno++;
         jogador.setTimeAtual((jogador.getTimeAtual() == time.ORACULO) ? time.TROPA : time.ORACULO);
         
+
 
     }
 
