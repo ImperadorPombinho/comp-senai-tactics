@@ -58,6 +58,7 @@ public class partidaCST {
         validacaoOrigem(origem);
         validacaoOrigemDestino(origem, destino);
         fazerMovimento(origem, destino);
+        proximoTurno();
     }
     public void perfomaceAtaque(CSTposicao posicaoAtacante, CSTposicao posicaoAtacado){
         posicao posAtacante = posicaoAtacante.toPosicao();
@@ -77,7 +78,7 @@ public class partidaCST {
             peca capturada = tabuleiro.removerPeca(posAtacado);
             
         }
-        
+        proximoTurno();
     }
     public void perfomaceHabilidade(CSTposicao posicaoVoce, CSTposicao posicaoAliado){
         posicao posicaooVoce = posicaoVoce.toPosicao();
@@ -86,7 +87,7 @@ public class partidaCST {
         CSTpeca aliado = (CSTpeca) tabuleiro.peca(posicaooAliado);
         validacaoHabilidade(voce, aliado);
         habilidade(voce, aliado);
-
+        proximoTurno();
     }
 
     private void fazerMovimento(posicao origem, posicao destino){
@@ -105,6 +106,9 @@ public class partidaCST {
     private void validacaoOrigem(posicao origem){
         if(!tabuleiro.istoEhUmaPeca(origem)){
             throw new exececaoCST("isto nao eh uma peca para se mover");
+        }
+        if(jogador.getTimeAtual() != ((CSTpeca)tabuleiro.peca(origem)).getTiminho()){
+            throw new exececaoCST("nao pode mover pecas adversarias");
         }
         if(!tabuleiro.peca(origem).haAlgumMovimentoPossivel() || tabuleiro.peca(origem) instanceof obstaculo){
             throw new exececaoCST("nao ha movimento possivel para essa peca ou essa peca eh um obstaculo");
@@ -139,6 +143,9 @@ public class partidaCST {
 
     }
     private void validacaoAtaqueOD(posicao destino, posicao origem){
+        if(jogador.getTimeAtual() != ((CSTpeca)tabuleiro.peca(origem)).getTiminho()){
+            throw new exececaoCST("esta peça escolhida nao eh do seu campo");
+        }
         if(!tabuleiro.peca(origem).possivelAtaque(destino)){
             throw new exececaoCST("essa peca escolhida nao pode atacar nessa direção");
         }
