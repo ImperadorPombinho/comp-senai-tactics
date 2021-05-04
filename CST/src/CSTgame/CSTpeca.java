@@ -73,7 +73,7 @@ public abstract class CSTpeca extends peca{
         super(tabul);
         
     }
-    public abstract void habilidade(CSTpeca aliado);
+    public abstract void habilidade(CSTpeca generico);
     
 
 }
