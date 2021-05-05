@@ -15,7 +15,11 @@ public class miguez extends CSTpeca {
         dormindo = aleatorio.nextInt(10)+1;
         return dormindo;
     }
-
+    @Override
+    public String toString() {
+        
+        return "🤡";
+    }
     public void setDormindo(int dormindo) {
         this.dormindo = dormindo;
     }
@@ -31,8 +35,8 @@ public class miguez extends CSTpeca {
     }
 
 
-    public miguez(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento) {
-        super(tabul, timinho, ataque, defesa, vida, rangeMovimento);
+    public miguez(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome) {
+        super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
         //TODO Auto-generated constructor stub
     }
 

@@ -11,7 +11,13 @@ public abstract class CSTpeca extends peca{
     private int defesa;
     private int rangeMovimento;
     private int contTomarAtq;
-    
+    private String nome;
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
     public int getContTomarAtq() {
         return contTomarAtq;
     }
@@ -48,13 +54,14 @@ public abstract class CSTpeca extends peca{
     public void setDefesa(int defesa) {
         this.defesa = defesa;
     }
-    public CSTpeca(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento) {
+    public CSTpeca(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome) {
         super(tabul);
         this.timinho = timinho;
         this.ataque = ataque;
         this.defesa = defesa;
         this.vida = vida;
         this.rangeMovimento =rangeMovimento;
+        this.nome = nome;
         
     }
     public time getTiminho() {

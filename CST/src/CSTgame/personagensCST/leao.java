@@ -51,8 +51,8 @@ public class leao extends CSTpeca{
 
 
 
-    public leao(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento) {
-        super(tabul, timinho, ataque, defesa, vida, rangeMovimento);
+    public leao(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome) {
+        super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
         setTravaratq(true);
         setHabAtivado(false);
     }

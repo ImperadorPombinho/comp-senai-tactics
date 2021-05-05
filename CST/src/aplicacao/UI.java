@@ -1,6 +1,7 @@
 package aplicacao;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import CSTgame.CSTpeca;
@@ -51,9 +52,11 @@ public class UI {
         if(partidaCST.getJogador().getTimeAtual() == time.ORACULO){
             partidaCST.getJogador().setNome(nomes[0]);
             System.out.println("Esperando " + partidaCST.getJogador().getNome() + " jogar");
+            System.out.println("Peça a ser jogada: " + partidaCST.getJogador().getPecaAtual().getNome() + " " +partidaCST.getJogador().getPecaAtual().toString());
         }else{
             partidaCST.getJogador().setNome(nomes[1]);
             System.out.println("Esperando " + partidaCST.getJogador().getNome() + " jogar");
+            System.out.println("Peça a ser jogada: " + partidaCST.getJogador().getPecaAtual().getNome() + " " +partidaCST.getJogador().getPecaAtual().toString());
         }
         System.out.println("Escolha a acao abaixo: ");
         System.out.println("1-Atacar");
@@ -75,7 +78,22 @@ public class UI {
         
     }
 
+    public static void printarSorteioAtqPecas(partidaCST partidaCST){
+        List<CSTpeca> auxOraculo = partidaCST.getPecasOraculo();
+        List<CSTpeca> auxTropa = partidaCST.getPecasTropa();
+        System.out.println();
+        System.out.println("ordem de atq da tropa: ");
+        for (CSTpeca csTpeca : auxTropa) {
+            System.out.print("-> " +csTpeca.getNome());
 
+        }
+        System.out.println();
+        System.out.println("ordem de atq da Oraculo: ");
+        for (CSTpeca csTpeca : auxOraculo) {
+            System.out.print("-> " +csTpeca.getNome());
+
+        }
+    }
 
     public static void printarTabuleiro(CSTpeca[][] pecas, int numeroLinhas){
         for (int i = 0; i < pecas.length; i++) {
