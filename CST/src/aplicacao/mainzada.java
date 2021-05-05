@@ -17,10 +17,12 @@ public class mainzada {
         partidaCST partidaCST = new partidaCST(20, 20);
         String[] nomes = UI.lerNomes(scan);
         boolean[][] possiveisAlgumaCoisa;
+        UI.printarSorteioAtqPecas(partidaCST);
+        scan.nextLine();
         scan.nextLine();
         while(true){
             try{
-            UI.limparTelaConsole();
+            //UI.limparTelaConsole();
             selec = UI.printarPartida(partidaCST, nomes, 20, scan);
             if(selec == 1){
                 System.out.println();

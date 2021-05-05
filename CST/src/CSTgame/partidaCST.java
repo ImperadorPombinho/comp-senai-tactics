@@ -7,7 +7,7 @@ import java.util.List;
 
 import CSTgame.personagensCST.juao;
 import CSTgame.personagensCST.leao;
-
+import CSTgame.personagensCST.miguez;
 import CSTgame.personagensCST.obstaculo;
 
 import tabuleiroGame.peca;
@@ -25,6 +25,18 @@ public class partidaCST {
     private List<CSTpeca> pecasTropa = new ArrayList<>();
     private int turno;
     private int indOraculo;
+    public List<CSTpeca> getPecasOraculo() {
+        return pecasOraculo;
+    }
+
+  
+
+    public List<CSTpeca> getPecasTropa() {
+        return pecasTropa;
+    }
+
+   
+
     private int indTropa;
     public int getTurno() {
         return turno;
@@ -247,31 +259,38 @@ public class partidaCST {
         jogador.setTimeAtual((jogador.getTimeAtual() == time.ORACULO) ? time.TROPA : time.ORACULO);
         if(jogador.getTimeAtual() == time.ORACULO){
             jogador.setPecaAtual(pecasOraculo.get(getIndOraculo()));
-            if(getIndOraculo() + 1 == pecasOraculo.size()){
-                setIndOraculo(0);
-            }else{
-                setIndOraculo(getIndOraculo() + 1);
-            }
-        }else{
-            jogador.setPecaAtual(pecasTropa.get(getIndTropa()));
-            if(getIndTropa() + 1 == pecasTropa.size()){
+            
+            if(getIndTropa() +1 == pecasTropa.size()){
                 setIndTropa(0);
             }else{
                 setIndTropa(getIndTropa() + 1);
+                System.out.println("indice Tropa: "+getIndTropa());
             }
+        }else{
+            
+            jogador.setPecaAtual(pecasTropa.get(getIndTropa()));
+            if(getIndOraculo() +1 == pecasOraculo.size()){
+                setIndOraculo(0);
+            }else{
+                setIndOraculo(getIndOraculo() + 1);
+                System.out.println("indice Oraculo: "+getIndOraculo());
+            }
+          
         }
 
 
     }
 
     private void setupInicial(){
-        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14, 5), 20, 20);
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 0, 0, 120,5), 19, 5);
-        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5), 7, 14);
-        colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 14,5), 1, 1);
-        colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 2, 500, 5), 14, 5);
-        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5), 1, 2);
-        colocarNovaPeca(new juao(tabuleiro, time.ORACULO, 0, 0, 14,4), 17, 5);
+
+        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14, 5, "obs"), 20, 20);
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 0, 0, 120,5, "leaoT"), 19, 5);
+        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5,"obs"), 7, 14);
+        colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 14,5, "obs"), 1, 1);
+        colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 2, 500, 5, "leaoO"), 14, 5);
+        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5, "obs"), 1, 2);
+        colocarNovaPeca(new miguez(tabuleiro, time.ORACULO, 0, 0, 14,5, "miguezO"), 20, 1);
+        colocarNovaPeca(new miguez(tabuleiro, time.TROPA, 0, 0, 14,5, "miguezT"), 13, 5);
         
     }
 }
