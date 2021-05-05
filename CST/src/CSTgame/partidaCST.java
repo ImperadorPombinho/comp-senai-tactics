@@ -267,7 +267,7 @@ public class partidaCST {
         }
     }
 
-    private void proximoTurno(){
+    public void proximoTurno(){
 
         setTurno(getTurno() + 1);
 

@@ -14,8 +14,8 @@ public class miguez extends CSTpeca {
     private int dormindo;
     private partidaCST partida;
 
-    public miguez(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, partidaCST partida) {
-        super(tabul, timinho, ataque, defesa, vida, rangeMovimento);
+    public miguez(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, partidaCST partida, String nome) {
+        super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
         this.partida = partida;
         setTravaMov(false);
     }
@@ -29,11 +29,7 @@ public class miguez extends CSTpeca {
         dormindo = aleatorio.nextInt(10)+1;
         return dormindo;
     }
-    @Override
-    public String toString() {
-        
-        return "🤡";
-    }
+
     public void setDormindo(int dormindo) {
         this.dormindo = dormindo;
     }
