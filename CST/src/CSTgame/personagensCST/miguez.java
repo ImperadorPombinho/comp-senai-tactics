@@ -1,15 +1,28 @@
 package CSTgame.personagensCST;
 
 import CSTgame.CSTpeca;
-
+import CSTgame.partidaCST;
 import CSTgame.time;
+
 import tabuleiroGame.posicao;
 import tabuleiroGame.tabuleiro;
+
 import java.util.Random;
 
 public class miguez extends CSTpeca {
     Random aleatorio = new Random();
     private int dormindo;
+    private partidaCST partida;
+
+    public miguez(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, partidaCST partida) {
+        super(tabul, timinho, ataque, defesa, vida, rangeMovimento);
+        this.partida = partida;
+    }
+
+    @Override
+    public String toString(){
+        return "🤡";
+    }
 
     public int getDormindo() {
         dormindo = aleatorio.nextInt(10)+1;
@@ -22,7 +35,7 @@ public class miguez extends CSTpeca {
 
     public String dormiuVez(){
         if(getDormindo() == 1){
-            //passarturno();
+            partida.proximoTurno();
             return "Miguez acabou dormindo demais e perdeu a jogada!";
         }
         else{ 
@@ -30,11 +43,7 @@ public class miguez extends CSTpeca {
         }
     }
 
-
-    public miguez(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento) {
-        super(tabul, timinho, ataque, defesa, vida, rangeMovimento);
-        //TODO Auto-generated constructor stub
-    }
+    
 
     @Override
     public boolean[][] possiveisMovimentos() {
@@ -86,22 +95,22 @@ public class miguez extends CSTpeca {
         boolean[][] matAux = new boolean[getTabul().getLinha()][getTabul().getColuna()];
         posicao posTeste = new posicao(0, 0);
         //acima
-        posTeste.setCoordenada(getPosicao().getLinha() - 5, getPosicao().getColuna());
+        posTeste.setCoordenada(getPosicao().getLinha() - 2, getPosicao().getColuna());
         if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
         //baixo
-        posTeste.setCoordenada(getPosicao().getLinha() + 5, getPosicao().getColuna());
+        posTeste.setCoordenada(getPosicao().getLinha() + 2, getPosicao().getColuna());
         if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
         //esquerda
-        posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 5);
+        posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 2);
         if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
         //direita
-        posTeste.setCoordenada(getPosicao().getLinha() , getPosicao().getColuna() + 5);
+        posTeste.setCoordenada(getPosicao().getLinha() , getPosicao().getColuna() + 2);
         if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)&& getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
@@ -110,8 +119,38 @@ public class miguez extends CSTpeca {
     }
 
     @Override
-    public void habilidade(CSTpeca aliado) {
-        // TODO Auto-generated method stub
+    public void habilidade(CSTpeca generico) {
+        boolean[][] matAux = new boolean[getTabul().getLinha()][getTabul().getColuna()];
+        posicao posTeste = new posicao(0, 0);
+        /*if(haUmaPecaDoOponente(generico.getPosicao())){
+
+        }*/
+        //acima
+        posTeste.setCoordenada(getPosicao().getLinha() - 2, getPosicao().getColuna());
+        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
+            matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
+            //puxar a função booleana de se é possível realizar o ataque
+        }
+        //abaixo
+        posTeste.setCoordenada(getPosicao().getLinha() + 2, getPosicao().getColuna());
+        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
+            matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
+            //puxar a função booleana de se é possível realizar o ataque
+        }
+        //acima
+        posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 2);
+        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
+            matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
+            //puxar a função booleana de se é possível realizar o ataque
+        }
+        //acima
+        posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() + 2);
+        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
+            matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
+            //puxar a função booleana de se é possível realizar o ataque
+        }
+
         
+
     }
 }

@@ -2,6 +2,7 @@ package CSTgame;
 
 
 import CSTgame.personagensCST.leao;
+import CSTgame.personagensCST.miguez;
 import CSTgame.personagensCST.obstaculo;
 
 import tabuleiroGame.peca;
@@ -158,7 +159,8 @@ public class partidaCST {
     private void colocarNovaPeca(peca peca, int linha, int coluna){
         tabuleiro.colocarPeca(peca, new CSTposicao(coluna, linha, linhaMax, ColunaMax).toPosicao());
     }
-    private void proximoTurno(){
+    
+    public void proximoTurno(){
         turno++;
         jogador.setTimeAtual((jogador.getTimeAtual() == time.ORACULO) ? time.TROPA : time.ORACULO);
     }
@@ -166,6 +168,7 @@ public class partidaCST {
     private void setupInicial(){
         colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14, 5), 20, 20);
         colocarNovaPeca(new leao(tabuleiro, time.TROPA, 0, 0, 120,5), 19, 5);
+        colocarNovaPeca(new miguez(tabuleiro, time.TROPA, 0, 0, 120,2, this), 19, 2);
         colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5), 7, 14);
         colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 14,5), 1, 1);
         colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 2, 500, 5), 14, 5);
