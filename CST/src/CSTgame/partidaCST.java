@@ -154,10 +154,11 @@ public class partidaCST {
             tabuleiro.colocarPeca(naOrigem, origem);
             System.out.println("Essa peça está congelada e será descongelada na próxima rodada!");
         }
-        else if(((CSTpeca) naOrigem).isTravaMov()==true /*&&*/ ){
+        else if(((CSTpeca) naOrigem).isTravaMov()==true && jogador.getPecaAtual()==(CSTpeca)naOrigem){
             tabuleiro.colocarPeca(naOrigem, origem);
             System.out.println("Essa peça está congelada e será descongelada na próxima rodada!");
             proximoTurno();
+            ((CSTpeca) naOrigem).setTravaMov(false);
         }
         else{
         tabuleiro.colocarPeca(naOrigem, destino);
