@@ -11,6 +11,7 @@ public abstract class CSTpeca extends peca{
     private int defesa;
     private int rangeMovimento;
     private int contTomarAtq;
+    private boolean travaMov;
     private String nome;
     public String getNome() {
         return nome;
@@ -18,6 +19,14 @@ public abstract class CSTpeca extends peca{
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
+     public boolean isTravaMov() {
+        return travaMov;
+    }
+    public void setTravaMov(boolean travaMov) {
+        this.travaMov = travaMov;
+    }
+
     public int getContTomarAtq() {
         return contTomarAtq;
     }

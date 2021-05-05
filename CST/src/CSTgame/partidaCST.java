@@ -150,8 +150,21 @@ public class partidaCST {
 
     private void fazerMovimento(posicao origem, posicao destino){
         peca naOrigem = tabuleiro.removerPeca(origem);
+        if(((CSTpeca) naOrigem).isTravaMov()==true){
+            tabuleiro.colocarPeca(naOrigem, origem);
+            System.out.println("Essa peça está congelada e será descongelada na próxima rodada!");
+        }
+        else if(((CSTpeca) naOrigem).isTravaMov()==true /*&&*/ ){
+            tabuleiro.colocarPeca(naOrigem, origem);
+            System.out.println("Essa peça está congelada e será descongelada na próxima rodada!");
+            proximoTurno();
+        }
+        else{
         tabuleiro.colocarPeca(naOrigem, destino);
+        }
+
     }
+    
     private void ataque(CSTpeca atacante, CSTpeca atacado){
         if(atacante instanceof juao){
             if(atacante.getVida() < atacado.getVida()){
@@ -253,9 +266,11 @@ public class partidaCST {
             pecasTropa.add((CSTpeca)peca);
         }
     }
+
     private void proximoTurno(){
 
         setTurno(getTurno() + 1);
+
         jogador.setTimeAtual((jogador.getTimeAtual() == time.ORACULO) ? time.TROPA : time.ORACULO);
         if(jogador.getTimeAtual() == time.ORACULO){
             jogador.setPecaAtual(pecasOraculo.get(getIndOraculo()));
