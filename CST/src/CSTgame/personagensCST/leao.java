@@ -51,8 +51,8 @@ public class leao extends CSTpeca{
 
 
 
-    public leao(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento) {
-        super(tabul, timinho, ataque, defesa, vida, rangeMovimento);
+    public leao(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome) {
+        super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
         setTravaratq(true);
         setHabAtivado(false);
     }
@@ -156,22 +156,24 @@ public class leao extends CSTpeca{
 
 
     @Override
-    public void habilidade(CSTpeca aliado) {
+    public void habilidade(CSTpeca generico) {
         CSTpeca auxaliado;
-        if(isHabAtivado() == false){
-            aliado.setDefesa(aliado.getDefesa() + 5);
-            aliados.add(aliado);
-            setHabAtivado(true);
-        }
-        if(isHabAtivado() == true){
-            auxaliado = aliados.get(0);
-            auxaliado.setDefesa(auxaliado.getDefesa() - 5);
-            aliado.setDefesa(aliado.getDefesa() + 5);
-            aliados.remove(0);
-            aliados.add(aliado);
-            setHabAtivado(true);
-        }
-        
+        if(haUmaPecaAliada(generico.getPosicao())){
+            if(isHabAtivado() == false){
+                generico.setDefesa(generico.getDefesa() + 5);
+                aliados.add(generico);
+                setHabAtivado(true);
+            
+          }
+            if(isHabAtivado() == true){
+                auxaliado = aliados.get(0);
+                auxaliado.setDefesa(auxaliado.getDefesa() - 5);
+                generico.setDefesa(generico.getDefesa() + 5);
+                aliados.remove(0);
+                aliados.add(generico);
+                setHabAtivado(true);
+          }
+    }
         
     }
 
