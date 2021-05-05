@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import CSTgame.personagensCST.juao;
 import CSTgame.personagensCST.leao;
 import CSTgame.personagensCST.miguez;
 import CSTgame.personagensCST.obstaculo;
@@ -152,13 +153,30 @@ public class partidaCST {
         tabuleiro.colocarPeca(naOrigem, destino);
     }
     private void ataque(CSTpeca atacante, CSTpeca atacado){
+        if(atacante instanceof juao){
+            if(atacante.getVida() < atacado.getVida()){
+                atacado.setVida(atacado.getVida() - ((atacante.getAtaque() + (atacante.getAtaque()/10)) - atacado.getDefesa()));
+                System.out.println("vida atacado: " + atacado.getVida());
+            }else{
+                atacado.setVida(atacado.getVida() - (atacante.getAtaque() - atacado.getDefesa()));
+                System.out.println("vida atacado: " + atacado.getVida());
+            }
+            
+        }
         atacado.setVida(atacado.getVida() - (atacante.getAtaque() - atacado.getDefesa()));
         System.out.println("vida atacado: " + atacado.getVida());
-        
     }
     private void habilidade(CSTpeca voce, CSTpeca aliado){
         voce.habilidade(aliado);
         System.out.println("defesa aliado: " + aliado.getDefesa());
+    }
+    private void habilidadeJuao(juao voce, CSTpeca oponente){
+            if(!voce.haUmaPecaDoOponente(oponente.getPosicao())){
+                throw new exececaoCST("isto nao eh uma peça para ataque");
+            }else{
+                voce.habilidade(oponente);
+                oponente.setVida(oponente.getVida() - voce.voltarDano(oponente));
+            }
     }
     private void validacaoOrigem(posicao origem){
         if(!tabuleiro.istoEhUmaPeca(origem)){
@@ -183,7 +201,7 @@ public class partidaCST {
     }
     private void validacaoAtaque(CSTpeca atacante, CSTpeca atacado){
         if(!tabuleiro.istoEhUmaPeca(atacado.getPosicao())){
-            throw new exececaoCST("isto nao eh uma pecapara ataque");
+            throw new exececaoCST("isto nao eh uma peça para ataque");
         }
         
         if(!atacante.haUmaPecaDoOponente(atacado.getPosicao())){
@@ -264,6 +282,7 @@ public class partidaCST {
     }
 
     private void setupInicial(){
+
         colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14, 5, "obs"), 20, 20);
         colocarNovaPeca(new leao(tabuleiro, time.TROPA, 0, 0, 120,5, "leaoT"), 19, 5);
         colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5,"obs"), 7, 14);
