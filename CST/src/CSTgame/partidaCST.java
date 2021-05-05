@@ -92,8 +92,21 @@ public class partidaCST {
 
     private void fazerMovimento(posicao origem, posicao destino){
         peca naOrigem = tabuleiro.removerPeca(origem);
+        if(((CSTpeca) naOrigem).isTravaMov()==true){
+            tabuleiro.colocarPeca(naOrigem, origem);
+            System.out.println("Essa peça está congelada e será descongelada na próxima rodada!");
+        }
+        else if(((CSTpeca) naOrigem).isTravaMov()==true /*&&*/ ){
+            tabuleiro.colocarPeca(naOrigem, origem);
+            System.out.println("Essa peça está congelada e será descongelada na próxima rodada!");
+            proximoTurno();
+        }
+        else{
         tabuleiro.colocarPeca(naOrigem, destino);
+        }
+
     }
+    
     private void ataque(CSTpeca atacante, CSTpeca atacado){
         atacado.setVida(atacado.getVida() - (atacante.getAtaque() - atacado.getDefesa()));
         System.out.println("vida atacado: " + atacado.getVida());

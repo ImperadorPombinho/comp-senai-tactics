@@ -17,11 +17,12 @@ public class miguez extends CSTpeca {
     public miguez(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, partidaCST partida) {
         super(tabul, timinho, ataque, defesa, vida, rangeMovimento);
         this.partida = partida;
+        setTravaMov(false);
     }
 
     @Override
     public String toString(){
-        return "🤡";
+        return "M";
     }
 
     public int getDormindo() {
@@ -53,7 +54,7 @@ public class miguez extends CSTpeca {
         //acima
         
         posTeste.setCoordenada(posicao.getLinha() - 1, posicao.getColuna());
-        while(getTabul().posicaoExiste(posTeste) && !getTabul().istoEhUmaPeca(posTeste) && contMovimento <= getRangeMovimento() ){
+        while(getTabul().posicaoExiste(posTeste) && !getTabul().istoEhUmaPeca(posTeste) && contMovimento <= getRangeMovimento()){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             posTeste.setCoordenada(posTeste.getLinha() - 1, posTeste.getColuna());
             contMovimento++;
@@ -69,7 +70,7 @@ public class miguez extends CSTpeca {
         //esquerda
           contMovimento = 1;
           posTeste.setCoordenada(posicao.getLinha() , posicao.getColuna() - 1);
-          while(getTabul().posicaoExiste(posTeste) && !getTabul().istoEhUmaPeca(posTeste) && contMovimento <= getRangeMovimento() ){
+          while(getTabul().posicaoExiste(posTeste) && !getTabul().istoEhUmaPeca(posTeste) && contMovimento <= getRangeMovimento()){
               matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
               posTeste.setCoordenada(posTeste.getLinha(), posTeste.getColuna() - 1);
               contMovimento++;
@@ -77,7 +78,7 @@ public class miguez extends CSTpeca {
             //direita
         contMovimento = 1;
         posTeste.setCoordenada(posicao.getLinha() , posicao.getColuna() + 1);
-        while(getTabul().posicaoExiste(posTeste) && !getTabul().istoEhUmaPeca(posTeste) && contMovimento <= getRangeMovimento() ){
+        while(getTabul().posicaoExiste(posTeste) && !getTabul().istoEhUmaPeca(posTeste) && contMovimento <= getRangeMovimento()){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             posTeste.setCoordenada(posTeste.getLinha() , posTeste.getColuna() + 1);
             contMovimento++;
@@ -122,35 +123,45 @@ public class miguez extends CSTpeca {
     public void habilidade(CSTpeca generico) {
         boolean[][] matAux = new boolean[getTabul().getLinha()][getTabul().getColuna()];
         posicao posTeste = new posicao(0, 0);
-        /*if(haUmaPecaDoOponente(generico.getPosicao())){
+        int cooldown=0;
 
-        }*/
+        if(cooldown==0){
         //acima
         posTeste.setCoordenada(getPosicao().getLinha() - 2, getPosicao().getColuna());
         if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
-            //puxar a função booleana de se é possível realizar o ataque
+            generico.setTravaMov(true);
+            
+            cooldown = 3;
         }
         //abaixo
         posTeste.setCoordenada(getPosicao().getLinha() + 2, getPosicao().getColuna());
         if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
-            //puxar a função booleana de se é possível realizar o ataque
+            generico.setTravaMov(true);
+            
+            cooldown = 3;
         }
         //acima
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 2);
         if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
-            //puxar a função booleana de se é possível realizar o ataque
+            generico.setTravaMov(true);
+            
+            cooldown = 3;
         }
         //acima
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() + 2);
         if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
-            //puxar a função booleana de se é possível realizar o ataque
+            generico.setTravaMov(true);
+            
+            cooldown = 3;
         }
-
-        
-
+    }
+       else{
+           System.out.println("A habilidade está em recarga");
+       } 
+       cooldown--;
     }
 }

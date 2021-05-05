@@ -11,6 +11,15 @@ public abstract class CSTpeca extends peca{
     private int defesa;
     private int rangeMovimento;
     private int contTomarAtq;
+    private boolean travaMov;
+
+    
+    public boolean isTravaMov() {
+        return travaMov;
+    }
+    public void setTravaMov(boolean travaMov) {
+        this.travaMov = travaMov;
+    }
     
     public int getContTomarAtq() {
         return contTomarAtq;
