@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.graalvm.compiler.nodes.java.InstanceOfDynamicNode;
-
 import CSTgame.personagensCST.juao;
 import CSTgame.personagensCST.leao;
 
@@ -144,7 +142,7 @@ public class partidaCST {
     }
     private void ataque(CSTpeca atacante, CSTpeca atacado){
         if(atacante instanceof juao){
-            if(atacante.getVida() > atacado.getVida()){
+            if(atacante.getVida() < atacado.getVida()){
                 atacado.setVida(atacado.getVida() - ((atacante.getAtaque() + (atacante.getAtaque()/10)) - atacado.getDefesa()));
                 System.out.println("vida atacado: " + atacado.getVida());
             }else{
@@ -273,7 +271,7 @@ public class partidaCST {
         colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 14,5), 1, 1);
         colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 2, 500, 5), 14, 5);
         colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5), 1, 2);
-        
+        colocarNovaPeca(new juao(tabuleiro, time.ORACULO, 0, 0, 14,4), 17, 5);
         
     }
 }
