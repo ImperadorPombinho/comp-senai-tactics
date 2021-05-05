@@ -7,8 +7,8 @@ import tabuleiroGame.tabuleiro;
 
 public class juao extends CSTpeca{
     
-    public juao(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento){
-        super(tabul, timinho, ataque, defesa, vida, rangeMovimento);
+    public juao(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome){
+        super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
     }
 
     @Override
