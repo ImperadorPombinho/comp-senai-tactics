@@ -76,11 +76,11 @@ public abstract class CSTpeca extends peca{
     public time getTiminho() {
         return timinho;
     }
-    protected boolean haUmaPecaDoOponente(posicao posicao){
+    public boolean haUmaPecaDoOponente(posicao posicao){
         CSTpeca peca = (CSTpeca) getTabul().peca(posicao);
         return peca != null && peca.getTiminho() != getTiminho();
     }
-    protected boolean haUmaPecaAliada(posicao posicao){
+    public boolean haUmaPecaAliada(posicao posicao){
         CSTpeca peca = (CSTpeca) getTabul().peca(posicao);
         return peca != null && peca.getTiminho() == getTiminho();
     }
