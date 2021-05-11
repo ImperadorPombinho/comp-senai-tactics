@@ -163,10 +163,6 @@ public class partidaCST {
         if(((CSTpeca) naOrigem).isTravaMov()==true){
             tabuleiro.colocarPeca(naOrigem, origem);
             System.out.println("Essa peça está congelada e será descongelada na próxima rodada!");
-        }
-        else if(((CSTpeca) naOrigem).isTravaMov()==true && jogador.getPecaAtual()==(CSTpeca)naOrigem){
-            tabuleiro.colocarPeca(naOrigem, origem);
-            System.out.println("Essa peça está congelada e será descongelada na próxima rodada!");
             proximoTurno();
             ((CSTpeca) naOrigem).setTravaMov(false);
         }
