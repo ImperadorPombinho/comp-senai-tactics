@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>testar</name>
+	<name>CST</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -16,7 +16,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1619829968768</id>
+			<id>1618704277548</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
