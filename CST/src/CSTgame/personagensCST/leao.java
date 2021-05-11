@@ -62,9 +62,9 @@ public class leao extends CSTpeca{
     @Override
     public String toString(){
         if(modoSurtado()){
-            return "🤬";
+            return "S";
         }
-        return "😇";
+        return "L";
     }
 
 

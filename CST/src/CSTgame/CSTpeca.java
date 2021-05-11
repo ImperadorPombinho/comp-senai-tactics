@@ -13,6 +13,13 @@ public abstract class CSTpeca extends peca{
     private int contTomarAtq;
     private boolean travaMov;
     private String nome;
+    private itemEquipavel inventario;
+    public itemEquipavel getInventario() {
+        return inventario;
+    }
+    public void setInventario(itemEquipavel inventario) {
+        this.inventario = inventario;
+    }
     public String getNome() {
         return nome;
     }
@@ -84,10 +91,12 @@ public abstract class CSTpeca extends peca{
         CSTpeca peca = (CSTpeca) getTabul().peca(posicao);
         return peca != null && peca.getTiminho() == getTiminho();
     }
+    public void equiparItem(itemEquipavel item){
+            setInventario(item);
+    }
 
     public CSTpeca(tabuleiro tabul) {
-        super(tabul);
-        
+        super(tabul);  
     }
     public abstract void habilidade(CSTpeca generico);
     

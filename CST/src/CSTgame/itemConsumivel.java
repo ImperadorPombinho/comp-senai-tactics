@@ -7,13 +7,23 @@ import CSTgame.interfacesItems.consumivelIF;
  */
 public class itemConsumivel implements consumivelIF{
     private String nomeItem;
+    private int quantidade;
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
 
     public String getNome() {
         return nomeItem;
     }
 
-    public itemConsumivel(String nomeItem) {
+    public itemConsumivel(String nomeItem, int quantidade) {
         this.nomeItem = nomeItem;
+        this.quantidade = quantidade;
     }
 
     public void setNome(String nomeItem) {
@@ -22,7 +32,8 @@ public class itemConsumivel implements consumivelIF{
 
     @Override
     public void efeitoFPyke(CSTpeca generica) {
-        // TODO Auto-generated method stub
+        generica.setAtaque(generica.getAtaque() + 5);
+        generica.setDefesa(generica.getDefesa() + 5);
         
     }
 
@@ -34,21 +45,11 @@ public class itemConsumivel implements consumivelIF{
 
     @Override
     public void efeitoPototonime(CSTpeca generica) {
-        // TODO Auto-generated method stub
+        generica.setVida(generica.getVida() - 5);
         
     }
 
-    @Override
-    public void efeitoBeats(CSTpeca generica) {
-        // TODO Auto-generated method stub
-        
-    }
 
-    @Override
-    public void efeitoPrevDoom(CSTpeca generica) {
-        // TODO Auto-generated method stub
-        
-    }
     public void efeito(CSTpeca generica){
         efeitoPizza(generica);
     }
