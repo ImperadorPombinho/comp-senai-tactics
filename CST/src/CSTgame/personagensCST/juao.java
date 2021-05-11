@@ -60,37 +60,46 @@ public class juao extends CSTpeca{
     public boolean[][] possiveisAtaques() {
         boolean[][] matAux = new boolean[getTabul().getLinha()][getTabul().getColuna()];
         int contMovimento = 1;
-        int rangeAtq = 4;
+        int rangeAtq = 6;
         posicao posTeste = new posicao(0, 0);
 
-        //diagonal pra baixo esquerda
-        posTeste.setCoordenada(posicao.getLinha() + 1, posicao.getColuna() );
-        while(getTabul().posicaoExiste(posTeste) && !getTabul().istoEhUmaPeca(posTeste) && contMovimento <= rangeAtq ){
-            matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
+        //cima
+        posTeste.setCoordenada(posicao.getLinha() - 1, posicao.getColuna());
+        while(getTabul().posicaoExiste(posTeste) && contMovimento <= rangeAtq ){
+            if(haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
+                matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
+            }
+            
             posTeste.setCoordenada(posTeste.getLinha() + 1, posTeste.getColuna() );
             contMovimento++;
         }
-        //diagonal pra cima direita
+        //direita
         contMovimento = 1;
         posTeste.setCoordenada(posicao.getLinha() , posicao.getColuna() + 1);
-        while(getTabul().posicaoExiste(posTeste) && !getTabul().istoEhUmaPeca(posTeste) && contMovimento <= rangeAtq ){
-            matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
+        while(getTabul().posicaoExiste(posTeste) && contMovimento <= rangeAtq ){
+            if(haUmaPecaDoOponente(posTeste)){
+                matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
+            }
             posTeste.setCoordenada(posTeste.getLinha() , posTeste.getColuna() + 1);
             contMovimento++;
         }
-        //diagonal pra baixo direita
+        //baixo
           contMovimento = 1;
-          posTeste.setCoordenada(posicao.getLinha() - 1, posicao.getColuna() );
-          while(getTabul().posicaoExiste(posTeste) && !getTabul().istoEhUmaPeca(posTeste) && contMovimento <= rangeAtq ){
-              matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
+          posTeste.setCoordenada(posicao.getLinha() + 1, posicao.getColuna() );
+          while(getTabul().posicaoExiste(posTeste) && contMovimento <= rangeAtq ){
+            if(haUmaPecaDoOponente(posTeste)){
+                matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
+            }
               posTeste.setCoordenada(posTeste.getLinha() - 1, posTeste.getColuna() );
               contMovimento++;
           }
-        //diagonal pra cima esquerda
+        //esquerda
         contMovimento = 1;
         posTeste.setCoordenada(posicao.getLinha() , posicao.getColuna() - 1);
-        while(getTabul().posicaoExiste(posTeste) && !getTabul().istoEhUmaPeca(posTeste) && contMovimento <= rangeAtq ){
-            matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
+        while(getTabul().posicaoExiste(posTeste)&& contMovimento <= rangeAtq ){
+            if(haUmaPecaDoOponente(posTeste)){
+                matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
+            }
             posTeste.setCoordenada(posTeste.getLinha() , posTeste.getColuna() - 1);
             contMovimento++;
         }
@@ -103,15 +112,23 @@ public class juao extends CSTpeca{
         if(Math.abs(alvo.getPosicao().getLinha() - this.getPosicao().getLinha()) <= 5 && Math.abs(alvo.getPosicao().getColuna() - this.getPosicao().getColuna()) <= 5){
             int dano;
             dano = alvo.getVida()/20;
+            if(dano == 0){
+                dano = 1;
+            }
+            
             this.setVida(this.getVida() + dano);
         }else{
             System.out.println("peça fora do alcance de ataque! tente novamente");
-            this.habilidade(alvo);
+            
         }
     }
     public int voltarDano(CSTpeca alvo){
         int dano;
         dano = alvo.getVida()/20;
+        if(dano == 0){
+            dano = 1;
+        }
+        
         return dano;
     }
 }
