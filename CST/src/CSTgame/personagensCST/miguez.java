@@ -100,22 +100,22 @@ public class miguez extends CSTpeca {
         posicao posTeste = new posicao(0, 0);
         //acima
         posTeste.setCoordenada(getPosicao().getLinha() - 2, getPosicao().getColuna());
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
         //baixo
         posTeste.setCoordenada(getPosicao().getLinha() + 2, getPosicao().getColuna());
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
         //esquerda
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 2);
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
         //direita
         posTeste.setCoordenada(getPosicao().getLinha() , getPosicao().getColuna() + 2);
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)&& getTabul().istoEhUmaPeca(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)&& getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
 
@@ -126,16 +126,16 @@ public class miguez extends CSTpeca {
     public void habilidade(CSTpeca generico) {
         boolean[][] matAux = new boolean[getTabul().getLinha()][getTabul().getColuna()];
         posicao posTeste = new posicao(0, 0);
-        int cooldown=0;
+        
 
-        if(cooldown==0){
+        
         //acima
         posTeste.setCoordenada(getPosicao().getLinha() - 2, getPosicao().getColuna());
         if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
             
-            cooldown = 3;
+            
         }
         //abaixo
         posTeste.setCoordenada(getPosicao().getLinha() + 2, getPosicao().getColuna());
@@ -143,7 +143,7 @@ public class miguez extends CSTpeca {
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
             
-            cooldown = 3;
+            
         }
         //acima
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 2);
@@ -151,7 +151,7 @@ public class miguez extends CSTpeca {
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
             
-            cooldown = 3;
+            
         }
         //acima
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() + 2);
@@ -159,12 +159,10 @@ public class miguez extends CSTpeca {
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
             
-            cooldown = 3;
+            
         }
-    }
-       else{
-           System.out.println("A habilidade está em recarga");
-       } 
-       cooldown--;
+    
+      
+      
     }
 }

@@ -112,6 +112,11 @@ public class partidaCST {
 
     public void perfomaceFazerMovimento(CSTposicao posicaoOrigem, CSTposicao posicaoDestino){
         posicao origem = posicaoOrigem.toPosicao();
+        CSTpeca miguezz = (CSTpeca) tabuleiro.peca(origem);
+        if(miguezz instanceof miguez){
+            String msg = ((miguez)miguezz).dormiuVez();
+            System.out.println(msg);
+        }
         posicao destino = posicaoDestino.toPosicao();
         validacaoOrigem(origem);
         validacaoOrigemDestino(origem, destino);
@@ -120,6 +125,11 @@ public class partidaCST {
     }
     public void perfomaceAtaque(CSTposicao posicaoAtacante, CSTposicao posicaoAtacado){
         posicao posAtacante = posicaoAtacante.toPosicao();
+        CSTpeca miguezz = (CSTpeca) tabuleiro.peca(posAtacante);
+        if(miguezz instanceof miguez){
+            String msg = ((miguez)miguezz).dormiuVez();
+            System.out.println(msg);
+        }
         posicao posAtacado =  posicaoAtacado.toPosicao();
         validacaoAtaqueOD(posAtacado, posAtacante);
         CSTpeca atacante = (CSTpeca) tabuleiro.peca(posAtacante);
@@ -143,12 +153,13 @@ public class partidaCST {
         posicao posicaooAliado = posicaoAliado.toPosicao();
         CSTpeca voce = (CSTpeca) tabuleiro.peca(posicaooVoce);
         CSTpeca aliado = (CSTpeca) tabuleiro.peca(posicaooAliado);
-        habilidadeJuao((juao)voce, aliado);
+        habilidade(voce, aliado);
         proximoTurno();
     }
 
     private void fazerMovimento(posicao origem, posicao destino){
         peca naOrigem = tabuleiro.removerPeca(origem);
+        System.out.println(((CSTpeca) naOrigem).isTravaMov());
         if(((CSTpeca) naOrigem).isTravaMov()==true){
             tabuleiro.colocarPeca(naOrigem, origem);
             System.out.println("Essa peça está congelada e será descongelada na próxima rodada!");
@@ -302,13 +313,12 @@ public class partidaCST {
     private void setupInicial(){
 
         colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14, 5, "obs"), 20, 20);
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 0, 0, 120,5, "leaoT"), 14, 6);
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 0, 0, 120,5, "leaoT"), 14, 7);
         colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5,"obs"), 7, 14);
         colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 14,5, "obs"), 1, 1);
-        colocarNovaPeca(new juao(tabuleiro, time.ORACULO, 20, 2, 50, 6, "juaoO"), 14, 5);
         colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5, "obs"), 1, 2);
-        colocarNovaPeca(new miguez(tabuleiro, time.ORACULO, 0, 0, 14,5, "miguezO"), 20, 1);
-        colocarNovaPeca(new miguez(tabuleiro, time.TROPA, 0, 0, 14,5, "miguezT"), 14, 4);
+        colocarNovaPeca(new miguez(tabuleiro, time.ORACULO, 0, 0, 14,5, this,"miguezO"), 14, 5);
+        colocarNovaPeca(new miguez(tabuleiro, time.TROPA, 0, 0, 14,5, this,"miguezT"), 14, 3);
         
     }
 }

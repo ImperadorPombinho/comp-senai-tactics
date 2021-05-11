@@ -55,6 +55,7 @@ public class leao extends CSTpeca{
         super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
         setTravaratq(true);
         setHabAtivado(false);
+        setTravaMov(false);
     }
 
     
