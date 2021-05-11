@@ -130,24 +130,28 @@ public class miguez extends CSTpeca {
         while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
+            System.out.println("Congelou a peça selecionada por uma rodada!");
         }
         //abaixo
         posTeste.setCoordenada(getPosicao().getLinha() + 2, getPosicao().getColuna());
         while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
+            System.out.println("Congelou a peça selecionada por uma rodada!");
         }
         //acima
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 2);
         while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
+            System.out.println("Congelou a peça selecionada por uma rodada!");
         }
         //acima
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() + 2);
         while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
+            System.out.println("Congelou a peça selecionada por uma rodada!");
         }
     }
 }
