@@ -14,8 +14,8 @@ public class miguez extends CSTpeca {
     private int dormindo;
     private partidaCST partida;
 
-    public miguez(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, partidaCST partida) {
-        super(tabul, timinho, ataque, defesa, vida, rangeMovimento);
+    public miguez(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, partidaCST partida, String nome) {
+        super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
         this.partida = partida;
         setTravaMov(false);
     }
@@ -44,7 +44,10 @@ public class miguez extends CSTpeca {
         }
     }
 
-    
+    public miguez(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome) {
+        super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
+        //TODO Auto-generated constructor stub
+    }
 
     @Override
     public boolean[][] possiveisMovimentos() {

@@ -1,10 +1,12 @@
 package aplicacao;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import CSTgame.CSTpeca;
 import CSTgame.CSTposicao;
+import CSTgame.partidaCST;
 import CSTgame.time;
 
 
@@ -33,6 +35,35 @@ public class UI {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+    public static String[] lerNomes(Scanner scan){
+        String[] nomes = new String[2];
+        for (int i = 0; i < nomes.length; i++) {
+            System.out.print("Digite o seu nome jogador #" + (i+1) + ":");
+            nomes[i] = scan.next();
+        }
+        return nomes;
+    }
+
+    public static int printarPartida(partidaCST partidaCST, String[] nomes, int numeroLinhas, Scanner scan){
+        int selec;
+        printarTabuleiro(partidaCST.getPecas(), numeroLinhas);
+        System.out.println();
+        System.out.println("Turno: " + partidaCST.getTurno());
+        if(partidaCST.getJogador().getTimeAtual() == time.ORACULO){
+            partidaCST.getJogador().setNome(nomes[0]);
+            System.out.println("Esperando " + partidaCST.getJogador().getNome() + " jogar");
+            System.out.println("Peça a ser jogada: " + partidaCST.getJogador().getPecaAtual().getNome() + " " +partidaCST.getJogador().getPecaAtual().toString());
+        }else{
+            partidaCST.getJogador().setNome(nomes[1]);
+            System.out.println("Esperando " + partidaCST.getJogador().getNome() + " jogar");
+            System.out.println("Peça a ser jogada: " + partidaCST.getJogador().getPecaAtual().getNome() + " " +partidaCST.getJogador().getPecaAtual().toString());
+        }
+        System.out.println("Escolha a acao abaixo: ");
+        System.out.println("1-Atacar");
+        System.out.println("2-Movimentar");
+        selec = scan.nextInt();
+        return selec;
+    }
     public static CSTposicao lerPosicao(Scanner scan, int linhaMax, int ColunaMax){
         try{
 
@@ -47,7 +78,22 @@ public class UI {
         
     }
 
+    public static void printarSorteioAtqPecas(partidaCST partidaCST){
+        List<CSTpeca> auxOraculo = partidaCST.getPecasOraculo();
+        List<CSTpeca> auxTropa = partidaCST.getPecasTropa();
+        System.out.println();
+        System.out.println("ordem de atq da tropa: ");
+        for (CSTpeca csTpeca : auxTropa) {
+            System.out.print("-> " +csTpeca.getNome());
 
+        }
+        System.out.println();
+        System.out.println("ordem de atq da Oraculo: ");
+        for (CSTpeca csTpeca : auxOraculo) {
+            System.out.print("-> " +csTpeca.getNome());
+
+        }
+    }
 
     public static void printarTabuleiro(CSTpeca[][] pecas, int numeroLinhas){
         for (int i = 0; i < pecas.length; i++) {
