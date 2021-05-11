@@ -51,6 +51,15 @@ public class mainzada {
                 System.out.print("posicao destino: ");
                 CSTposicao destino = UI.lerPosicao(scan, 20, 20);
                 partidaCST.perfomaceFazerMovimento(origem, destino);
+            }else if(selec == 3){
+                System.out.println();
+                System.out.println("Habilidade");
+                System.out.print("posicao origem: ");
+                CSTposicao origem = UI.lerPosicao(scan, 20, 20);
+                System.out.println();
+                System.out.print("posicao destino: ");
+                CSTposicao destino = UI.lerPosicao(scan, 20, 20);
+                partidaCST.perfomaceHabilidade(origem, destino);
             }
             
                 //alou; 
