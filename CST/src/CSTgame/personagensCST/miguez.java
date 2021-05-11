@@ -46,7 +46,6 @@ public class miguez extends CSTpeca {
 
     public miguez(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome) {
         super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
-        //TODO Auto-generated constructor stub
     }
 
     @Override
@@ -88,7 +87,6 @@ public class miguez extends CSTpeca {
         }
 
 
-
         return matAux;
     }
 
@@ -126,43 +124,64 @@ public class miguez extends CSTpeca {
     public void habilidade(CSTpeca generico) {
         boolean[][] matAux = new boolean[getTabul().getLinha()][getTabul().getColuna()];
         posicao posTeste = new posicao(0, 0);
+<<<<<<< HEAD
         
 
         
+=======
+
+>>>>>>> 3b365f1cf98a65729bda35d848e42125fe161fef
         //acima
         posTeste.setCoordenada(getPosicao().getLinha() - 2, getPosicao().getColuna());
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
+<<<<<<< HEAD
             
             
+=======
+            System.out.println("Congelou a peça selecionada por uma rodada!");
+>>>>>>> 3b365f1cf98a65729bda35d848e42125fe161fef
         }
         //abaixo
         posTeste.setCoordenada(getPosicao().getLinha() + 2, getPosicao().getColuna());
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
+<<<<<<< HEAD
             
             
+=======
+            System.out.println("Congelou a peça selecionada por uma rodada!");
+>>>>>>> 3b365f1cf98a65729bda35d848e42125fe161fef
         }
         //acima
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 2);
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
+<<<<<<< HEAD
             
             
+=======
+            System.out.println("Congelou a peça selecionada por uma rodada!");
+>>>>>>> 3b365f1cf98a65729bda35d848e42125fe161fef
         }
         //acima
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() + 2);
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
+<<<<<<< HEAD
             
             
         }
     
       
       
+=======
+            System.out.println("Congelou a peça selecionada por uma rodada!");
+        }
+>>>>>>> 3b365f1cf98a65729bda35d848e42125fe161fef
     }
 }
