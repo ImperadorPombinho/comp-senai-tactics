@@ -46,7 +46,6 @@ public class miguez extends CSTpeca {
 
     public miguez(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome) {
         super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
-        //TODO Auto-generated constructor stub
     }
 
     @Override
@@ -88,7 +87,6 @@ public class miguez extends CSTpeca {
         }
 
 
-
         return matAux;
     }
 
@@ -100,22 +98,22 @@ public class miguez extends CSTpeca {
         posicao posTeste = new posicao(0, 0);
         //acima
         posTeste.setCoordenada(getPosicao().getLinha() - 2, getPosicao().getColuna());
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
         //baixo
         posTeste.setCoordenada(getPosicao().getLinha() + 2, getPosicao().getColuna());
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
         //esquerda
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 2);
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
         //direita
         posTeste.setCoordenada(getPosicao().getLinha() , getPosicao().getColuna() + 2);
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)&& getTabul().istoEhUmaPeca(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)&& getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
 
@@ -126,45 +124,34 @@ public class miguez extends CSTpeca {
     public void habilidade(CSTpeca generico) {
         boolean[][] matAux = new boolean[getTabul().getLinha()][getTabul().getColuna()];
         posicao posTeste = new posicao(0, 0);
-        int cooldown=0;
 
-        if(cooldown==0){
         //acima
         posTeste.setCoordenada(getPosicao().getLinha() - 2, getPosicao().getColuna());
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
-            
-            cooldown = 3;
+            System.out.println("Congelou a peça selecionada por uma rodada!");
         }
         //abaixo
         posTeste.setCoordenada(getPosicao().getLinha() + 2, getPosicao().getColuna());
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
-            
-            cooldown = 3;
+            System.out.println("Congelou a peça selecionada por uma rodada!");
         }
         //acima
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 2);
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
-            
-            cooldown = 3;
+            System.out.println("Congelou a peça selecionada por uma rodada!");
         }
         //acima
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() + 2);
-        if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
+        while(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
             generico.setTravaMov(true);
-            
-            cooldown = 3;
+            System.out.println("Congelou a peça selecionada por uma rodada!");
         }
-    }
-       else{
-           System.out.println("A habilidade está em recarga");
-       } 
-       cooldown--;
     }
 }
