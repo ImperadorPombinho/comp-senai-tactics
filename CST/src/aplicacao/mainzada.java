@@ -20,10 +20,13 @@ public class mainzada {
         UI.printarSorteioAtqPecas(partidaCST);
         scan.nextLine();
         scan.nextLine();
-        while(true){
+        while(partidaCST.ispartida()){
             try{
             //UI.limparTelaConsole();
             selec = UI.printarPartida(partidaCST, nomes, 20, scan);
+            if(partidaCST.ispartida() == false){
+                break;
+            }
             if(selec == 1){
                 System.out.println();
                 System.out.println("Ataque");
