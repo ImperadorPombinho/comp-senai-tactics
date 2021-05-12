@@ -19,6 +19,7 @@ public class partidaCST {
     private tabuleiro tabuleiro;
     private int linhaMax;
     private int ColunaMax;
+    private boolean partida;
     private boolean trava;
     private jogador jogador = new jogador();
     
@@ -26,6 +27,12 @@ public class partidaCST {
     private List<CSTpeca> pecasTropa = new ArrayList<>();
     private int turno;
     private int indOraculo;
+    public boolean ispartida() {
+        return partida;
+    }
+    public void setPartida(boolean partida) {
+        this.partida = partida;
+    }
     public List<CSTpeca> getPecasOraculo() {
         return pecasOraculo;
     }
@@ -89,6 +96,8 @@ public class partidaCST {
         setIndOraculo(0);
         setIndTropa(0);
         jogador.setPecaAtual(pecasOraculo.get(getIndOraculo()));
+        setPartida(true);
+        
     }
 
     public CSTpeca[][] getPecas(){
@@ -145,6 +154,11 @@ public class partidaCST {
         System.out.println(atacante.getAtaque());
         if(atacado.getVida() <= 0){
             peca capturada = tabuleiro.removerPeca(posAtacado);
+            if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
+                pecasOraculo.remove((CSTpeca)capturada);
+            }else{
+                pecasTropa.remove((CSTpeca)capturada);
+            }
             
         }
         proximoTurno();
@@ -202,6 +216,52 @@ public class partidaCST {
                 System.out.println("vida de juao: " + voce.getVida());
                 System.out.println("vida do oponente: " + oponente.getVida());
             }
+    }
+    private int somaVida(List<CSTpeca> qualquer){
+        int soma = 0;
+        for (CSTpeca csTpeca : qualquer) {
+            soma += csTpeca.getVida();
+        }
+        return soma;
+    }
+    private time testaDepoisTurno(int quantOraculo, int quantTropa){
+        int somaOraculo, somaTropa;
+
+        if(quantOraculo > quantTropa){
+            return time.ORACULO;
+        }else if(quantTropa > quantOraculo){
+            return time.TROPA;
+        }else{
+            somaOraculo = somaVida(pecasOraculo);
+            somaTropa = somaVida(pecasTropa);
+            if(somaOraculo > somaTropa){
+                return time.ORACULO;
+            }else if(somaTropa > somaOraculo){
+                return time.TROPA;
+            }else{
+                return null;
+            }
+        }
+    }
+    public time testaQuemGanhou(){
+        time timinho;
+        int turno = getTurno();
+        int quantOraculo = pecasOraculo.size();
+        int quantTropa = pecasTropa.size();
+        if(quantOraculo == 0){
+            setPartida(false);
+            return time.TROPA;
+        }else if(quantTropa == 0){
+            setPartida(false);
+            return time.ORACULO;
+        }else if(turno == 17){
+            setPartida(false);
+            timinho = testaDepoisTurno(quantOraculo, quantTropa);
+            return timinho;
+        }else{
+            return null;
+        }
+
     }
     private void validacaoOrigem(posicao origem){
         if(!tabuleiro.istoEhUmaPeca(origem)){
@@ -282,41 +342,37 @@ public class partidaCST {
     public void proximoTurno(){
 
         setTurno(getTurno() + 1);
-
-        jogador.setTimeAtual((jogador.getTimeAtual() == time.ORACULO) ? time.TROPA : time.ORACULO);
-        if(jogador.getTimeAtual() == time.ORACULO){
-            jogador.setPecaAtual(pecasOraculo.get(getIndOraculo()));
-            
-            if(getIndTropa() +1 == pecasTropa.size()){
-                setIndTropa(0);
+        if(pecasOraculo.size() != 0 && pecasTropa.size() != 0){
+            jogador.setTimeAtual((jogador.getTimeAtual() == time.ORACULO) ? time.TROPA : time.ORACULO);
+            if(jogador.getTimeAtual() == time.ORACULO){
+                jogador.setPecaAtual(pecasOraculo.get(getIndOraculo()));
+                
+                if(getIndTropa() +1 == pecasTropa.size()){
+                    setIndTropa(0);
+                }else{
+                    setIndTropa(getIndTropa() + 1);
+                    System.out.println("indice Tropa: "+getIndTropa());
+                }
             }else{
-                setIndTropa(getIndTropa() + 1);
-                System.out.println("indice Tropa: "+getIndTropa());
+                
+                jogador.setPecaAtual(pecasTropa.get(getIndTropa()));
+                if(getIndOraculo() +1 == pecasOraculo.size()){
+                    setIndOraculo(0);
+                }else{
+                    setIndOraculo(getIndOraculo() + 1);
+                    System.out.println("indice Oraculo: "+getIndOraculo());
+                }
+              
             }
-        }else{
-            
-            jogador.setPecaAtual(pecasTropa.get(getIndTropa()));
-            if(getIndOraculo() +1 == pecasOraculo.size()){
-                setIndOraculo(0);
-            }else{
-                setIndOraculo(getIndOraculo() + 1);
-                System.out.println("indice Oraculo: "+getIndOraculo());
-            }
-          
         }
+
 
 
     }
 
     private void setupInicial(){
-
-        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14, 5, "obs"), 20, 20);
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 0, 0, 120,5, "leaoT"), 15, 5);
-        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5,"obs"), 7, 14);
-        colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 14,5, "obs"), 1, 1);
-        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5, "obs"), 1, 2);
-        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 0, 0, 14,5,"miguezO"), 14, 5);
-        colocarNovaPeca(new miguez(tabuleiro, time.TROPA, 0, 0, 14,5, this,"miguezT"), 13, 5);
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 0, 0, 1,5, "leaoT"), 16, 5);
+        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 1, 0, 14,5,"henridogO"), 14, 5);
         
     }
 }

@@ -45,10 +45,21 @@ public class UI {
     }
 
     public static int printarPartida(partidaCST partidaCST, String[] nomes, int numeroLinhas, Scanner scan){
-        int selec;
+        time testa;
+        testa = partidaCST.testaQuemGanhou();
+        if(testa == time.ORACULO || testa == time.TROPA){
+            System.out.println("parabens vermao "+ partidaCST.getJogador().getNome() + " venceu a partida");
+        }
+        int selec = 0;
+        
         printarTabuleiro(partidaCST.getPecas(), numeroLinhas);
         System.out.println();
         System.out.println("Turno: " + partidaCST.getTurno());
+        
+
+
+        
+
         if(partidaCST.getJogador().getTimeAtual() == time.ORACULO){
             partidaCST.getJogador().setNome(nomes[0]);
             System.out.println("Esperando " + partidaCST.getJogador().getNome() + " jogar");
@@ -63,6 +74,7 @@ public class UI {
         System.out.println("2-Movimentar");
         System.out.println("3-Habilidade");
         selec = scan.nextInt();
+    
         return selec;
     }
     public static CSTposicao lerPosicao(Scanner scan, int linhaMax, int ColunaMax){
