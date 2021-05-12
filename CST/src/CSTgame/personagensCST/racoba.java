@@ -126,7 +126,7 @@ public class racoba extends CSTpeca {
     public void habilidade(CSTpeca generico) {
         gacha roll = new gacha("");
         //selecionar gacha
-        roll.atributos(this, aleatorio.nextInt(1)+1);
+        roll.atributos(this, aleatorio.nextInt(4)+1);
         
     }
 
