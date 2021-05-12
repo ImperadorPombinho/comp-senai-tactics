@@ -119,7 +119,7 @@ public class miguez extends CSTpeca {
 
         return matAux;
     }
-
+//aa
     @Override
     public void habilidade(CSTpeca generico) {
         boolean[][] matAux = new boolean[getTabul().getLinha()][getTabul().getColuna()];
