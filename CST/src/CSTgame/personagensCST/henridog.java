@@ -7,9 +7,27 @@ import tabuleiroGame.posicao;
 import tabuleiroGame.tabuleiro; 
 
 public class henridog extends CSTpeca{
+private int vidaMax;
 
-public henridog(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome) {
+
+public int getVidaMax() {
+    return vidaMax;
+}
+
+private boolean RENASCEU;
+
+public boolean isRENASCEU() {
+    return RENASCEU;
+}
+
+public void setRENASCEU(boolean rENASCEU) {
+    RENASCEU = rENASCEU;
+}
+
+public henridog(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome){ 
     super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
+    this.vidaMax = vida;
+    setRENASCEU(false);
 }
 
 @Override
@@ -200,5 +218,16 @@ public String toString(){
         }
         
     }
+    public void passiva(){
+       if(isRENASCEU() == false){ 
+        double vidaParcial = getVidaMax()*0.2;
+        int vidaParcial2 = (int)vidaParcial;
+        setVida(vidaParcial2);
+        System.out.println("RENASCEU");
+        System.out.println("vida: "+getVida());
+        setRENASCEU(true);
+       }
+    }
+
 
 }
