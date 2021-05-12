@@ -9,7 +9,7 @@ import CSTgame.personagensCST.juao;
 import CSTgame.personagensCST.leao;
 import CSTgame.personagensCST.miguez;
 import CSTgame.personagensCST.obstaculo;
-
+import CSTgame.personagensCST.racoba;
 import tabuleiroGame.peca;
 import tabuleiroGame.posicao;
 import tabuleiroGame.tabuleiro;
