@@ -1,5 +1,6 @@
 package CSTgame;
 
+import CSTgame.personagensCST.racoba;
 import tabuleiroGame.peca;
 import tabuleiroGame.posicao;
 import tabuleiroGame.tabuleiro;
@@ -93,6 +94,29 @@ public abstract class CSTpeca extends peca{
     }
     public void equiparItem(itemEquipavel item){
             setInventario(item);
+    }
+    public void desequiparItem(itemEquipavel item){
+        if(this instanceof racoba){
+            // desequipar itens racoba
+            String nome = item.getNomeItem();
+            if(nome.equals("Foice")){
+                this.setAtaque(this.getAtaque()-20);
+            }
+            if(nome.equals("AK Trovoada")){
+                this.setAtaque(this.getAtaque()+5);
+            }
+            if(nome.equals("Martelo")){
+                this.setAtaque(this.getAtaque()-20);
+            }
+            if(nome.equals("Bodychain da Gucci")){
+                this.setAtaque(this.getAtaque()+10);
+                this.setDefesa(this.getDefesa()-25);
+            }
+            this.setRangeMovimento(3);
+        }
+        else{
+            // desequipar padrao
+        }
     }
 
     public CSTpeca(tabuleiro tabul) {

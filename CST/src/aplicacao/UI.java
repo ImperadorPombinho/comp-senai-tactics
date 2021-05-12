@@ -61,6 +61,7 @@ public class UI {
         System.out.println("Escolha a acao abaixo: ");
         System.out.println("1-Atacar");
         System.out.println("2-Movimentar");
+        System.out.println("3-Habilidade");
         selec = scan.nextInt();
         return selec;
     }

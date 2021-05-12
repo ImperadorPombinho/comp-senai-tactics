@@ -8,6 +8,7 @@ import java.util.Scanner;
 import CSTgame.CSTposicao;
 import CSTgame.exececaoCST;
 import CSTgame.partidaCST;
+import CSTgame.personagensCST.racoba;
 
 
 public class mainzada {
@@ -51,6 +52,23 @@ public class mainzada {
                 System.out.print("posicao destino: ");
                 CSTposicao destino = UI.lerPosicao(scan, 20, 20);
                 partidaCST.perfomaceFazerMovimento(origem, destino);
+            }else if(selec == 3){
+                System.out.println();
+                System.out.println("Habilidade");
+                System.out.print("posicao origem: ");
+                CSTposicao origem = UI.lerPosicao(scan, 20, 20);
+                System.out.println();
+                if(partidaCST.getJogador().getPecaAtual() instanceof racoba){
+                    System.out.println("Rodando o gacha...");
+                    CSTposicao destino = new CSTposicao(10, 10, 20, 20);
+                    partidaCST.perfomaceHabilidade(origem, destino);
+                }
+                else{
+                    System.out.print("posicao destino: ");
+                    CSTposicao destino = UI.lerPosicao(scan, 20, 20);
+                    partidaCST.perfomaceHabilidade(origem, destino);
+                }
+                
             }
             
                 //alou; 

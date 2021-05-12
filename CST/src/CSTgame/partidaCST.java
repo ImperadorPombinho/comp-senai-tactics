@@ -112,6 +112,11 @@ public class partidaCST {
 
     public void perfomaceFazerMovimento(CSTposicao posicaoOrigem, CSTposicao posicaoDestino){
         posicao origem = posicaoOrigem.toPosicao();
+        CSTpeca miguezz = (CSTpeca) tabuleiro.peca(origem);
+        if(miguezz instanceof miguez){
+            String msg = ((miguez)miguezz).dormiuVez();
+            System.out.println(msg);
+        }
         posicao destino = posicaoDestino.toPosicao();
         validacaoOrigem(origem);
         validacaoOrigemDestino(origem, destino);
@@ -120,6 +125,11 @@ public class partidaCST {
     }
     public void perfomaceAtaque(CSTposicao posicaoAtacante, CSTposicao posicaoAtacado){
         posicao posAtacante = posicaoAtacante.toPosicao();
+        CSTpeca miguezz = (CSTpeca) tabuleiro.peca(posAtacante);
+        if(miguezz instanceof miguez){
+            String msg = ((miguez)miguezz).dormiuVez();
+            System.out.println(msg);
+        }
         posicao posAtacado =  posicaoAtacado.toPosicao();
         validacaoAtaqueOD(posAtacado, posAtacante);
         CSTpeca atacante = (CSTpeca) tabuleiro.peca(posAtacante);
@@ -127,11 +137,53 @@ public class partidaCST {
         validacaoAtaque(atacante, atacado);
         if(atacado instanceof leao){
             atacado.contarAtqTomado();
-           
+            
         }
+        // ataque da foice de racoba
+        if(atacante instanceof racoba && atacante.getInventario().getNomeItem().equals("Foice")){
+            if(posAtacado.getLinha() != posAtacante.getLinha()){
+                posicao posEsq = new posicao(posAtacado.getLinha(), posAtacado.getColuna()-1);
+                posicao posDir = new posicao(posAtacado.getLinha(), posAtacado.getColuna()+1);
+                
+                if(atacado.haUmaPecaAliada(posEsq)){
+                   CSTpeca pecaEsq = (CSTpeca) tabuleiro.peca(posEsq.getLinha(), posEsq.getColuna());
+                   ataque(atacante, pecaEsq);
+                   if(pecaEsq.getVida() <= 0){
+                        peca capturada = tabuleiro.removerPeca(posEsq);
+                    }
+                }
+                if(atacado.haUmaPecaAliada(posDir)){
+                    CSTpeca pecaDir = (CSTpeca) tabuleiro.peca(posDir.getLinha(), posDir.getColuna());
+                    ataque(atacante, pecaDir);
+                    if(pecaDir.getVida() <= 0){
+                        peca capturada = tabuleiro.removerPeca(posDir);
+                    }
+                }
+            }
+            if(posAtacado.getColuna() != posAtacante.getColuna()){
+                posicao posCima = new posicao(posAtacado.getLinha()-1, posAtacado.getColuna());
+                posicao posBaixo = new posicao(posAtacado.getLinha()+1, posAtacado.getColuna());
+
+                if(atacado.haUmaPecaAliada(posCima)){
+                    CSTpeca pecaCima = (CSTpeca) tabuleiro.peca(posCima.getLinha(), posCima.getColuna());
+                    ataque(atacante, pecaCima);
+                    if(pecaCima.getVida() <= 0){
+                        peca capturada = tabuleiro.removerPeca(posCima);
+                    }
+                }
+                if(atacado.haUmaPecaAliada(posBaixo)){
+                    CSTpeca pecaBaixo = (CSTpeca) tabuleiro.peca(posBaixo.getLinha(), posBaixo.getColuna());
+                    ataque(atacante, pecaBaixo);
+                    if(pecaBaixo.getVida() <= 0){
+                        peca capturada = tabuleiro.removerPeca(posBaixo);
+                    }
+                }
+            }
+        }
+
         ataque(atacante, atacado);
-        System.out.println(atacado.getAtaque());
-        System.out.println(atacante.getAtaque());
+        //System.out.println(atacado.getAtaque());
+        //System.out.println(atacante.getAtaque());
         if(atacado.getVida() <= 0){
             peca capturada = tabuleiro.removerPeca(posAtacado);
             
@@ -143,18 +195,20 @@ public class partidaCST {
         posicao posicaooAliado = posicaoAliado.toPosicao();
         CSTpeca voce = (CSTpeca) tabuleiro.peca(posicaooVoce);
         CSTpeca aliado = (CSTpeca) tabuleiro.peca(posicaooAliado);
-        validacaoHabilidade(voce, aliado);
-        habilidade(voce, aliado);
+        if(voce instanceof racoba){
+            voce.habilidade(voce);
+        }
+        else{
+            habilidade(voce, aliado);
+        }
+        
         proximoTurno();
     }
 
     private void fazerMovimento(posicao origem, posicao destino){
         peca naOrigem = tabuleiro.removerPeca(origem);
+        System.out.println(((CSTpeca) naOrigem).isTravaMov());
         if(((CSTpeca) naOrigem).isTravaMov()==true){
-            tabuleiro.colocarPeca(naOrigem, origem);
-            System.out.println("Essa peça está congelada e será descongelada na próxima rodada!");
-        }
-        else if(((CSTpeca) naOrigem).isTravaMov()==true && jogador.getPecaAtual()==(CSTpeca)naOrigem){
             tabuleiro.colocarPeca(naOrigem, origem);
             System.out.println("Essa peça está congelada e será descongelada na próxima rodada!");
             proximoTurno();
@@ -175,10 +229,12 @@ public class partidaCST {
                 atacado.setVida(atacado.getVida() - (atacante.getAtaque() - atacado.getDefesa()));
                 System.out.println("vida atacado: " + atacado.getVida());
             }
-            
+        }else{
+            atacado.setVida(atacado.getVida() - (atacante.getAtaque() - atacado.getDefesa()));
+            System.out.println("vida atacado: " + atacado.getVida());
+            System.out.println("atacado: " +atacado.getNome());
         }
-        atacado.setVida(atacado.getVida() - (atacante.getAtaque() - atacado.getDefesa()));
-        System.out.println("vida atacado: " + atacado.getVida());
+        
     }
     private void habilidade(CSTpeca voce, CSTpeca aliado){
         voce.habilidade(aliado);
@@ -190,6 +246,8 @@ public class partidaCST {
             }else{
                 voce.habilidade(oponente);
                 oponente.setVida(oponente.getVida() - voce.voltarDano(oponente));
+                System.out.println("vida de juao: " + voce.getVida());
+                System.out.println("vida do oponente: " + oponente.getVida());
             }
     }
     private void validacaoOrigem(posicao origem){
@@ -299,14 +357,13 @@ public class partidaCST {
 
     private void setupInicial(){
 
-        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14, 5, "obs"), 20, 20);
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 0, 0, 120,5, "leaoT"), 19, 5);
-        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5,"obs"), 7, 14);
-        colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 14,5, "obs"), 1, 1);
-        colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 2, 500, 5, "leaoO"), 14, 5);
-        colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5, "obs"), 1, 2);
-        colocarNovaPeca(new miguez(tabuleiro, time.ORACULO, 0, 0, 14,5, "miguezO"), 20, 1);
-        colocarNovaPeca(new miguez(tabuleiro, time.TROPA, 0, 0, 14,5, "miguezT"), 13, 5);
-        
+        colocarNovaPeca(new juao(tabuleiro, time.TROPA, 0, 0, 10, 5, "juaoT"), 15, 6);
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 0, 0, 10,5, "leaoT"), 13, 6);
+        colocarNovaPeca(new miguez(tabuleiro, time.TROPA, 0, 0, 5,5,"miguezT"), 14, 6);
+        //colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 14,5, "obs"), 1, 1);
+        //colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5, "obs"), 1, 2);
+        colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 5, 10, 20,3,"racobaO"), 14, 5);
+        //colocarNovaPeca(new racoba(tabuleiro, time.TROPA, 0, 0, 14,5,"racobaT"), 14, 3);
+
     }
 }
