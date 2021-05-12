@@ -61,7 +61,7 @@ public abstract class CSTpeca extends peca{
     public int getVida() {
         return vida;
     }
-    protected void setVida(int vida) {
+    public void setVida(int vida) {
         this.vida = vida;
     }
     public int getDefesa() {

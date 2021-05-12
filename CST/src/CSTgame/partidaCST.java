@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import CSTgame.personagensCST.henridog;
 import CSTgame.personagensCST.juao;
 import CSTgame.personagensCST.leao;
 import CSTgame.personagensCST.miguez;
@@ -190,6 +191,7 @@ public class partidaCST {
     private void habilidade(CSTpeca voce, CSTpeca aliado){
         voce.habilidade(aliado);
         System.out.println("defesa aliado: " + aliado.getDefesa());
+        System.out.println("vida: " + aliado.getVida());
     }
     private void habilidadeJuao(juao voce, CSTpeca oponente){
             if(!voce.haUmaPecaDoOponente(oponente.getPosicao())){
@@ -309,12 +311,12 @@ public class partidaCST {
     private void setupInicial(){
 
         colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14, 5, "obs"), 20, 20);
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 0, 0, 120,5, "leaoT"), 14, 7);
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 0, 0, 120,5, "leaoT"), 15, 5);
         colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5,"obs"), 7, 14);
         colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 14,5, "obs"), 1, 1);
         colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5, "obs"), 1, 2);
-        colocarNovaPeca(new miguez(tabuleiro, time.ORACULO, 0, 0, 14,5, this,"miguezO"), 14, 5);
-        colocarNovaPeca(new miguez(tabuleiro, time.TROPA, 0, 0, 14,5, this,"miguezT"), 14, 3);
+        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 0, 0, 14,5,"miguezO"), 14, 5);
+        colocarNovaPeca(new miguez(tabuleiro, time.TROPA, 0, 0, 14,5, this,"miguezT"), 13, 5);
         
     }
 }
