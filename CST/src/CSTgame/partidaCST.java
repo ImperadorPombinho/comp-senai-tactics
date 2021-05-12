@@ -154,11 +154,25 @@ public class partidaCST {
         System.out.println(atacante.getAtaque());
         if(atacado.getVida() <= 0){
             peca capturada = tabuleiro.removerPeca(posAtacado);
-            if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
-                pecasOraculo.remove((CSTpeca)capturada);
+            if((CSTpeca) capturada instanceof henridog){
+                if(((henridog)capturada).isRENASCEU() == false){
+                    ((henridog)capturada).passiva();
+                    tabuleiro.colocarPeca(capturada, posAtacado);
+                }else{
+                    if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
+                        pecasOraculo.remove((CSTpeca)capturada);
+                    }else{
+                        pecasTropa.remove((CSTpeca)capturada);
+                    }
+                }
             }else{
-                pecasTropa.remove((CSTpeca)capturada);
+                if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
+                    pecasOraculo.remove((CSTpeca)capturada);
+                }else{
+                    pecasTropa.remove((CSTpeca)capturada);
+                }
             }
+
             
         }
         proximoTurno();
@@ -371,8 +385,8 @@ public class partidaCST {
     }
 
     private void setupInicial(){
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 0, 0, 1,5, "leaoT"), 16, 5);
-        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 1, 0, 14,5,"henridogO"), 14, 5);
+        colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 0, 120,5, "leaoT"), 17, 5);
+        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 1, 0, 14,5,"henridogO"), 12, 5);
         
     }
 }
