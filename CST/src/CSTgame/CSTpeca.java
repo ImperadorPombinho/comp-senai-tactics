@@ -11,13 +11,29 @@ public abstract class CSTpeca extends peca{
     private int defesa;
     private int rangeMovimento;
     private int contTomarAtq;
+    private boolean travaMov;
     private String nome;
+    private itemEquipavel inventario;
+    public itemEquipavel getInventario() {
+        return inventario;
+    }
+    public void setInventario(itemEquipavel inventario) {
+        this.inventario = inventario;
+    }
     public String getNome() {
         return nome;
     }
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
+     public boolean isTravaMov() {
+        return travaMov;
+    }
+    public void setTravaMov(boolean travaMov) {
+        this.travaMov = travaMov;
+    }
+
     public int getContTomarAtq() {
         return contTomarAtq;
     }
@@ -67,18 +83,20 @@ public abstract class CSTpeca extends peca{
     public time getTiminho() {
         return timinho;
     }
-    protected boolean haUmaPecaDoOponente(posicao posicao){
+    public boolean haUmaPecaDoOponente(posicao posicao){
         CSTpeca peca = (CSTpeca) getTabul().peca(posicao);
         return peca != null && peca.getTiminho() != getTiminho();
     }
-    protected boolean haUmaPecaAliada(posicao posicao){
+    public boolean haUmaPecaAliada(posicao posicao){
         CSTpeca peca = (CSTpeca) getTabul().peca(posicao);
         return peca != null && peca.getTiminho() == getTiminho();
     }
+    public void equiparItem(itemEquipavel item){
+            setInventario(item);
+    }
 
     public CSTpeca(tabuleiro tabul) {
-        super(tabul);
-        
+        super(tabul);  
     }
     public abstract void habilidade(CSTpeca generico);
     

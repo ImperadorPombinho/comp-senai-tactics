@@ -55,6 +55,7 @@ public class leao extends CSTpeca{
         super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
         setTravaratq(true);
         setHabAtivado(false);
+        setTravaMov(false);
     }
 
     
@@ -62,9 +63,9 @@ public class leao extends CSTpeca{
     @Override
     public String toString(){
         if(modoSurtado()){
-            return "🤬";
+            return "S";
         }
-        return "😇";
+        return "L";
     }
 
 

@@ -30,5 +30,8 @@ public class posicao {
     public String toString(){
         return getLinha() + ", " + getColuna();
     }
+	public boolean posicaoExiste(posicao posTeste) {
+		return false;
+	}
     
 }
