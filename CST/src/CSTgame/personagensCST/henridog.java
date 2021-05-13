@@ -29,6 +29,7 @@ public henridog(tabuleiro tabul, time timinho, int ataque, int defesa, int vida,
     this.vidaMax = vida;
     this.partidaCST = partidaCST;
     setRENASCEU(false);
+
 }
 
 @Override

@@ -200,7 +200,7 @@ public class partidaCST {
         if(((CSTpeca) naOrigem).isTravaMov()==true){
             tabuleiro.colocarPeca(naOrigem, origem);
             System.out.println("Essa peça está congelada e será descongelada na próxima rodada!");
-            proximoTurno();
+            //proximoTurno();
             ((CSTpeca) naOrigem).setTravaMov(false);
         }
         else{
@@ -426,9 +426,8 @@ public class partidaCST {
     }
 
     private void setupInicial(){
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 1,5, "leaoT"), 17, 5);
-        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 20, 0, 120,5, "leaoT", this), 14, 5);
-        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 1, 0, 500,5,"henridogO", this), 12, 5);
+        colocarNovaPeca(new miguez(tabuleiro, time.ORACULO, 20, 0, 120,1, this,"miguezO"), 14, 5);
+        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 1, 0, 500,5,"henridogT", this), 15, 5);
         
     }
     protected boolean euSouInimigo(CSTpeca generico){
