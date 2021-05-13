@@ -93,7 +93,7 @@ public class partidaCST {
         tabuleiro = new tabuleiro(linha, coluna);
         this.linhaMax = linha;
         this.ColunaMax = coluna;
-        setTurno(16);
+        setTurno(1);
         jogador.setTimeAtual(time.ORACULO);
         setupInicial();
         Collections.shuffle(pecasOraculo);
@@ -116,6 +116,7 @@ public class partidaCST {
         }
         return matriz;
     }
+
     public boolean[][] possiveisMovimentos(CSTposicao posicaoOrigem){
         posicao posicao = posicaoOrigem.toPosicao();
         validacaoOrigem(posicao);
@@ -293,6 +294,30 @@ public class partidaCST {
         lConsumivels.add(new itemConsumivel("Pizza", 5, this, 2));
         lConsumivels.add(new itemConsumivel("Pototonime", 5, this, 3));
     }
+    public void morreu(CSTpeca peca){
+        posicao aux = peca.getPosicao();
+        if(peca.getVida() <= 0){
+            tabuleiro.removerPeca(peca.getPosicao());
+            if(peca instanceof henridog){
+                if(((henridog)peca).isRENASCEU() == false){
+                    ((henridog)peca).passiva();
+                    tabuleiro.colocarPeca(peca, aux);
+                }else{
+                    if(((CSTpeca)peca).getTiminho() == time.ORACULO){
+                        pecasOraculo.remove(peca);
+                    }else{
+                        pecasTropa.remove(peca);
+                    }
+                }
+            }else{
+            if(peca.getTiminho() == time.ORACULO){
+                pecasOraculo.remove(peca);
+            }else{
+                pecasTropa.remove(peca);
+            }
+         }
+        }
+    }
     private void validacaoOrigem(posicao origem){
         if(!tabuleiro.istoEhUmaPeca(origem)){
             throw new exececaoCST("isto nao eh uma peca para se mover");
@@ -401,8 +426,9 @@ public class partidaCST {
     }
 
     private void setupInicial(){
-        colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 0, 120,5, "leaoT"), 17, 5);
-        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 1, 0, 500,5,"henridogO"), 12, 5);
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 1,5, "leaoT"), 17, 5);
+        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 20, 0, 120,5, "leaoT", this), 14, 5);
+        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 1, 0, 500,5,"henridogO", this), 12, 5);
         
     }
     protected boolean euSouInimigo(CSTpeca generico){

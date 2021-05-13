@@ -1,14 +1,14 @@
 package CSTgame.personagensCST;
 
 import CSTgame.CSTpeca;
-
+import CSTgame.partidaCST;
 import CSTgame.time;
 import tabuleiroGame.posicao;
 import tabuleiroGame.tabuleiro; 
 
 public class henridog extends CSTpeca{
 private int vidaMax;
-
+private partidaCST partidaCST;
 
 public int getVidaMax() {
     return vidaMax;
@@ -24,9 +24,10 @@ public void setRENASCEU(boolean rENASCEU) {
     RENASCEU = rENASCEU;
 }
 
-public henridog(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome){ 
+public henridog(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome, partidaCST partidaCST){ 
     super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
     this.vidaMax = vida;
+    this.partidaCST = partidaCST;
     setRENASCEU(false);
 }
 
@@ -171,7 +172,8 @@ public String toString(){
         while (getTabul().posicaoExiste(posTeste) && cont <= rangehab) {
             if (haUmaPecaDoOponente(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
-                qualquercoisa.setVida(qualquercoisa.getVida() - 12);
+                qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
             posTeste.setCoordenada(posTeste.getLinha() - 1, posTeste.getColuna());
@@ -184,7 +186,8 @@ public String toString(){
         while (getTabul().posicaoExiste(posTeste) && cont <= rangehab) {
             if (haUmaPecaDoOponente(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
-                qualquercoisa.setVida(qualquercoisa.getVida() - 12);
+                qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
             posTeste.setCoordenada(posTeste.getLinha() + 1, posTeste.getColuna());
@@ -197,7 +200,8 @@ public String toString(){
         while (getTabul().posicaoExiste(posTeste) && cont <= rangehab) {
             if (haUmaPecaDoOponente(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
-                qualquercoisa.setVida(qualquercoisa.getVida() - 12);
+                qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
         }
             posTeste.setCoordenada(posTeste.getLinha(), posTeste.getColuna() - 1);
@@ -210,7 +214,8 @@ public String toString(){
         while (getTabul().posicaoExiste(posTeste) && cont <= rangehab) {
             if (haUmaPecaDoOponente(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
-                qualquercoisa.setVida(qualquercoisa.getVida() - 12);
+                qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
             posTeste.setCoordenada(posTeste.getLinha(), posTeste.getColuna() + 1);
