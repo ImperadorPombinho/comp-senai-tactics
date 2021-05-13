@@ -70,7 +70,13 @@ public class itemConsumivel implements consumivelIF{
 
 
     public void efeito(CSTpeca generica){
-        efeitoPizza(generica);
+        if(getID() == 1){
+            efeitoFPyke(generica);
+        }else if(getID() == 2){
+            efeitoPizza(generica);
+        }else if(getID() == 3){
+            efeitoPototonime(generica);
+        }
     }
     
  
