@@ -193,6 +193,16 @@ public class partidaCST {
         habilidade(voce, aliado);
         proximoTurno();
     }
+    public void perfomaceUsarItem(CSTposicao posicaoGenerica, int IDItem){
+        posicao posgenerica = posicaoGenerica.toPosicao();
+        CSTpeca generica = (CSTpeca) tabuleiro.peca(posgenerica);
+        usarItemConsumivel(IDItem, generica);
+    }
+    public void perfomaceEquiparItem(CSTposicao posicaogenerica, int ID){
+        posicao possgenerica = posicaogenerica.toPosicao();
+        CSTpeca generico = (CSTpeca) tabuleiro.peca(possgenerica);
+        equiparItemEquipavel(ID, generico);
+    }
 
     private void fazerMovimento(posicao origem, posicao destino){
         peca naOrigem = tabuleiro.removerPeca(origem);
@@ -293,6 +303,34 @@ public class partidaCST {
         lConsumivels.add(new itemConsumivel("Flexao Pyke", 5, this, 1));
         lConsumivels.add(new itemConsumivel("Pizza", 5, this, 2));
         lConsumivels.add(new itemConsumivel("Pototonime", 5, this, 3));
+    }
+    private void usarItemConsumivel(int IDUI, CSTpeca generica){
+        int item = pesquisarListaConsumivel(IDUI);
+        itemConsumivel itemUsado = itensConsumivels.get(item);
+        itemUsado.efeito(generica);
+        itemUsado.setQuantidade(itemUsado.getQuantidade() - 1);
+
+    }
+    private int pesquisarListaConsumivel(int IDUI){
+        for (int i = 0; i < itensConsumivels.size(); i++) {
+            if(i == IDUI - 1){
+                return i;
+            }
+        }
+        return -1;
+    }
+    private void equiparItemEquipavel(int ID, CSTpeca generico){
+        int equipavel = pesquisarListaEquipavel(ID);
+        itemEquipavel equipar = itensEquipavels.get(equipavel);
+        generico.equiparItem(equipar, generico);
+    }
+    private int pesquisarListaEquipavel(int ID){
+        for (int i = 0; i < itensEquipavels.size(); i++) {
+            if(i == ID - 1){
+                return i;
+            }
+        }
+        return -1;
     }
     public void morreu(CSTpeca peca){
         posicao aux = peca.getPosicao();
