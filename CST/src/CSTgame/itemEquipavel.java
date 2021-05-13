@@ -4,13 +4,21 @@ import CSTgame.interfacesItems.equipavelIF;
 
 public class itemEquipavel implements equipavelIF{
     private String nomeItem;
+    private partidaCST partidaCST;
+    private int ID;
+    
+    public int getID() {
+        return ID;
+    }
 
     public String getNomeItem() {
         return nomeItem;
     }
 
-    public itemEquipavel(String nomeItem) {
+    public itemEquipavel(String nomeItem, partidaCST partidaCST, int ID) {
         this.nomeItem = nomeItem;
+        this.partidaCST = partidaCST;
+        this.ID = ID;
     }
 
     public void setNomeItem(String nomeItem) {
@@ -21,14 +29,24 @@ public class itemEquipavel implements equipavelIF{
 
     @Override
     public void efeitoCamPlaystation(CSTpeca generico) {
-        generico.setDefesa(generico.getDefesa() + 20);
+        if(partidaCST.euSouAliado(generico)){
+            generico.setDefesa(generico.getDefesa() + 20);
+        }else{
+            throw new exececaoCST("nao pode usar em inimigo");
+        }
+        
     }
 
  
 
     @Override
     public void efeitoTacoDeSinuca(CSTpeca generico) {
-        generico.setAtaque(generico.getAtaque() + 30);
+        if(partidaCST.euSouAliado(generico)){
+            generico.setAtaque(generico.getAtaque() + 30);
+        }else{
+            throw new exececaoCST("nao pode usar em inimigo");
+        }
+        
         
     }
 
