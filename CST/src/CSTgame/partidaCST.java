@@ -88,7 +88,7 @@ public class partidaCST {
         tabuleiro = new tabuleiro(linha, coluna);
         this.linhaMax = linha;
         this.ColunaMax = coluna;
-        setTurno(1);
+        setTurno(16);
         jogador.setTimeAtual(time.ORACULO);
         setupInicial();
         Collections.shuffle(pecasOraculo);
@@ -386,7 +386,7 @@ public class partidaCST {
 
     private void setupInicial(){
         colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 0, 120,5, "leaoT"), 17, 5);
-        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 1, 0, 14,5,"henridogO"), 12, 5);
+        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 1, 0, 500,5,"henridogO"), 12, 5);
         
     }
     protected boolean euSouInimigo(CSTpeca generico){

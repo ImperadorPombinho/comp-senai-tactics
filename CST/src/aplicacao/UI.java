@@ -47,11 +47,12 @@ public class UI {
     public static int printarPartida(partidaCST partidaCST, String[] nomes, int numeroLinhas, Scanner scan){
         time testa;
         testa = partidaCST.testaQuemGanhou();
-        if(testa == time.ORACULO || testa == time.TROPA){
-            System.out.println("parabens vermao "+ partidaCST.getJogador().getNome() + " venceu a partida");
+        if(testa == time.ORACULO){
+            System.out.println("venceu: "+ nomes[0]);
+        }else if(testa == time.TROPA){
+            System.out.println("venceu: "+ nomes[1]);
         }
-        int selec = 0;
-        
+        int selec = 0;      
         printarTabuleiro(partidaCST.getPecas(), numeroLinhas);
         System.out.println();
         System.out.println("Turno: " + partidaCST.getTurno());
