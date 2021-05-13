@@ -389,4 +389,10 @@ public class partidaCST {
         colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 1, 0, 14,5,"henridogO"), 12, 5);
         
     }
+    protected boolean euSouInimigo(CSTpeca generico){
+        return generico != null && generico.getTiminho() != jogador.getTimeAtual();
+    }
+    protected boolean euSouAliado(CSTpeca generico){
+        return generico != null && generico.getTiminho() == jogador.getTimeAtual();
+    }
 }
