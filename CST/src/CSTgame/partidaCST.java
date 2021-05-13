@@ -22,9 +22,10 @@ public class partidaCST {
     private boolean partida;
     private boolean trava;
     private jogador jogador = new jogador();
-    
     private List<CSTpeca> pecasOraculo= new ArrayList<>();
     private List<CSTpeca> pecasTropa = new ArrayList<>();
+    private List<itemEquipavel> itensEquipavels = new ArrayList<>();
+    private List<itemConsumivel> itensConsumivels = new ArrayList<>();
     private int turno;
     private int indOraculo;
     public boolean ispartida() {
@@ -37,8 +38,12 @@ public class partidaCST {
         return pecasOraculo;
     }
 
-  
-
+    public List<itemConsumivel> getItensConsumivels() {
+        return itensConsumivels;
+    }
+    public List<itemEquipavel> getItensEquipavels() {
+        return itensEquipavels;
+    }
     public List<CSTpeca> getPecasTropa() {
         return pecasTropa;
     }
@@ -97,6 +102,8 @@ public class partidaCST {
         setIndTropa(0);
         jogador.setPecaAtual(pecasOraculo.get(getIndOraculo()));
         setPartida(true);
+        encherListaConsumivel(itensConsumivels);
+        encherListaEquipavel(itensEquipavels);
         
     }
 
@@ -276,6 +283,15 @@ public class partidaCST {
             return null;
         }
 
+    }
+    private void encherListaEquipavel(List<itemEquipavel> lEquipavels){
+        lEquipavels.add(new itemEquipavel("Camisa da Playstation", this, 1));
+        lEquipavels.add(new itemEquipavel("Taco de Sinuca", this, 2));
+    }
+    private void encherListaConsumivel(List<itemConsumivel> lConsumivels){
+        lConsumivels.add(new itemConsumivel("Flexao Pyke", 5, this, 1));
+        lConsumivels.add(new itemConsumivel("Pizza", 5, this, 2));
+        lConsumivels.add(new itemConsumivel("Pototonime", 5, this, 3));
     }
     private void validacaoOrigem(posicao origem){
         if(!tabuleiro.istoEhUmaPeca(origem)){

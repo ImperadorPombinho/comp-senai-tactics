@@ -52,6 +52,10 @@ public class itemEquipavel implements equipavelIF{
 
 
     public void efeito(CSTpeca generico){
-        efeitoCamPlaystation(generico);
+        if(getID() == 1){
+            efeitoCamPlaystation(generico);
+        }else if(getID() == 2){
+            efeitoTacoDeSinuca(generico);
+        }
     }
 }
