@@ -163,7 +163,7 @@ public String toString(){
     public void habilidade(CSTpeca generico) {
         CSTpeca qualquercoisa;
         posicao posTeste = new posicao (0, 0);
-        int rangehab = 5;
+        int rangehab = 10;
         int cont = 1;
         // cima
     

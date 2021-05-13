@@ -43,16 +43,25 @@ public class UI {
         }
         return nomes;
     }
-
+    public static void printarVencedor(String nome){
+        limparTelaConsole();
+        System.out.println("==================================================================");
+        System.out.println("\tO VENCENDOR EH: "+ nome+" PARABENS VERMAO");
+        System.out.println("==================================================================");
+        
+    }
     public static int printarPartida(partidaCST partidaCST, String[] nomes, int numeroLinhas, Scanner scan){
         time testa;
+        int selec = 0;
         testa = partidaCST.testaQuemGanhou();
         if(testa == time.ORACULO){
-            System.out.println("venceu: "+ nomes[0]);
+            printarVencedor(nomes[0]);
         }else if(testa == time.TROPA){
-            System.out.println("venceu: "+ nomes[1]);
-        }
-        int selec = 0;      
+            printarVencedor(nomes[1]);
+        }else{
+
+        
+              
         printarTabuleiro(partidaCST.getPecas(), numeroLinhas);
         System.out.println();
         System.out.println("Turno: " + partidaCST.getTurno());
@@ -75,6 +84,7 @@ public class UI {
         System.out.println("2-Movimentar");
         System.out.println("3-Habilidade");
         selec = scan.nextInt();
+    }
     
         return selec;
     }
@@ -149,7 +159,7 @@ public class UI {
             if(peca.getTiminho() == time.ORACULO){
                 System.out.print(ANSI_BLUE + peca + ANSI_RESET);
             }else{
-                System.out.print(ANSI_BLACK + peca + ANSI_RESET);
+                System.out.print(ANSI_RED + peca + ANSI_RESET);
             }
            
                 

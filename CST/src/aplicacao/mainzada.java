@@ -23,6 +23,7 @@ public class mainzada {
         while(partidaCST.ispartida()){
             try{
             //UI.limparTelaConsole();
+            
             selec = UI.printarPartida(partidaCST, nomes, 20, scan);
             if(partidaCST.ispartida() == false){
                 break;
