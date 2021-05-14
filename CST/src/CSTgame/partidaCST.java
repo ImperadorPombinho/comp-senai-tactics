@@ -169,8 +169,10 @@ public class partidaCST {
                 }else{
                     if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
                         pecasOraculo.remove((CSTpeca)capturada);
+                        setIndOraculo(getIndOraculo() - 1);
                     }else{
                         pecasTropa.remove((CSTpeca)capturada);
+                        setIndTropa(getIndTropa() - 1);
                     }
                 }
             }else{
@@ -343,15 +345,19 @@ public class partidaCST {
                 }else{
                     if(((CSTpeca)peca).getTiminho() == time.ORACULO){
                         pecasOraculo.remove(peca);
+                        setIndOraculo(getIndOraculo() - 1);
                     }else{
                         pecasTropa.remove(peca);
+                        setIndTropa(getIndTropa() - 1);
                     }
                 }
             }else{
             if(peca.getTiminho() == time.ORACULO){
                 pecasOraculo.remove(peca);
+                
             }else{
                 pecasTropa.remove(peca);
+                
             }
          }
         }
@@ -464,8 +470,10 @@ public class partidaCST {
     }
 
     private void setupInicial(){
-        colocarNovaPeca(new miguez(tabuleiro, time.ORACULO, 20, 0, 120,1, this,"miguezO"), 14, 5);
-        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 1, 0, 500,5,"henridogT", this), 15, 5);
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 240,1,"LeaoO"), 16, 5);
+        colocarNovaPeca(new miguez(tabuleiro, time.TROPA, 20, 0, 120,1, this,"miguezO"), 13, 8);
+        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 20, 0, 120,1,"dogO", this), 14, 5);
+        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 1, 0, 700,5,"henridogT", this), 15, 5);
         
     }
     protected boolean euSouInimigo(CSTpeca generico){
