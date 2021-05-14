@@ -136,8 +136,8 @@ public class UI {
             
             System.out.println();
         }
-       
-        System.out.println();
+        
+        System.out.println("   A B C D E F G H I J K L M N O P Q R S T");
         
     }
     public static void printarTabuleiro(CSTpeca[][] pecas, int numeroLinhas, boolean[][] possiveisAtaques){
