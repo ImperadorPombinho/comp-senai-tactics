@@ -21,10 +21,14 @@ public class mainzada {
         UI.printarSorteioAtqPecas(partidaCST);
         scan.nextLine();
         scan.nextLine();
-        while(true){
+        while(partidaCST.ispartida()){
             try{
             //UI.limparTelaConsole();
+            
             selec = UI.printarPartida(partidaCST, nomes, 20, scan);
+            if(partidaCST.ispartida() == false){
+                break;
+            }
             if(selec == 1){
                 System.out.println();
                 System.out.println("Ataque");
@@ -53,22 +57,37 @@ public class mainzada {
                 CSTposicao destino = UI.lerPosicao(scan, 20, 20);
                 partidaCST.perfomaceFazerMovimento(origem, destino);
             }else if(selec == 3){
-                System.out.println();
-                System.out.println("Habilidade");
-                System.out.print("posicao origem: ");
-                CSTposicao origem = UI.lerPosicao(scan, 20, 20);
-                System.out.println();
+                
                 if(partidaCST.getJogador().getPecaAtual() instanceof racoba){
-                    System.out.println("Rodando o gacha...");
-                    CSTposicao destino = new CSTposicao(10, 10, 20, 20);
-                    partidaCST.perfomaceHabilidade(origem, destino);
+                    System.out.println("JOGANDO COM A SORTE...");
+                    if(partidaCST.getJogador().getPecaAtual().getInventario().getNomeItem().equals("Foice")){
+                        System.out.println();
+                        System.out.println("Habilidade + GOLPE LETAL DA FOICE");
+                        System.out.print("posicao origem: ");
+                        CSTposicao origem = UI.lerPosicao(scan, 20, 20);
+                        System.out.println("Ataque giratorio da foice!");
+                        CSTposicao destino = new CSTposicao(10, 10, 20, 20);
+                        partidaCST.perfomaceHabilidade(origem, destino);
+                    }
+                    else{
+                        System.out.println();
+                        System.out.println("Habilidade");
+                        System.out.print("posicao origem: ");
+                        CSTposicao origem = UI.lerPosicao(scan, 20, 20);
+                        CSTposicao destino = new CSTposicao(10, 10, 20, 20);
+                        partidaCST.perfomaceHabilidade(origem, destino);
+                    }
                 }
                 else{
+                    System.out.println();
+                    System.out.println("Habilidade");
+                    System.out.print("posicao origem: ");
+                    CSTposicao origem = UI.lerPosicao(scan, 20, 20);
+                    System.out.println();
                     System.out.print("posicao destino: ");
                     CSTposicao destino = UI.lerPosicao(scan, 20, 20);
                     partidaCST.perfomaceHabilidade(origem, destino);
                 }
-                
             }
             
                 //alou; 

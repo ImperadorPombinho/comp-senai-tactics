@@ -1,13 +1,12 @@
 package CSTgame;
-
 import CSTgame.interfacesItems.gachaRollIf;
 
 public class gacha extends itemEquipavel implements gachaRollIf {
 
-    public gacha(String nomeItem) {
-        super(nomeItem);
-        
+    public gacha(String nomeItem, CSTgame.partidaCST partidaCST, int ID) {
+        super(nomeItem, partidaCST, ID);
     }
+
     @Override
     public void efeitoFoice(CSTpeca generico) {
         generico.setAtaque(generico.getAtaque()+15);
@@ -35,32 +34,32 @@ public class gacha extends itemEquipavel implements gachaRollIf {
     }
     
     public void atributos(CSTpeca generico, int id){
-        generico.desequiparItem(this);
-        System.out.println("teste");
+        generico.desequiparItem(generico.getInventario());
+        System.out.println(generico.getNome() +" recebeu: ");
         switch(id){
             case 1:
                 this.setNomeItem("Foice");
-                generico.equiparItem(this);
+                generico.setInventario(this);
                 efeitoFoice(generico);
-                System.out.println(generico.getNome() +" agora possui a Racofoice em mãos!");
+                System.out.println("Racofoice!! Agora é possível utilizar o giro mortal!");
                 break;
             case 2:
                 this.setNomeItem("AK Trovoada");
-                generico.equiparItem(this);
+                generico.setInventario(this);
                 efeitoAk(generico);
-                System.out.println(generico.getNome() +" agora está de AK Trovoada");
+                System.out.println("AK 47 pique trovoada!! Ataque a distancia!");
                 break;
             case 3:
                 this.setNomeItem("Martelo");
-                generico.equiparItem(this);  
+                generico.setInventario(this);  
                 efeitoMartelo(generico);
-                System.out.println(generico.getNome() +" MARTELA O MARTELOBALDO!");
+                System.out.println("MARTELOBALDO!");
                 break;
             case 4:
                 this.setNomeItem("Bodychain da Gucci");
-                generico.equiparItem(this); 
+                generico.setInventario(this); 
                 efeitoRoupaGrife(generico);
-                System.out.println(generico.getNome() +" esta charlando de Bodychain da Gucci");
+                System.out.println("Bodychain da Gucci! ta podendo filho!");
                 break;
             default:
                 break;                    

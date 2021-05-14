@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import CSTgame.personagensCST.henridog;
 import CSTgame.personagensCST.juao;
 import CSTgame.personagensCST.leao;
 import CSTgame.personagensCST.miguez;
@@ -18,19 +19,31 @@ public class partidaCST {
     private tabuleiro tabuleiro;
     private int linhaMax;
     private int ColunaMax;
+    private boolean partida;
     private boolean trava;
     private jogador jogador = new jogador();
-    
     private List<CSTpeca> pecasOraculo= new ArrayList<>();
     private List<CSTpeca> pecasTropa = new ArrayList<>();
+    private List<itemEquipavel> itensEquipavels = new ArrayList<>();
+    private List<itemConsumivel> itensConsumivels = new ArrayList<>();
     private int turno;
     private int indOraculo;
+    public boolean ispartida() {
+        return partida;
+    }
+    public void setPartida(boolean partida) {
+        this.partida = partida;
+    }
     public List<CSTpeca> getPecasOraculo() {
         return pecasOraculo;
     }
 
-  
-
+    public List<itemConsumivel> getItensConsumivels() {
+        return itensConsumivels;
+    }
+    public List<itemEquipavel> getItensEquipavels() {
+        return itensEquipavels;
+    }
     public List<CSTpeca> getPecasTropa() {
         return pecasTropa;
     }
@@ -88,6 +101,10 @@ public class partidaCST {
         setIndOraculo(0);
         setIndTropa(0);
         jogador.setPecaAtual(pecasOraculo.get(getIndOraculo()));
+        setPartida(true);
+        encherListaConsumivel(itensConsumivels);
+        encherListaEquipavel(itensEquipavels);
+        
     }
 
     public CSTpeca[][] getPecas(){
@@ -99,6 +116,7 @@ public class partidaCST {
         }
         return matriz;
     }
+
     public boolean[][] possiveisMovimentos(CSTposicao posicaoOrigem){
         posicao posicao = posicaoOrigem.toPosicao();
         validacaoOrigem(posicao);
@@ -137,55 +155,34 @@ public class partidaCST {
         validacaoAtaque(atacante, atacado);
         if(atacado instanceof leao){
             atacado.contarAtqTomado();
-            
+           
         }
-        // ataque da foice de racoba
-        if(atacante instanceof racoba && atacante.getInventario().getNomeItem().equals("Foice")){
-            if(posAtacado.getLinha() != posAtacante.getLinha()){
-                posicao posEsq = new posicao(posAtacado.getLinha(), posAtacado.getColuna()-1);
-                posicao posDir = new posicao(posAtacado.getLinha(), posAtacado.getColuna()+1);
-                
-                if(atacado.haUmaPecaAliada(posEsq)){
-                   CSTpeca pecaEsq = (CSTpeca) tabuleiro.peca(posEsq.getLinha(), posEsq.getColuna());
-                   ataque(atacante, pecaEsq);
-                   if(pecaEsq.getVida() <= 0){
-                        peca capturada = tabuleiro.removerPeca(posEsq);
-                    }
-                }
-                if(atacado.haUmaPecaAliada(posDir)){
-                    CSTpeca pecaDir = (CSTpeca) tabuleiro.peca(posDir.getLinha(), posDir.getColuna());
-                    ataque(atacante, pecaDir);
-                    if(pecaDir.getVida() <= 0){
-                        peca capturada = tabuleiro.removerPeca(posDir);
-                    }
-                }
-            }
-            if(posAtacado.getColuna() != posAtacante.getColuna()){
-                posicao posCima = new posicao(posAtacado.getLinha()-1, posAtacado.getColuna());
-                posicao posBaixo = new posicao(posAtacado.getLinha()+1, posAtacado.getColuna());
-
-                if(atacado.haUmaPecaAliada(posCima)){
-                    CSTpeca pecaCima = (CSTpeca) tabuleiro.peca(posCima.getLinha(), posCima.getColuna());
-                    ataque(atacante, pecaCima);
-                    if(pecaCima.getVida() <= 0){
-                        peca capturada = tabuleiro.removerPeca(posCima);
-                    }
-                }
-                if(atacado.haUmaPecaAliada(posBaixo)){
-                    CSTpeca pecaBaixo = (CSTpeca) tabuleiro.peca(posBaixo.getLinha(), posBaixo.getColuna());
-                    ataque(atacante, pecaBaixo);
-                    if(pecaBaixo.getVida() <= 0){
-                        peca capturada = tabuleiro.removerPeca(posBaixo);
-                    }
-                }
-            }
-        }
-
         ataque(atacante, atacado);
-        //System.out.println(atacado.getAtaque());
-        //System.out.println(atacante.getAtaque());
+        System.out.println(atacado.getAtaque());
+        System.out.println(atacante.getAtaque());
         if(atacado.getVida() <= 0){
             peca capturada = tabuleiro.removerPeca(posAtacado);
+            if((CSTpeca) capturada instanceof henridog){
+                if(((henridog)capturada).isRENASCEU() == false){
+                    ((henridog)capturada).passiva();
+                    tabuleiro.colocarPeca(capturada, posAtacado);
+                }else{
+                    if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
+                        pecasOraculo.remove((CSTpeca)capturada);
+                        setIndOraculo(getIndOraculo()-1);
+                    }else{
+                        pecasTropa.remove((CSTpeca)capturada);
+                        setIndTropa(getIndTropa()-1);
+                    }
+                }
+            }else{
+                if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
+                    pecasOraculo.remove((CSTpeca)capturada);
+                }else{
+                    pecasTropa.remove((CSTpeca)capturada);
+                }
+            }
+
             
         }
         proximoTurno();
@@ -195,14 +192,24 @@ public class partidaCST {
         posicao posicaooAliado = posicaoAliado.toPosicao();
         CSTpeca voce = (CSTpeca) tabuleiro.peca(posicaooVoce);
         CSTpeca aliado = (CSTpeca) tabuleiro.peca(posicaooAliado);
-        if(voce instanceof racoba){
-            voce.habilidade(voce);
+        if(voce instanceof racoba){            
+            voce.habilidade(aliado);
         }
         else{
             habilidade(voce, aliado);
         }
         
         proximoTurno();
+    }
+    public void perfomaceUsarItem(CSTposicao posicaoGenerica, int IDItem){
+        posicao posgenerica = posicaoGenerica.toPosicao();
+        CSTpeca generica = (CSTpeca) tabuleiro.peca(posgenerica);
+        usarItemConsumivel(IDItem, generica);
+    }
+    public void perfomaceEquiparItem(CSTposicao posicaogenerica, int ID){
+        posicao possgenerica = posicaogenerica.toPosicao();
+        CSTpeca generico = (CSTpeca) tabuleiro.peca(possgenerica);
+        equiparItemEquipavel(ID, generico);
     }
 
     private void fazerMovimento(posicao origem, posicao destino){
@@ -211,7 +218,7 @@ public class partidaCST {
         if(((CSTpeca) naOrigem).isTravaMov()==true){
             tabuleiro.colocarPeca(naOrigem, origem);
             System.out.println("Essa peça está congelada e será descongelada na próxima rodada!");
-            proximoTurno();
+            //proximoTurno();
             ((CSTpeca) naOrigem).setTravaMov(false);
         }
         else{
@@ -232,13 +239,13 @@ public class partidaCST {
         }else{
             atacado.setVida(atacado.getVida() - (atacante.getAtaque() - atacado.getDefesa()));
             System.out.println("vida atacado: " + atacado.getVida());
-            System.out.println("atacado: " +atacado.getNome());
         }
         
     }
     private void habilidade(CSTpeca voce, CSTpeca aliado){
         voce.habilidade(aliado);
         System.out.println("defesa aliado: " + aliado.getDefesa());
+        System.out.println("vida: " + aliado.getVida());
     }
     private void habilidadeJuao(juao voce, CSTpeca oponente){
             if(!voce.haUmaPecaDoOponente(oponente.getPosicao())){
@@ -249,6 +256,115 @@ public class partidaCST {
                 System.out.println("vida de juao: " + voce.getVida());
                 System.out.println("vida do oponente: " + oponente.getVida());
             }
+    }
+    private int somaVida(List<CSTpeca> qualquer){
+        int soma = 0;
+        for (CSTpeca csTpeca : qualquer) {
+            soma += csTpeca.getVida();
+        }
+        return soma;
+    }
+    private time testaDepoisTurno(int quantOraculo, int quantTropa){
+        int somaOraculo, somaTropa;
+
+        if(quantOraculo > quantTropa){
+            return time.ORACULO;
+        }else if(quantTropa > quantOraculo){
+            return time.TROPA;
+        }else{
+            somaOraculo = somaVida(pecasOraculo);
+            somaTropa = somaVida(pecasTropa);
+            if(somaOraculo > somaTropa){
+                return time.ORACULO;
+            }else if(somaTropa > somaOraculo){
+                return time.TROPA;
+            }else{
+                return null;
+            }
+        }
+    }
+    public time testaQuemGanhou(){
+        time timinho;
+        int turno = getTurno();
+        int quantOraculo = pecasOraculo.size();
+        int quantTropa = pecasTropa.size();
+        if(quantOraculo == 0){
+            setPartida(false);
+            return time.TROPA;
+        }else if(quantTropa == 0){
+            setPartida(false);
+            return time.ORACULO;
+        }else if(turno == 17){
+            setPartida(false);
+            timinho = testaDepoisTurno(quantOraculo, quantTropa);
+            return timinho;
+        }else{
+            return null;
+        }
+
+    }
+    private void encherListaEquipavel(List<itemEquipavel> lEquipavels){
+        lEquipavels.add(new itemEquipavel("Camisa da Playstation", this, 1));
+        lEquipavels.add(new itemEquipavel("Taco de Sinuca", this, 2));
+    }
+    private void encherListaConsumivel(List<itemConsumivel> lConsumivels){
+        lConsumivels.add(new itemConsumivel("Flexao Pyke", 5, this, 1));
+        lConsumivels.add(new itemConsumivel("Pizza", 5, this, 2));
+        lConsumivels.add(new itemConsumivel("Pototonime", 5, this, 3));
+    }
+    private void usarItemConsumivel(int IDUI, CSTpeca generica){
+        int item = pesquisarListaConsumivel(IDUI);
+        itemConsumivel itemUsado = itensConsumivels.get(item);
+        itemUsado.efeito(generica);
+        itemUsado.setQuantidade(itemUsado.getQuantidade() - 1);
+
+    }
+    private int pesquisarListaConsumivel(int IDUI){
+        for (int i = 0; i < itensConsumivels.size(); i++) {
+            if(i == IDUI - 1){
+                return i;
+            }
+        }
+        return -1;
+    }
+    private void equiparItemEquipavel(int ID, CSTpeca generico){
+        int equipavel = pesquisarListaEquipavel(ID);
+        itemEquipavel equipar = itensEquipavels.get(equipavel);
+        generico.equiparItem(equipar, generico);
+    }
+    private int pesquisarListaEquipavel(int ID){
+        for (int i = 0; i < itensEquipavels.size(); i++) {
+            if(i == ID - 1){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public void morreu(CSTpeca peca){
+        posicao aux = peca.getPosicao();
+        if(peca.getVida() <= 0){
+            tabuleiro.removerPeca(peca.getPosicao());
+            if(peca instanceof henridog){
+                if(((henridog)peca).isRENASCEU() == false){
+                    ((henridog)peca).passiva();
+                    tabuleiro.colocarPeca(peca, aux);
+                }else{
+                    if(((CSTpeca)peca).getTiminho() == time.ORACULO){
+                        pecasOraculo.remove(peca);
+                        setIndOraculo(getIndOraculo()-1);
+                    }else{
+                        pecasTropa.remove(peca);
+                        setIndTropa(getIndTropa()-1);
+                    }
+                }
+            }else{
+            if(peca.getTiminho() == time.ORACULO){
+                pecasOraculo.remove(peca);
+            }else{
+                pecasTropa.remove(peca);
+            }
+         }
+        }
     }
     private void validacaoOrigem(posicao origem){
         if(!tabuleiro.istoEhUmaPeca(origem)){
@@ -329,41 +445,45 @@ public class partidaCST {
     public void proximoTurno(){
 
         setTurno(getTurno() + 1);
-
-        jogador.setTimeAtual((jogador.getTimeAtual() == time.ORACULO) ? time.TROPA : time.ORACULO);
-        if(jogador.getTimeAtual() == time.ORACULO){
-            jogador.setPecaAtual(pecasOraculo.get(getIndOraculo()));
-            
-            if(getIndTropa() +1 == pecasTropa.size()){
-                setIndTropa(0);
+        if(pecasOraculo.size() != 0 && pecasTropa.size() != 0){
+            jogador.setTimeAtual((jogador.getTimeAtual() == time.ORACULO) ? time.TROPA : time.ORACULO);
+            if(jogador.getTimeAtual() == time.ORACULO){
+                jogador.setPecaAtual(pecasOraculo.get(getIndOraculo()));
+                
+                if(getIndTropa() +1 == pecasTropa.size()){
+                    setIndTropa(0);
+                }else{
+                    setIndTropa(getIndTropa() + 1);
+                    System.out.println("indice Tropa: "+getIndTropa());
+                }
             }else{
-                setIndTropa(getIndTropa() + 1);
-                System.out.println("indice Tropa: "+getIndTropa());
+                
+                jogador.setPecaAtual(pecasTropa.get(getIndTropa()));
+                if(getIndOraculo() +1 == pecasOraculo.size()){
+                    setIndOraculo(0);
+                }else{
+                    setIndOraculo(getIndOraculo() + 1);
+                    System.out.println("indice Oraculo: "+getIndOraculo());
+                }
+              
             }
-        }else{
-            
-            jogador.setPecaAtual(pecasTropa.get(getIndTropa()));
-            if(getIndOraculo() +1 == pecasOraculo.size()){
-                setIndOraculo(0);
-            }else{
-                setIndOraculo(getIndOraculo() + 1);
-                System.out.println("indice Oraculo: "+getIndOraculo());
-            }
-          
         }
+
 
 
     }
 
     private void setupInicial(){
-
-        colocarNovaPeca(new juao(tabuleiro, time.TROPA, 0, 0, 10, 5, "juaoT"), 15, 6);
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 0, 0, 10,5, "leaoT"), 13, 6);
-        colocarNovaPeca(new miguez(tabuleiro, time.TROPA, 0, 0, 5,5,"miguezT"), 14, 6);
-        //colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 14,5, "obs"), 1, 1);
-        //colocarNovaPeca(new obstaculo(tabuleiro, time.ORACULO, 0, 0, 14,5, "obs"), 1, 2);
-        colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 5, 10, 20,3,"racobaO"), 14, 5);
-        //colocarNovaPeca(new racoba(tabuleiro, time.TROPA, 0, 0, 14,5,"racobaT"), 14, 3);
-
+        colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 20, 0, 500,1, "racO", this), 14, 5);
+        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 1, 0, 10,5,"henridgT", this), 14, 6);
+        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 1, 0, 10,5,"henridogT", this), 17, 5);
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 1, 0, 10,5,"leaoT"), 15, 4);
+        
+    }
+    protected boolean euSouInimigo(CSTpeca generico){
+        return generico != null && generico.getTiminho() != jogador.getTimeAtual();
+    }
+    protected boolean euSouAliado(CSTpeca generico){
+        return generico != null && generico.getTiminho() == jogador.getTimeAtual();
     }
 }

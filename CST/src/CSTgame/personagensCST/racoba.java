@@ -4,16 +4,19 @@ import java.util.Random;
 
 import CSTgame.CSTpeca;
 import CSTgame.gacha;
+import CSTgame.partidaCST;
 import CSTgame.time;
 import tabuleiroGame.posicao;
 import tabuleiroGame.tabuleiro;
 
 public class racoba extends CSTpeca {
+    private partidaCST partidaCST;
 
-    public racoba(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome){
+    public racoba(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome, partidaCST partidaCST){
         super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
         setTravaMov(false);
-        
+        this.partidaCST = partidaCST;
+        setInventario(new gacha("Foice", partidaCST, 0));
     }
     
     Random aleatorio = new Random();
@@ -123,11 +126,32 @@ public class racoba extends CSTpeca {
     }
 
     @Override
-    public void habilidade(CSTpeca generico) {
-        gacha roll = new gacha("");
-        //selecionar gacha
-        roll.atributos(this, aleatorio.nextInt(4)+1);
+    public void habilidade(CSTpeca generico) { 
+        if(getInventario().getNomeItem().equals("Foice")){
+            System.out.println(getPosicao().getLinha());
+            System.out.println(getPosicao().getLinha()+1);
+            posicao posTeste = new posicao (0, 0);
+            CSTpeca pecax;
+            int lin;
+            int col;
+            for(lin = getPosicao().getLinha()+1; lin > getPosicao().getLinha()-2; lin--){
+                for(col = getPosicao().getColuna()-1; col < getPosicao().getColuna()+2; col++){
+                    posTeste.setCoordenada(lin, col);
+                    if(haUmaPecaDoOponente(posTeste)){
+                        pecax = (CSTpeca) getTabul().peca(posTeste);
+                        pecax.setVida(pecax.getVida() - 50);
+                        partidaCST.morreu(pecax);
+                        System.out.println("atacado: " +pecax.getNome());
+                    }
+                    
+                }
+            }
+            System.out.println("A racofoice atual foi quebrada!");
+        }
+        System.out.println("Rodando o gacha...");
+        ((gacha)getInventario()).atributos(this, aleatorio.nextInt(4)+1);
         
     }
-
+    
+    
 }

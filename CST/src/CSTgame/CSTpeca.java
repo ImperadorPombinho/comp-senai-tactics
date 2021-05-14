@@ -62,7 +62,7 @@ public abstract class CSTpeca extends peca{
     public int getVida() {
         return vida;
     }
-    protected void setVida(int vida) {
+    public void setVida(int vida) {
         this.vida = vida;
     }
     public int getDefesa() {
@@ -92,30 +92,44 @@ public abstract class CSTpeca extends peca{
         CSTpeca peca = (CSTpeca) getTabul().peca(posicao);
         return peca != null && peca.getTiminho() == getTiminho();
     }
-    public void equiparItem(itemEquipavel item){
+    public void equiparItem(itemEquipavel item, CSTpeca generico){
+        if(getInventario() == null){
             setInventario(item);
+            item.efeito(generico);
+
+        }else{
+            throw new exececaoCST("Inventario do personagem cheio");
+        }
+            
     }
     public void desequiparItem(itemEquipavel item){
-        if(this instanceof racoba){
-            // desequipar itens racoba
-            String nome = item.getNomeItem();
-            if(nome.equals("Foice")){
-                this.setAtaque(this.getAtaque()-20);
+        if(getInventario() != null){
+            setInventario(null);
+            //System.out.println("Inventario esvaziado");
+            if(this instanceof racoba){
+                // desequipar itens racoba
+                String nome = item.getNomeItem();
+                if(nome.equals("Foice")){
+                    setAtaque(getAtaque()-20);
+                }
+                if(nome.equals("AK Trovoada")){
+                    setAtaque(getAtaque()+5);
+                }
+                if(nome.equals("Martelo")){
+                    setAtaque(getAtaque()-20);
+                }
+                if(nome.equals("Bodychain da Gucci")){
+                    setAtaque(getAtaque()+10);
+                    setDefesa(getDefesa()-25);
+                }
+                setRangeMovimento(3);
             }
-            if(nome.equals("AK Trovoada")){
-                this.setAtaque(this.getAtaque()+5);
+            else{
+                // desequipar padrao
             }
-            if(nome.equals("Martelo")){
-                this.setAtaque(this.getAtaque()-20);
-            }
-            if(nome.equals("Bodychain da Gucci")){
-                this.setAtaque(this.getAtaque()+10);
-                this.setDefesa(this.getDefesa()-25);
-            }
-            this.setRangeMovimento(3);
         }
         else{
-            // desequipar padrao
+            throw new exececaoCST("o inventario ja esta vazio");
         }
     }
 
