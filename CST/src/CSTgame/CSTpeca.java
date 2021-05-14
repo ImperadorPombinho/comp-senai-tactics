@@ -92,7 +92,7 @@ public abstract class CSTpeca extends peca{
         return peca != null && peca.getTiminho() == getTiminho();
     }
     public void equiparItem(itemEquipavel item, CSTpeca generico){
-        if(getInventario() == null){
+        if(getInventario() == null ){
             setInventario(item);
             item.efeito(generico);
 
