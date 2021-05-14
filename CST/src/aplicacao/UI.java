@@ -1,5 +1,6 @@
 package aplicacao;
 
+import java.io.ObjectInputFilter.Status;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -8,6 +9,7 @@ import CSTgame.CSTpeca;
 import CSTgame.CSTposicao;
 import CSTgame.partidaCST;
 import CSTgame.time;
+import tabuleiroGame.peca;
 
 
 public class UI {
@@ -79,6 +81,8 @@ public class UI {
             System.out.println("Esperando " + partidaCST.getJogador().getNome() + " jogar");
             System.out.println("Peça a ser jogada: " + partidaCST.getJogador().getPecaAtual().getNome() + " " +partidaCST.getJogador().getPecaAtual().toString());
         }
+        String status = printarStatus(partidaCST.getJogador().getPecaAtual());
+        System.out.println(status);
         System.out.println("Escolha a acao abaixo: ");
         System.out.println("1-Atacar");
         System.out.println("2-Movimentar");
@@ -132,8 +136,8 @@ public class UI {
             
             System.out.println();
         }
-       
-        System.out.println();
+        
+        System.out.println("   A B C D E F G H I J K L M N O P Q R S T");
         
     }
     public static void printarTabuleiro(CSTpeca[][] pecas, int numeroLinhas, boolean[][] possiveisAtaques){
@@ -165,5 +169,32 @@ public class UI {
                 
         }
         System.out.print(" ");
+    }
+    private static String printarStatus(CSTpeca peca){
+        StringBuilder Status = new StringBuilder();
+        Status.append("\n==========STATUS==========");
+        Status.append("\n");
+        if(peca.getTiminho() == time.ORACULO){
+            Status.append("\tNome: " +ANSI_BLUE+ peca.getNome()+ ANSI_RESET + "\n");
+            Status.append("\tPeca: " + ANSI_BLUE + peca + ANSI_RESET + "\n");
+
+        }else{
+            Status.append("\tNome: " +ANSI_RED+ peca.getNome()+ ANSI_RESET+ "\n");
+            Status.append("\tPeca: " + ANSI_RED + peca + ANSI_RESET + "\n"); 
+        }
+        Status.append("\tVida: " + peca.getVida());
+        Status.append("\n");
+        Status.append("\tAtaque: "+peca.getAtaque());
+        Status.append("\n");
+        Status.append("\tDefesa: "+peca.getDefesa());
+        Status.append("\n");
+        Status.append("\tRange geral: "+ peca.getRangeMovimento());
+        Status.append("\n");
+        Status.append("\tInventario: "+ peca.getInventario());
+        Status.append("\n");
+        Status.append("\n===========================");
+        Status.append("\n");
+        return Status.toString();
+        
     }
 }
