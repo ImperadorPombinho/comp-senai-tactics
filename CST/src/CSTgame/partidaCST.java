@@ -4,6 +4,7 @@ package CSTgame;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import CSTgame.personagensCST.henridog;
 import CSTgame.personagensCST.juao;
@@ -26,6 +27,10 @@ public class partidaCST {
     private List<CSTpeca> pecasTropa = new ArrayList<>();
     private List<itemEquipavel> itensEquipavels = new ArrayList<>();
     private List<itemConsumivel> itensConsumivels = new ArrayList<>();
+    private List<itemEquipavel> itensEquipavelsO = new ArrayList<>();
+    private List<itemConsumivel> itensConsumivelsO = new ArrayList<>();
+    private List<itemEquipavel> itensEquipavelsT = new ArrayList<>();
+    private List<itemConsumivel> itensConsumivelsT = new ArrayList<>();
     private int turno;
     private int indOraculo;
     public boolean ispartida() {
@@ -297,6 +302,29 @@ public class partidaCST {
         }
 
     }
+    private boolean pesquisarSeEhIgual(List<itemConsumivel> qualquer, itemConsumivel itemgacha){
+        for (int i = 0; i < qualquer.size(); i++) {
+            if(itemgacha.hashCode() == qualquer.get(i).hashCode()){
+                return true;
+            }
+            
+        }
+        return false;
+    }
+    private void darItemAleatorio(List<itemConsumivel> qualquer){
+        Random gachazinho = new Random();
+        int gacha;
+        while(true){
+            gacha = gachazinho.nextInt(qualquer.size());
+            itemConsumivel itemgacha = itensConsumivels.get(gacha);
+            boolean ganhougacha = pesquisarSeEhIgual(qualquer, itemgacha);
+            if(ganhougacha == false){
+                qualquer.add(itemgacha);
+                break;
+            }
+        }
+
+    }
     private void encherListaEquipavel(List<itemEquipavel> lEquipavels){
         lEquipavels.add(new itemEquipavel("Camisa da Playstation", this, 1));
         lEquipavels.add(new itemEquipavel("Taco de Sinuca", this, 2));
@@ -307,14 +335,22 @@ public class partidaCST {
         lConsumivels.add(new itemConsumivel("Pototonime", 5, this, 3));
     }
     private void usarItemConsumivel(int IDUI, CSTpeca generica){
-        int item = pesquisarListaConsumivel(IDUI);
-        itemConsumivel itemUsado = itensConsumivels.get(item);
+        int item;
+        itemConsumivel itemUsado;
+        if(jogador.getTimeAtual() == time.ORACULO){
+            item = pesquisarListaConsumivel(IDUI, itensConsumivelsO);
+            itemUsado = itensConsumivelsO.get(item);
+        }else{
+            item = pesquisarListaConsumivel(IDUI, itensConsumivelsT);
+            itemUsado = itensConsumivelsT.get(item);
+        }
+         
         itemUsado.efeito(generica);
         itemUsado.setQuantidade(itemUsado.getQuantidade() - 1);
 
     }
-    private int pesquisarListaConsumivel(int IDUI){
-        for (int i = 0; i < itensConsumivels.size(); i++) {
+    private int pesquisarListaConsumivel(int IDUI, List<itemConsumivel> qualquer){
+        for (int i = 0; i < qualquer.size(); i++) {
             if(i == IDUI - 1){
                 return i;
             }
@@ -322,12 +358,19 @@ public class partidaCST {
         return -1;
     }
     private void equiparItemEquipavel(int ID, CSTpeca generico){
-        int equipavel = pesquisarListaEquipavel(ID);
-        itemEquipavel equipar = itensEquipavels.get(equipavel);
+        int equipavel;
+        itemEquipavel equipar;
+        if(generico.getTiminho() == time.ORACULO){
+            equipavel = pesquisarListaEquipavel(ID, itensEquipavelsO);
+            equipar = itensEquipavelsO.get(equipavel);
+        }else{
+            equipavel = pesquisarListaEquipavel(ID, itensEquipavelsT);
+            equipar = itensEquipavelsT.get(equipavel);
+        }
         generico.equiparItem(equipar, generico);
     }
-    private int pesquisarListaEquipavel(int ID){
-        for (int i = 0; i < itensEquipavels.size(); i++) {
+    private int pesquisarListaEquipavel(int ID, List<itemEquipavel> qualquer2){
+        for (int i = 0; i < qualquer2.size(); i++) {
             if(i == ID - 1){
                 return i;
             }
