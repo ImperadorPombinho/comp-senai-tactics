@@ -33,6 +33,24 @@ public class partidaCST {
     private List<itemConsumivel> itensConsumivelsT = new ArrayList<>();
     private int turno;
     private int indOraculo;
+    public List<itemEquipavel> getItensEquipavelsO() {
+        return itensEquipavelsO;
+    }
+
+    public List<itemConsumivel> getItensConsumivelsO() {
+        return itensConsumivelsO;
+    }
+
+    public List<itemEquipavel> getItensEquipavelsT() {
+        return itensEquipavelsT;
+    }
+
+    public List<itemConsumivel> getItensConsumivelsT() {
+        return itensConsumivelsT;
+    }
+    public void setItensConsumivelsT(List<itemConsumivel> itensConsumivelsT) {
+        this.itensConsumivelsT = itensConsumivelsT;
+    }
     public boolean ispartida() {
         return partida;
     }
@@ -183,8 +201,21 @@ public class partidaCST {
             }else{
                 if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
                     pecasOraculo.remove((CSTpeca)capturada);
+                    if(itensConsumivelsT.size() <= 3 ){
+                        darItemAleatorioConsumivel(itensConsumivelsT);
+                    }
+                    if(itensEquipavelsT.size() <= 2){
+                        darItemAleatorioEquipavel(itensEquipavelsT);
+                    }
+                    
                 }else{
                     pecasTropa.remove((CSTpeca)capturada);
+                    if(itensConsumivelsO.size() <= 3){
+                        darItemAleatorioConsumivel(itensConsumivelsO);
+                    }
+                    if(itensEquipavelsO.size() <= 2){
+                        darItemAleatorioEquipavel(itensEquipavelsO);
+                    }
                 }
             }
 
@@ -195,6 +226,7 @@ public class partidaCST {
     public void perfomaceHabilidade(CSTposicao posicaoVoce, CSTposicao posicaoAliado){
         posicao posicaooVoce = posicaoVoce.toPosicao();
         posicao posicaooAliado = posicaoAliado.toPosicao();
+        validacaoHabilidadeGenericaPosicao(posicaooVoce);
         CSTpeca voce = (CSTpeca) tabuleiro.peca(posicaooVoce);
         CSTpeca aliado = (CSTpeca) tabuleiro.peca(posicaooAliado);
         habilidade(voce, aliado);
@@ -256,6 +288,7 @@ public class partidaCST {
                 System.out.println("vida do oponente: " + oponente.getVida());
             }
     }
+
     private int somaVida(List<CSTpeca> qualquer){
         int soma = 0;
         for (CSTpeca csTpeca : qualquer) {
@@ -302,7 +335,7 @@ public class partidaCST {
         }
 
     }
-    private boolean pesquisarSeEhIgual(List<itemConsumivel> qualquer, itemConsumivel itemgacha){
+    private boolean pesquisarSeEhIgualC(List<itemConsumivel> qualquer, itemConsumivel itemgacha){
         for (int i = 0; i < qualquer.size(); i++) {
             if(itemgacha.hashCode() == qualquer.get(i).hashCode()){
                 return true;
@@ -311,13 +344,36 @@ public class partidaCST {
         }
         return false;
     }
-    private void darItemAleatorio(List<itemConsumivel> qualquer){
+    private boolean pesquisarSeEhIgualE(List<itemEquipavel> qualquer, itemEquipavel itemgacha){
+        for (int i = 0; i < qualquer.size(); i++) {
+            if(itemgacha.hashCode() == qualquer.get(i).hashCode()){
+                return true;
+            }
+            
+        }
+        return false;
+    }
+    private void darItemAleatorioConsumivel(List<itemConsumivel> qualquer){
         Random gachazinho = new Random();
         int gacha;
         while(true){
-            gacha = gachazinho.nextInt(qualquer.size());
+            gacha = gachazinho.nextInt(itensConsumivels.size());
             itemConsumivel itemgacha = itensConsumivels.get(gacha);
-            boolean ganhougacha = pesquisarSeEhIgual(qualquer, itemgacha);
+            boolean ganhougacha = pesquisarSeEhIgualC(qualquer, itemgacha);
+            if(ganhougacha == false){
+                qualquer.add(itemgacha);
+                break;
+            }
+        }
+
+    }
+    private void darItemAleatorioEquipavel(List<itemEquipavel> qualquer){
+        Random gachazinho = new Random();
+        int gacha;
+        while(true){
+            gacha = gachazinho.nextInt(itensEquipavels.size());
+            itemEquipavel itemgacha = itensEquipavels.get(gacha);
+            boolean ganhougacha = pesquisarSeEhIgualE(qualquer, itemgacha);
             if(ganhougacha == false){
                 qualquer.add(itemgacha);
                 break;
@@ -347,6 +403,12 @@ public class partidaCST {
          
         itemUsado.efeito(generica);
         itemUsado.setQuantidade(itemUsado.getQuantidade() - 1);
+        if(itemUsado.getQuantidade() == 0 && jogador.getTimeAtual() == time.ORACULO){
+            itensConsumivelsO.remove(itemUsado);
+        }
+        if(itemUsado.getQuantidade() == 0 && jogador.getTimeAtual() == time.TROPA){
+            itensConsumivelsT.remove(itemUsado);
+        }
 
     }
     private int pesquisarListaConsumivel(int IDUI, List<itemConsumivel> qualquer){
@@ -405,6 +467,18 @@ public class partidaCST {
          }
         }
     }
+    private void validacaoHabilidadeGenericaPosicao(posicao posicao){
+        if(!tabuleiro.istoEhUmaPeca(posicao)){
+            throw new exececaoCST("isto nao eh uma peca");
+        }
+        if(jogador.getTimeAtual() != ((CSTpeca)tabuleiro.peca(posicao)).getTiminho()){
+            throw new exececaoCST("nao pode começar com pecas inimigas");
+        }
+        if(jogador.getPecaAtual() != ((CSTpeca)tabuleiro.peca(posicao))){
+            throw new exececaoCST("nao eh essa peca para ser jogada");
+
+        }
+    }
     private void validacaoOrigem(posicao origem){
         if(!tabuleiro.istoEhUmaPeca(origem)){
             throw new exececaoCST("isto nao eh uma peca para se mover");
@@ -439,7 +513,7 @@ public class partidaCST {
             throw new exececaoCST("nao ha ataques disponiveis para essa peca");
         }
     }
-    private void validacaoHabilidade(CSTpeca voce, CSTpeca aliado){
+    private void validacaoHabilidadeLeao(CSTpeca voce, CSTpeca aliado){
         if(!tabuleiro.istoEhUmaPeca(aliado.getPosicao())){
             throw new exececaoCST("isto nao eh uma peca do tabuleiro");
         }
@@ -513,9 +587,9 @@ public class partidaCST {
     }
 
     private void setupInicial(){
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 240,1,"LeaoO"), 20, 'A');
-        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 1, 0, 700,5,"henridogT", this), 19, 'A');
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 240,1,"LeaoO"), 18, 'A');
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 120,1,"LeaoO"), 20, 'A');
+        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 300, 0, 700,5,"henridogT", this), 19, 'A');
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 300,1,"LeaoO"), 17, 'A');
        
         
         

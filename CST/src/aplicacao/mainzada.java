@@ -67,6 +67,11 @@ public class mainzada {
                 System.out.print("posicao destino: ");
                 CSTposicao destino = UI.lerPosicao(scan, 20);
                 partidaCST.perfomaceHabilidade(origem, destino);
+            }else if(selec == 4){
+                scan.nextLine();
+                UI.menuItem(scan, partidaCST);
+               System.out.println();
+                
             }
             
                 //alou; 
