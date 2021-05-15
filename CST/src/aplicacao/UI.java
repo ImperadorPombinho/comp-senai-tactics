@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 import CSTgame.CSTpeca;
 import CSTgame.CSTposicao;
+import CSTgame.exececaoCST;
+import CSTgame.itemConsumivel;
+import CSTgame.itemEquipavel;
 import CSTgame.partidaCST;
 import CSTgame.time;
 
@@ -87,10 +90,81 @@ public class UI {
         System.out.println("1-Atacar");
         System.out.println("2-Movimentar");
         System.out.println("3-Habilidade");
+        System.out.println("4-Usar Item");
         selec = scan.nextInt();
     }
     
         return selec;
+    }
+    private static void imprimirLIsta(List<itemConsumivel> qualquer){
+        int cont = 1;
+        if(qualquer.size() > 0){
+            for (itemConsumivel itemConsumivel : qualquer) {
+                System.out.print(cont + " - " + itemConsumivel.getNome());
+                System.out.println();
+                cont++;
+            }
+        }else{
+            throw new exececaoCST("lista de itens vazia");
+        }
+
+    }
+    private static void imprimirLista(List<itemEquipavel> qualquer){
+        int cont = 1;
+        if(qualquer.size() > 0){
+            for (itemEquipavel itemEquipavel : qualquer) {
+                System.out.print(cont + " - " + itemEquipavel.getNomeItem());
+                System.out.println();
+                cont++;
+            }
+        }else{
+            throw new exececaoCST("lista de itens vazia");
+        }
+    }
+    public static void menuItem(Scanner scan, partidaCST partidaCST){
+        int resp, ID = 0;
+        System.out.println("Item");
+        System.out.println("Qual tipo?");
+        System.out.println("1 - Consumivel");
+        System.out.println("2 - Equipavel");
+        resp = scan.nextInt();
+        if(resp == 1){
+            
+            if(partidaCST.getJogador().getTimeAtual() == time.ORACULO){
+                imprimirLIsta(partidaCST.getItensConsumivelsO());
+                System.out.println("Escolha: ");
+                ID = scan.nextInt();
+                
+            }else{
+                imprimirLIsta(partidaCST.getItensConsumivelsT());
+                System.out.println("Escolha: ");
+                ID = scan.nextInt();
+            }
+            scan.nextLine();
+            System.out.print("posicao destino: ");
+            
+            CSTposicao destino = UI.lerPosicao(scan, 20);
+             partidaCST.perfomaceUsarItem(destino, ID);
+            
+        }else if(resp == 2){
+           
+            if(partidaCST.getJogador().getTimeAtual() == time.ORACULO){
+                imprimirLista(partidaCST.getItensEquipavelsO());
+                System.out.println("Escolha: ");
+                ID = scan.nextInt();
+            }else{
+                imprimirLista(partidaCST.getItensEquipavelsT());
+                System.out.println("Escolha: ");
+                ID = scan.nextInt();
+            }
+            scan.nextLine();
+            System.out.print("posicao destino: ");
+            
+            CSTposicao destino = UI.lerPosicao(scan, 20);
+             partidaCST.perfomaceEquiparItem(destino, ID);
+        }
+        
+
     }
     public static CSTposicao lerPosicao(Scanner scan, int linhaMax){
         try{
@@ -196,7 +270,12 @@ public class UI {
         Status.append("\n");
         Status.append("\tRange geral: "+ peca.getRangeMovimento());
         Status.append("\n");
-        Status.append("\tInventario: "+ peca.getInventario());
+        if(peca.getInventario() == null){
+            Status.append("\tInventario: "+ peca.getInventario());
+        }else{
+            Status.append("\tInventario: "+ peca.getInventario().getNomeItem());
+        }
+        
         Status.append("\n");
         Status.append("\n===========================");
         Status.append("\n");
