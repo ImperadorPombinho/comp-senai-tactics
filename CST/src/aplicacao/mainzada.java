@@ -29,23 +29,25 @@ public class mainzada {
                 break;
             }
             if(selec == 1){
+                scan.nextLine();
                 System.out.println();
                 System.out.println("Ataque");
                 System.out.print("posicao origem: ");
-                CSTposicao posicaoAtacante = UI.lerPosicao(scan, 20, 20);
+                CSTposicao posicaoAtacante = UI.lerPosicao(scan, 20);
                 possiveisAlgumaCoisa = partidaCST.possiveisAtaques(posicaoAtacante);
                 UI.limparTelaConsole();
                 UI.printarTabuleiro(partidaCST.getPecas(), 20, possiveisAlgumaCoisa);
     
                 System.out.println();
                 System.out.print("posicao destino: ");
-                CSTposicao posicaoAtacado = UI.lerPosicao(scan, 20, 20);
+                CSTposicao posicaoAtacado = UI.lerPosicao(scan, 20);
                 partidaCST.perfomaceAtaque(posicaoAtacante, posicaoAtacado);
             }else if(selec == 2){
+                scan.nextLine();
                 System.out.println();
                 System.out.println("Movimento");
                 System.out.print("posicao origem: ");
-                CSTposicao origem = UI.lerPosicao(scan, 20, 20);
+                CSTposicao origem = UI.lerPosicao(scan, 20);
                 
                 possiveisAlgumaCoisa = partidaCST.possiveisMovimentos(origem);
                 UI.limparTelaConsole();
@@ -53,16 +55,17 @@ public class mainzada {
     
                 System.out.println();
                 System.out.print("posicao destino: ");
-                CSTposicao destino = UI.lerPosicao(scan, 20, 20);
+                CSTposicao destino = UI.lerPosicao(scan, 20);
                 partidaCST.perfomaceFazerMovimento(origem, destino);
             }else if(selec == 3){
+                scan.nextLine();
                 System.out.println();
                 System.out.println("Habilidade");
                 System.out.print("posicao origem: ");
-                CSTposicao origem = UI.lerPosicao(scan, 20, 20);
+                CSTposicao origem = UI.lerPosicao(scan, 20);
                 System.out.println();
                 System.out.print("posicao destino: ");
-                CSTposicao destino = UI.lerPosicao(scan, 20, 20);
+                CSTposicao destino = UI.lerPosicao(scan, 20);
                 partidaCST.perfomaceHabilidade(origem, destino);
             }
             

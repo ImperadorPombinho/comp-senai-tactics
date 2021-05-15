@@ -81,7 +81,7 @@ public class UI {
             System.out.println("Esperando " + partidaCST.getJogador().getNome() + " jogar");
             System.out.println("Peça a ser jogada: " + partidaCST.getJogador().getPecaAtual().getNome() + " " +partidaCST.getJogador().getPecaAtual().toString());
         }
-        String status = printarStatus(partidaCST.getJogador().getPecaAtual());
+        String status = printarStatus(partidaCST.getJogador().getPecaAtual(), numeroLinhas);
         System.out.println(status);
         System.out.println("Escolha a acao abaixo: ");
         System.out.println("1-Atacar");
@@ -92,13 +92,19 @@ public class UI {
     
         return selec;
     }
-    public static CSTposicao lerPosicao(Scanner scan, int linhaMax, int ColunaMax){
+    public static CSTposicao lerPosicao(Scanner scan, int linhaMax){
         try{
-
+           
+        String string = scan.nextLine();
+        char coluna = string.charAt(0);
+        int linha;
+        if(string.length() == 3){
+             linha = Integer.parseInt(string.substring(1, 3));
+        }else{
+            linha = Integer.parseInt(string.substring(1));
+        }
         
-        int linha = scan.nextInt();
-        int coluna = scan.nextInt();
-        return new CSTposicao(coluna, linha, linhaMax, ColunaMax);
+        return new CSTposicao(coluna, linha, linhaMax);
         }catch(RuntimeException e){
             throw new InputMismatchException("erro lendo posicao");
             
@@ -148,7 +154,7 @@ public class UI {
             }
             System.out.println();
         }
-        System.out.print(" ");
+        System.out.println("   A B C D E F G H I J K L M N O P Q R S T");
     }
 
 
@@ -170,7 +176,7 @@ public class UI {
         }
         System.out.print(" ");
     }
-    private static String printarStatus(CSTpeca peca){
+    private static String printarStatus(CSTpeca peca, int linhas){
         StringBuilder Status = new StringBuilder();
         Status.append("\n==========STATUS==========");
         Status.append("\n");
