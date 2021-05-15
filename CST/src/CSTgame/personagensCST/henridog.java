@@ -165,61 +165,73 @@ public String toString(){
     public void habilidade(CSTpeca generico) {
         CSTpeca qualquercoisa;
         posicao posTeste = new posicao (0, 0);
-        int rangehab = 10;
+        int rangehab = 7;
         int cont = 1;
         // cima
     
         posTeste.setCoordenada(getPosicao().getLinha() - 1, getPosicao().getColuna());
-        while (getTabul().posicaoExiste(posTeste) && cont <= rangehab) {
-            if (haUmaPecaDoOponente(posTeste)) {
+        while (cont <= rangehab) {
+            if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
                 qualquercoisa.setVida(qualquercoisa.getVida() - 120);
                 partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
             posTeste.setCoordenada(posTeste.getLinha() - 1, posTeste.getColuna());
+          if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
+                break;
+            }
             cont++;
         }
         
         // baixo
         cont = 1;
         posTeste.setCoordenada(getPosicao().getLinha() + 1, getPosicao().getColuna());
-        while (getTabul().posicaoExiste(posTeste) && cont <= rangehab) {
-            if (haUmaPecaDoOponente(posTeste)) {
+        while ( cont <= rangehab) {
+            if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
                 qualquercoisa.setVida(qualquercoisa.getVida() - 120);
                 partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
             posTeste.setCoordenada(posTeste.getLinha() + 1, posTeste.getColuna());
+            if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
+                break;
+            }
             cont++;
         }
         
         // esquerda
        cont = 1;
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 1);
-        while (getTabul().posicaoExiste(posTeste) && cont <= rangehab) {
-            if (haUmaPecaDoOponente(posTeste)) {
+        while (cont <= rangehab) {
+            if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
                 qualquercoisa.setVida(qualquercoisa.getVida() - 120);
                 partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
         }
             posTeste.setCoordenada(posTeste.getLinha(), posTeste.getColuna() - 1);
+            if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
+                break;
+            }
             cont++;
         }
         
         // direita
         cont = 1;
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() + 1);
-        while (getTabul().posicaoExiste(posTeste) && cont <= rangehab) {
-            if (haUmaPecaDoOponente(posTeste)) {
+        while ( cont <= rangehab) {
+            if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
                 qualquercoisa.setVida(qualquercoisa.getVida() - 120);
                 partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
             posTeste.setCoordenada(posTeste.getLinha(), posTeste.getColuna() + 1);
+            if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
+                break;
+            }
             cont++;
         }
         

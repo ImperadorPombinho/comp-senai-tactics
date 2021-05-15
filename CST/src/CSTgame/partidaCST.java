@@ -471,8 +471,8 @@ public class partidaCST {
 
     }
     
-    private void colocarNovaPeca(peca peca, int linha, int coluna){
-        tabuleiro.colocarPeca(peca, new CSTposicao(coluna, linha, linhaMax, ColunaMax).toPosicao());
+    private void colocarNovaPeca(peca peca, int linha, char coluna){
+        tabuleiro.colocarPeca(peca, new CSTposicao(coluna, linha, linhaMax).toPosicao());
         if(!(peca instanceof obstaculo) && ((CSTpeca)peca).getTiminho() == time.ORACULO){
             pecasOraculo.add((CSTpeca)peca);
         }
@@ -513,10 +513,11 @@ public class partidaCST {
     }
 
     private void setupInicial(){
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 240,1,"LeaoO"), 16, 5);
-        colocarNovaPeca(new miguez(tabuleiro, time.TROPA, 20, 0, 120,1, this,"miguezO"), 13, 8);
-        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 20, 0, 120,1,"dogO", this), 14, 5);
-        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 1, 0, 700,5,"henridogT", this), 15, 5);
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 240,1,"LeaoO"), 3, 'D');
+        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 1, 0, 700,5,"henridogT", this), 3, 'E');
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 240,1,"LeaoO"), 3, 'F');
+       
+        
         
     }
     protected boolean euSouInimigo(CSTpeca generico){

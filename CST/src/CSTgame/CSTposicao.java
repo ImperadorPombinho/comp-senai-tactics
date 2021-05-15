@@ -3,16 +3,14 @@ package CSTgame;
 import tabuleiroGame.posicao;
 
 public class CSTposicao {
-    private int coluna;
+    private char coluna;
     private int linha;
-
-
     private int linhaMax;
-    private int ColunaMax;
+
     public int getColuna() {
         return coluna;
     }
-    public void setColuna(int coluna) {
+    public void setColuna(char coluna) {
         this.coluna = coluna;
     }
     public int getLinha() {
@@ -25,24 +23,27 @@ public class CSTposicao {
         return linhaMax;
     }
 
-    public int getColunaMax() {
-        return ColunaMax;
-    }
-    public CSTposicao(int coluna, int linha, int linhaMax, int ColunaMax) {
-        
+ 
+    public CSTposicao(char coluna, int linha, int linhaMax) {
+        if(coluna < 'A' || coluna > 'U' || linha < 1 || linha > linhaMax){
+            throw new exececaoCST("erro instanciando CSTposiçao, valores permitidos de A1 ate T"+linhaMax);
+        }
         this.coluna = coluna;
         this.linha = linha;
         this.linhaMax = linhaMax;
-        this.ColunaMax = ColunaMax;
+        
     }
 
     public posicao toPosicao(){
-        return new posicao(getLinhaMax() - getLinha(), getColuna() - 1);
+        return new posicao(getLinhaMax() - getLinha(), getColuna() - 'A');
     }
-    public CSTposicao voltaCsTposicao(posicao posicao){
-        return new CSTposicao(posicao.getColuna() + 1, getLinhaMax() - getLinha(), linhaMax, ColunaMax);
+    public CSTposicao voltaCsTposicao(posicao posicao, int linhas){
+        return new CSTposicao((char)('A' + posicao.getColuna()), linhas - getLinha(), linhas);
     }
-
+    @Override
+    public String toString(){
+        return "" + getColuna() + getLinha();
+    }
 
 
 }
