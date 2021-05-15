@@ -513,9 +513,9 @@ public class partidaCST {
     }
 
     private void setupInicial(){
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 240,1,"LeaoO"), 2, 'E');
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 240,1,"LeaoO"), 3, 'D');
         colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 1, 0, 700,5,"henridogT", this), 3, 'E');
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 240,1,"LeaoO"), 4, 'E');
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 240,1,"LeaoO"), 3, 'F');
        
         
         

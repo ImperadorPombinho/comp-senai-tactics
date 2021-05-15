@@ -178,7 +178,7 @@ public String toString(){
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
             posTeste.setCoordenada(posTeste.getLinha() - 1, posTeste.getColuna());
-            if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
+          if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
                 break;
             }
             cont++;
