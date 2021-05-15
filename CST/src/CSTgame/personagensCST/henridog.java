@@ -170,68 +170,72 @@ public String toString(){
         // cima
     
         posTeste.setCoordenada(getPosicao().getLinha() - 1, getPosicao().getColuna());
-        while (cont <= rangehab) {
+        while (cont <= rangehab  && getTabul().posicaoExiste(posTeste)) {
             if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
                 qualquercoisa.setVida(qualquercoisa.getVida() - 120);
                 partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
+            if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
+                  break;
+              }
             posTeste.setCoordenada(posTeste.getLinha() - 1, posTeste.getColuna());
-          if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
-                break;
-            }
+
             cont++;
         }
         
         // baixo
         cont = 1;
         posTeste.setCoordenada(getPosicao().getLinha() + 1, getPosicao().getColuna());
-        while ( cont <= rangehab) {
+        while ( cont <= rangehab && getTabul().posicaoExiste(posTeste)) {
             if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
                 qualquercoisa.setVida(qualquercoisa.getVida() - 120);
                 partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
-            posTeste.setCoordenada(posTeste.getLinha() + 1, posTeste.getColuna());
             if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
-                break;
-            }
+                  break;
+              }
+            posTeste.setCoordenada(posTeste.getLinha() + 1, posTeste.getColuna());
+
             cont++;
         }
         
         // esquerda
        cont = 1;
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 1);
-        while (cont <= rangehab) {
+        while (cont <= rangehab && getTabul().posicaoExiste(posTeste)) {
             if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
                 qualquercoisa.setVida(qualquercoisa.getVida() - 120);
                 partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
         }
+        if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
+              break;
+          }
             posTeste.setCoordenada(posTeste.getLinha(), posTeste.getColuna() - 1);
-            if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
-                break;
-            }
+
             cont++;
         }
         
         // direita
         cont = 1;
         posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() + 1);
-        while ( cont <= rangehab) {
+        while ( cont <= rangehab && getTabul().posicaoExiste(posTeste)) {
             if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
                 qualquercoisa.setVida(qualquercoisa.getVida() - 120);
                 partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
-            posTeste.setCoordenada(posTeste.getLinha(), posTeste.getColuna() + 1);
             if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
-                break;
-            }
+                  break;
+              }
+            posTeste.setCoordenada(posTeste.getLinha(), posTeste.getColuna() + 1);
+
             cont++;
         }
         
