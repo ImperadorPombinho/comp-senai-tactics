@@ -1,6 +1,14 @@
 package CSTgame;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +24,7 @@ import tabuleiroGame.peca;
 import tabuleiroGame.posicao;
 import tabuleiroGame.tabuleiro;
 
-public class partidaCST {
+public class partidaCST implements Serializable{
     private tabuleiro tabuleiro;
     private int linhaMax;
     private int ColunaMax;
@@ -33,6 +41,8 @@ public class partidaCST {
     private List<itemConsumivel> itensConsumivelsT = new ArrayList<>();
     private int turno;
     private int indOraculo;
+    File arquivo = new File("arqitens.dat");
+
     public List<itemEquipavel> getItensEquipavelsO() {
         return itensEquipavelsO;
     }
@@ -257,7 +267,22 @@ public class partidaCST {
         }
 
     }
-    
+    public void escreverNoArquivo(){
+        try {
+            ManipuladorDeArquivo.escritor(itensConsumivelsO, "cons.txt");
+        } catch (IOException e) {
+            
+
+        }
+
+    }
+    public void lerDoArquivo(){
+        try {
+            ManipuladorDeArquivo.leitor("cons.txt");
+        } catch (IOException e) {
+
+        }
+    }
     private void ataque(CSTpeca atacante, CSTpeca atacado){
         if(atacante instanceof juao){
             if(atacante.getVida() < atacado.getVida()){
@@ -424,12 +449,30 @@ public class partidaCST {
         itemEquipavel equipar;
         if(generico.getTiminho() == time.ORACULO){
             equipavel = pesquisarListaEquipavel(ID, itensEquipavelsO);
+
             equipar = itensEquipavelsO.get(equipavel);
         }else{
             equipavel = pesquisarListaEquipavel(ID, itensEquipavelsT);
             equipar = itensEquipavelsT.get(equipavel);
         }
-        generico.equiparItem(equipar, generico);
+        if(verificarSeEsseItemJaEstaEquipado(equipar.getNomeItem()) == false){
+            generico.equiparItem(equipar, generico);
+        }else{
+            throw new exececaoCST("este item ja esta equipado em alguma peca");
+        }
+
+        
+    }
+    private boolean verificarSeEsseItemJaEstaEquipado(String nomeItem){
+        CSTpeca[][] mataux = getPecas();
+        for (int i = 0; i < mataux.length; i++) {
+            for (int j = 0; j < mataux.length; j++) {
+                if(mataux[i][j].getInventario().getNomeItem() == nomeItem){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     private int pesquisarListaEquipavel(int ID, List<itemEquipavel> qualquer2){
         for (int i = 0; i < qualquer2.size(); i++) {
@@ -587,7 +630,7 @@ public class partidaCST {
     }
 
     private void setupInicial(){
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 120,1,"LeaoO"), 20, 'A');
+        
         colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 300, 0, 700,5,"henridogT", this), 19, 'A');
         colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 300,1,"LeaoO"), 17, 'A');
        

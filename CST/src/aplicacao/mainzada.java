@@ -26,6 +26,8 @@ public class mainzada {
             
             selec = UI.printarPartida(partidaCST, nomes, 20, scan);
             if(partidaCST.ispartida() == false){
+                partidaCST.escreverNoArquivo();
+                partidaCST.lerDoArquivo();
                 break;
             }
             if(selec == 1){
