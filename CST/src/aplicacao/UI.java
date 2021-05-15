@@ -1,6 +1,6 @@
 package aplicacao;
 
-import java.io.ObjectInputFilter.Status;
+
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +9,7 @@ import CSTgame.CSTpeca;
 import CSTgame.CSTposicao;
 import CSTgame.partidaCST;
 import CSTgame.time;
-import tabuleiroGame.peca;
+
 
 
 public class UI {
