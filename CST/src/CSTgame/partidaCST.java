@@ -288,13 +288,14 @@ public class partidaCST implements Serializable{
         try {
             time timinho = testaQuemGanhou();
             if(timinho == time.ORACULO){
-                ManipuladorDeArquivo.leitorConsumivel("cons.txt", itensConsumivelsO, this);
-                ManipuladorDeArquivo.leitorEquipavel("equip.txt", itensEquipavelsO, this);
+             itensConsumivelsO =   ManipuladorDeArquivo.leitorConsumivel("cons.txt", itensConsumivelsO, this);
+               itensEquipavelsO =  ManipuladorDeArquivo.leitorEquipavel("equip.txt", itensEquipavelsO, this);
             }else{
-                ManipuladorDeArquivo.leitorConsumivel("cons.txt", itensConsumivelsT, this);
-                ManipuladorDeArquivo.leitorEquipavel("equip.txt", itensEquipavelsT, this);
+                itensConsumivelsT = ManipuladorDeArquivo.leitorConsumivel("cons.txt", itensConsumivelsT, this);
+                itensEquipavelsT =  ManipuladorDeArquivo.leitorEquipavel("equip.txt", itensEquipavelsT, this);
             }
             for (itemConsumivel itemConsumivel : itensConsumivelsO) {
+                System.out.println("aeeeee porraa");
                 System.out.println(itemConsumivel.getNome());
             }
         } catch (IOException e) {
