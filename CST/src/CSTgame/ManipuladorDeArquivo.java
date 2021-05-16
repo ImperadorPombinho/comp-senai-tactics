@@ -29,6 +29,7 @@ public class ManipuladorDeArquivo {
                 
             linha = buffRead.readLine();
         }
+        
         buffRead.close();
         return qualquer;
     }

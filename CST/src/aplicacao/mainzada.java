@@ -20,6 +20,7 @@ public class mainzada {
         String[] nomes = UI.lerNomes(scan);
         boolean[][] possiveisAlgumaCoisa;
         UI.printarSorteioAtqPecas(partidaCST);
+        partidaCST.lerDoArquivo();
         scan.nextLine();
         scan.nextLine();
         while(partidaCST.ispartida()){
@@ -28,8 +29,6 @@ public class mainzada {
             selec = UI.printarPartida(partidaCST, nomes, linhas, scan);
             if(partidaCST.ispartida() == false){
                 partidaCST.escreverNoArquivo();
-                partidaCST.lerDoArquivo();
-                
                 break;
             }
             if(selec == 1){
