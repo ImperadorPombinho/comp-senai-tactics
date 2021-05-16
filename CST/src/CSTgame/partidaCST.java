@@ -269,7 +269,15 @@ public class partidaCST implements Serializable{
     }
     public void escreverNoArquivo(){
         try {
-            ManipuladorDeArquivo.escritor(itensConsumivelsO, "cons.txt");
+            time timinho = testaQuemGanhou();
+            if(timinho == time.ORACULO){
+                ManipuladorDeArquivo.escritorConsumivel(itensConsumivelsO, "cons.txt", this);
+                ManipuladorDeArquivo.escritorEquipavel(itensEquipavelsO, "equip.txt", this);
+            }else{
+                ManipuladorDeArquivo.escritorConsumivel(itensConsumivelsT, "cons.txt", this);
+                ManipuladorDeArquivo.escritorEquipavel(itensEquipavelsT, "equip.txt", this);
+            }
+            
         } catch (IOException e) {
             
 
@@ -278,7 +286,17 @@ public class partidaCST implements Serializable{
     }
     public void lerDoArquivo(){
         try {
-            ManipuladorDeArquivo.leitor("cons.txt");
+            time timinho = testaQuemGanhou();
+            if(timinho == time.ORACULO){
+                ManipuladorDeArquivo.leitorConsumivel("cons.txt", itensConsumivelsO, this);
+                ManipuladorDeArquivo.leitorEquipavel("equip.txt", itensEquipavelsO, this);
+            }else{
+                ManipuladorDeArquivo.leitorConsumivel("cons.txt", itensConsumivelsT, this);
+                ManipuladorDeArquivo.leitorEquipavel("equip.txt", itensEquipavelsT, this);
+            }
+            for (itemConsumivel itemConsumivel : itensConsumivelsO) {
+                System.out.println(itemConsumivel.getNome());
+            }
         } catch (IOException e) {
 
         }
@@ -407,11 +425,11 @@ public class partidaCST implements Serializable{
 
     }
     private void encherListaEquipavel(List<itemEquipavel> lEquipavels){
-        lEquipavels.add(new itemEquipavel("Camisa da Playstation", this, 1));
-        lEquipavels.add(new itemEquipavel("Taco de Sinuca", this, 2));
+        lEquipavels.add(new itemEquipavel("CamisadaPlaystation", this, 1));
+        lEquipavels.add(new itemEquipavel("TacodeSinuca", this, 2));
     }
     private void encherListaConsumivel(List<itemConsumivel> lConsumivels){
-        lConsumivels.add(new itemConsumivel("Flexao Pyke", 5, this, 1));
+        lConsumivels.add(new itemConsumivel("FlexaoPyke", 5, this, 1));
         lConsumivels.add(new itemConsumivel("Pizza", 5, this, 2));
         lConsumivels.add(new itemConsumivel("Pototonime", 5, this, 3));
     }
