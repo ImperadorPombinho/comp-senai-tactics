@@ -2,12 +2,7 @@ package CSTgame;
 
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -650,8 +645,8 @@ public class partidaCST implements Serializable{
 
     private void setupInicial(){
         
-        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 300, 0, 700,5,"henridogT", this), 19, 'A');
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 300,1,"LeaoO"), 17, 'A');
+        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 300, 0, 700,5,"henridogT", this), 5, 'A');
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 300,1,"LeaoO"), 3, 'A');
        
         
         
