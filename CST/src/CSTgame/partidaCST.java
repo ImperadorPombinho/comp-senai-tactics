@@ -646,7 +646,8 @@ public class partidaCST implements Serializable{
     private void setupInicial(){
         
         colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 300, 0, 700,5,"henridogT", this), 5, 'A');
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 300,1,"LeaoO"), 3, 'A');
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 300,1,"LeaoO"), 4, 'A');
+        colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 20, 0, 300,1,"ObsO"), 3, 'A');
        
         
         
