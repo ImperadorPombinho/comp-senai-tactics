@@ -8,6 +8,8 @@ import java.util.Scanner;
 import CSTgame.CSTposicao;
 import CSTgame.exececaoCST;
 import CSTgame.partidaCST;
+import CSTgame.personagensCST.racoba;
+import tabuleiroGame.posicao;
 
 
 public class mainzada {
@@ -68,14 +70,24 @@ public class mainzada {
                 System.out.print("posicao origem: ");
                 CSTposicao origem = UI.lerPosicao(scan, linhas);
                 System.out.println();
-                System.out.print("posicao destino: ");
-                CSTposicao destino = UI.lerPosicao(scan, linhas);
-                partidaCST.perfomaceHabilidade(origem, destino);
+                if(partidaCST.getJogador().getPecaAtual() instanceof racoba){
+                    System.out.println();
+                    partidaCST.perfomaceHabilidade(origem, origem);
+                }
+                else{
+                    System.out.print("posicao destino: ");
+                    CSTposicao destino = UI.lerPosicao(scan, linhas);
+                    partidaCST.perfomaceHabilidade(origem, destino);
+                }
             }else if(selec == 4){
-                scan.nextLine();
-                UI.menuItem(scan, partidaCST);
-               System.out.println();
-                
+                if(partidaCST.getJogador().getPecaAtual() instanceof racoba){
+                    System.out.println("Nada de itens! só equipamentos gacha!!!!");
+                }
+                else{
+                    scan.nextLine();
+                    UI.menuItem(scan, partidaCST);
+                    System.out.println();
+                }
             }
             
                 //alou; 

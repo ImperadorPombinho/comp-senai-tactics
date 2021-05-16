@@ -14,7 +14,7 @@ import CSTgame.personagensCST.juao;
 import CSTgame.personagensCST.leao;
 import CSTgame.personagensCST.miguez;
 import CSTgame.personagensCST.obstaculo;
-
+import CSTgame.personagensCST.racoba;
 import tabuleiroGame.peca;
 import tabuleiroGame.posicao;
 import tabuleiroGame.tabuleiro;
@@ -204,27 +204,30 @@ public class partidaCST implements Serializable{
                     }
                 }
             }else{
-                if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
-                    pecasOraculo.remove((CSTpeca)capturada);
-                    if(itensConsumivelsT.size() <= 3 ){
-                        darItemAleatorioConsumivel(itensConsumivelsT);
-                    }
-                    if(itensEquipavelsT.size() <= 2){
-                        darItemAleatorioEquipavel(itensEquipavelsT);
-                    }
-                    
-                }else{
-                    pecasTropa.remove((CSTpeca)capturada);
-                    if(itensConsumivelsO.size() <= 3){
-                        darItemAleatorioConsumivel(itensConsumivelsO);
-                    }
-                    if(itensEquipavelsO.size() <= 2){
-                        darItemAleatorioEquipavel(itensEquipavelsO);
+                if(atacante instanceof racoba){
+                    System.out.println("racobas nao recebem itens :)");
+                }
+                else{
+                    if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
+                        pecasOraculo.remove((CSTpeca)capturada);
+                        if(itensConsumivelsT.size() <= 3 ){
+                            darItemAleatorioConsumivel(itensConsumivelsT);
+                        }
+                        if(itensEquipavelsT.size() <= 2){
+                            darItemAleatorioEquipavel(itensEquipavelsT);
+                        }
+                        
+                    }else{
+                        pecasTropa.remove((CSTpeca)capturada);
+                        if(itensConsumivelsO.size() <= 3){
+                            darItemAleatorioConsumivel(itensConsumivelsO);
+                        }
+                        if(itensEquipavelsO.size() <= 2){
+                            darItemAleatorioEquipavel(itensEquipavelsO);
+                        }
                     }
                 }
-            }
-
-            
+            } 
         }
         proximoTurno();
     }
@@ -235,8 +238,13 @@ public class partidaCST implements Serializable{
         validacao(posicaooAliado);
         CSTpeca voce = (CSTpeca) tabuleiro.peca(posicaooVoce);
         CSTpeca aliado = (CSTpeca) tabuleiro.peca(posicaooAliado);
-        validacaoHabilidadePecas(voce, aliado);
-        habilidade(voce, aliado);
+        if(voce instanceof racoba){
+            voce.habilidade(voce);
+        }
+        else{
+            validacaoHabilidadePecas(voce, aliado);
+            habilidade(voce, aliado);
+        }
         proximoTurno();
     }
     public void perfomaceUsarItem(CSTposicao posicaoGenerica, int IDItem){
@@ -688,8 +696,8 @@ public class partidaCST implements Serializable{
 
     private void setupInicial(){
         
-        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 300, 0, 700,5,"henridogT", this), 5, 'A');
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 300,1,"LeaoO"), 4, 'A');
+        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 3, 0, 20,5,"henridogT", this), 5, 'A');
+        colocarNovaPeca(new racoba(tabuleiro, time.TROPA, 20, 0, 300,3,"racO", this), 4, 'A');
         colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 20, 0, 300,1,"ObsO"), 3, 'A');
        
         
