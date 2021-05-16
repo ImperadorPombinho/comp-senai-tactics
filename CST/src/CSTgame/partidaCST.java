@@ -30,6 +30,8 @@ public class partidaCST implements Serializable{
     private List<CSTpeca> pecasTropa = new ArrayList<>();
     private List<itemEquipavel> itensEquipavels = new ArrayList<>();
     private List<itemConsumivel> itensConsumivels = new ArrayList<>();
+    private List<itemEquipavel> itensEquipavelsaux = new ArrayList<>();
+    private List<itemConsumivel> itensConsumivelsaux = new ArrayList<>();
     private List<itemEquipavel> itensEquipavelsO = new ArrayList<>();
     private List<itemConsumivel> itensConsumivelsO = new ArrayList<>();
     private List<itemEquipavel> itensEquipavelsT = new ArrayList<>();
@@ -59,6 +61,18 @@ public class partidaCST implements Serializable{
     public boolean ispartida() {
         return partida;
     }
+    public void setItensEquipavelsO(List<itemEquipavel> itensEquipavelsO) {
+        this.itensEquipavelsO = itensEquipavelsO;
+    }
+
+    public void setItensConsumivelsO(List<itemConsumivel> itensConsumivelsO) {
+        this.itensConsumivelsO = itensConsumivelsO;
+    }
+
+    public void setItensEquipavelsT(List<itemEquipavel> itensEquipavelsT) {
+        this.itensEquipavelsT = itensEquipavelsT;
+    }
+
     public void setPartida(boolean partida) {
         this.partida = partida;
     }
@@ -132,6 +146,7 @@ public class partidaCST implements Serializable{
         setPartida(true);
         encherListaConsumivel(itensConsumivels);
         encherListaEquipavel(itensEquipavels);
+        lerDoArquivo();
         
     }
 
@@ -295,11 +310,11 @@ public class partidaCST implements Serializable{
         try {
             time timinho = testaQuemGanhou();
             if(timinho == time.ORACULO){
-             itensConsumivelsO =   ManipuladorDeArquivo.leitorConsumivel("cons.txt", itensConsumivelsO, this);
-               itensEquipavelsO =  ManipuladorDeArquivo.leitorEquipavel("equip.txt", itensEquipavelsO, this);
+             setItensConsumivelsO(ManipuladorDeArquivo.leitorConsumivel("cons.txt", itensConsumivelsaux, this));  
+               setItensEquipavelsO(ManipuladorDeArquivo.leitorEquipavel("equip.txt", itensEquipavelsaux, this)); 
             }else{
-                itensConsumivelsT = ManipuladorDeArquivo.leitorConsumivel("cons.txt", itensConsumivelsT, this);
-                itensEquipavelsT =  ManipuladorDeArquivo.leitorEquipavel("equip.txt", itensEquipavelsT, this);
+                setItensConsumivelsT(ManipuladorDeArquivo.leitorConsumivel("cons.txt", itensConsumivelsaux, this)); 
+            setItensEquipavelsT(ManipuladorDeArquivo.leitorEquipavel("equip.txt", itensEquipavelsaux, this)); 
             }
             for (itemConsumivel itemConsumivel : itensConsumivelsO) {
                 System.out.println("aeeeee porraa");
@@ -696,9 +711,9 @@ public class partidaCST implements Serializable{
 
     private void setupInicial(){
         
-        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 3, 0, 20,5,"henridogT", this), 5, 'A');
-        colocarNovaPeca(new racoba(tabuleiro, time.TROPA, 20, 0, 300,3,"racO", this), 4, 'A');
-        colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 20, 0, 300,1,"ObsO"), 3, 'A');
+        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 300, 0, 20,5,"henridogT", this), 5, 'A');
+        colocarNovaPeca(new racoba(tabuleiro, time.TROPA, 20, 0, 300,3,"racO", this), 3, 'A');
+        
        
         
         
