@@ -177,9 +177,6 @@ public String toString(){
                 partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
-            if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
-                  break;
-              }
             posTeste.setCoordenada(posTeste.getLinha() - 1, posTeste.getColuna());
 
             cont++;
@@ -195,9 +192,6 @@ public String toString(){
                 partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
-            if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
-                  break;
-              }
             posTeste.setCoordenada(posTeste.getLinha() + 1, posTeste.getColuna());
 
             cont++;
@@ -213,9 +207,6 @@ public String toString(){
                 partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
         }
-        if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
-              break;
-          }
             posTeste.setCoordenada(posTeste.getLinha(), posTeste.getColuna() - 1);
 
             cont++;
@@ -231,9 +222,7 @@ public String toString(){
                 partidaCST.morreu(qualquercoisa);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
-            if(posTeste.getLinha() == 19 || posTeste.getColuna() == 19 || posTeste.getLinha() == 0 || posTeste.getColuna() == 0){
-                  break;
-              }
+
             posTeste.setCoordenada(posTeste.getLinha(), posTeste.getColuna() + 1);
 
             cont++;

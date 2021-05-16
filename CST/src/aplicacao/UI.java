@@ -1,7 +1,5 @@
 package aplicacao;
 
-
-import java.io.PrintStream;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;

@@ -232,18 +232,22 @@ public class partidaCST implements Serializable{
         posicao posicaooVoce = posicaoVoce.toPosicao();
         posicao posicaooAliado = posicaoAliado.toPosicao();
         validacaoHabilidadeGenericaPosicao(posicaooVoce);
+        validacao(posicaooAliado);
         CSTpeca voce = (CSTpeca) tabuleiro.peca(posicaooVoce);
         CSTpeca aliado = (CSTpeca) tabuleiro.peca(posicaooAliado);
+        validacaoHabilidadePecas(voce, aliado);
         habilidade(voce, aliado);
         proximoTurno();
     }
     public void perfomaceUsarItem(CSTposicao posicaoGenerica, int IDItem){
         posicao posgenerica = posicaoGenerica.toPosicao();
+        validacao(posgenerica);
         CSTpeca generica = (CSTpeca) tabuleiro.peca(posgenerica);
         usarItemConsumivel(IDItem, generica);
     }
     public void perfomaceEquiparItem(CSTposicao posicaogenerica, int ID){
         posicao possgenerica = posicaogenerica.toPosicao();
+        validacao(possgenerica);
         CSTpeca generico = (CSTpeca) tabuleiro.peca(possgenerica);
         equiparItemEquipavel(ID, generico);
     }
@@ -313,7 +317,12 @@ public class partidaCST implements Serializable{
         
     }
     private void habilidade(CSTpeca voce, CSTpeca aliado){
-        voce.habilidade(aliado);
+       if(voce instanceof juao){
+           habilidadeJuao((juao)voce, aliado);
+       }else{
+           voce.habilidade(aliado);
+       }
+        
         System.out.println("defesa aliado: " + aliado.getDefesa());
         System.out.println("vida: " + aliado.getVida());
     }
@@ -536,6 +545,12 @@ public class partidaCST implements Serializable{
 
         }
     }
+
+    private void validacao(posicao posicao){
+        if(!tabuleiro.istoEhUmaPeca(posicao)){
+            throw new exececaoCST("isto nao eh uma peca");
+        }
+    }
     private void validacaoOrigem(posicao origem){
         if(!tabuleiro.istoEhUmaPeca(origem)){
             throw new exececaoCST("isto nao eh uma peca para se mover");
@@ -570,6 +585,18 @@ public class partidaCST implements Serializable{
             throw new exececaoCST("nao ha ataques disponiveis para essa peca");
         }
     }
+    private void validacaoHabilidadePecas(CSTpeca voce, CSTpeca generica){
+        if(voce instanceof leao){
+            validacaoHabilidadeLeao(voce, generica);
+        }
+        if(voce instanceof miguez){
+            validacaoHabilidadeMiguez(voce, generica);
+        }
+        if(voce instanceof henridog){
+            validacaoHabilidadeHenridog(voce, generica);
+        }
+
+    }
     private void validacaoHabilidadeLeao(CSTpeca voce, CSTpeca aliado){
         if(!tabuleiro.istoEhUmaPeca(aliado.getPosicao())){
             throw new exececaoCST("isto nao eh uma peca do tabuleiro");
@@ -578,6 +605,22 @@ public class partidaCST implements Serializable{
             throw new exececaoCST("nao eh aliado para ajudar");
         }
 
+    }
+    private void validacaoHabilidadeMiguez(CSTpeca voce, CSTpeca oponente){
+        if(!tabuleiro.istoEhUmaPeca(oponente.getPosicao())){
+            throw new exececaoCST("isto nao eh uma peca do tabuleiro");
+        }
+        if(!voce.haUmaPecaDoOponente(oponente.getPosicao())){
+            throw new exececaoCST("nao eh um oponente");
+        }
+    }
+    private void validacaoHabilidadeHenridog(CSTpeca voce, CSTpeca oponente){
+        if(!tabuleiro.istoEhUmaPeca(oponente.getPosicao())){
+            throw new exececaoCST("isto nao eh uma peca do tabuleiro");
+        }
+        if(!voce.haUmaPecaDoOponente(oponente.getPosicao())){
+            throw new exececaoCST("nao eh um oponente");
+        }
     }
     private void validacaoAtaqueOD(posicao destino, posicao origem){
         if(jogador.getTimeAtual() != ((CSTpeca)tabuleiro.peca(origem)).getTiminho()){

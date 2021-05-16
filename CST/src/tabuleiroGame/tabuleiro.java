@@ -59,7 +59,7 @@ public class tabuleiro {
     }
     
     public boolean posicaoExiste(int linha, int coluna){
-        return linha >= 0  && linha <= getLinha() && coluna >= 0 && coluna <= getColuna();
+        return linha >= 0  && linha < getLinha() && coluna >= 0 && coluna < getColuna();
     }
     public boolean posicaoExiste(posicao posicao){
         return posicaoExiste(posicao.getLinha(), posicao.getColuna());
