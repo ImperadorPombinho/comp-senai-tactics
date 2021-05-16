@@ -1,6 +1,7 @@
 package aplicacao;
 
 
+import java.io.PrintStream;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -216,8 +217,16 @@ public class UI {
             
             System.out.println();
         }
-        
-        System.out.println("   A B C D E F G H I J K L M N O P Q R S T");
+        StringBuilder string = new StringBuilder();
+        string.append("   ");
+        for (int i = 0; i < numeroLinhas; i++) {
+            if(i == numeroLinhas - 1){
+                string.append((char)('A' + i));
+            }else{
+                string.append((char)('A' + i) + " ");
+            } 
+        }
+        System.out.println(string.toString());
         
     }
     public static void printarTabuleiro(CSTpeca[][] pecas, int numeroLinhas, boolean[][] possiveisAtaques){
@@ -228,7 +237,17 @@ public class UI {
             }
             System.out.println();
         }
-        System.out.println("   A B C D E F G H I J K L M N O P Q R S T");
+        
+        StringBuilder string = new StringBuilder();
+        string.append("   ");
+        for (int i = 0; i < numeroLinhas; i++) {
+            if(i == numeroLinhas - 1){
+                string.append((char)('A' + i));
+            }else{
+                string.append((char)('A' + i) + " ");
+            } 
+        }
+        System.out.println(string.toString());
     }
 
 
@@ -281,5 +300,22 @@ public class UI {
         Status.append("\n");
         return Status.toString();
         
+    }
+    public static int escolhaDoFormato(Scanner scan){
+        int linhas = 0, resp;
+        System.out.println("Bem vindo ao Comp-Senai-Tactics");
+        System.out.println("Escolha qual formato de mapa voce quer: ");
+        System.out.println("1- 20 x 20");
+        System.out.println("2- 10 x 10");
+        System.out.println("3- 26 x 26");
+        resp = scan.nextInt();
+        if(resp == 1){
+            linhas = 20;
+        }else if(resp == 2){
+            linhas = 10;
+        }else if(resp == 3){
+            linhas = 26;
+        }
+        return linhas;
     }
 }
