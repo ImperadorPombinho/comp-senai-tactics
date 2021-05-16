@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class ManipuladorDeArquivo {
     public static List<itemConsumivel> leitorConsumivel(String nome, List<itemConsumivel> qualquer, partidaCST partidaCST) throws IOException {
