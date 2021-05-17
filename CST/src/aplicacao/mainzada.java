@@ -17,6 +17,10 @@ import CSTgame.personagensCST.racoba;
 public class mainzada {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        try {
+            ManipuladorDeArquivo.lerArquivo("banner.txt");
+        } catch (IOException e1) {
+        }
         boolean pog = true;
         System.out.println("Seja Bem vindo ao Comp-Senai-Tactics");
         while(pog){
