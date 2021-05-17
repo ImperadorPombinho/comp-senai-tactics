@@ -174,7 +174,7 @@ public String toString(){
             if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
                 qualquercoisa.setVida(qualquercoisa.getVida() - 120);
-                partidaCST.morreu(qualquercoisa);
+                partidaCST.morreu(qualquercoisa, this);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
             posTeste.setCoordenada(posTeste.getLinha() - 1, posTeste.getColuna());
@@ -189,7 +189,7 @@ public String toString(){
             if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
                 qualquercoisa.setVida(qualquercoisa.getVida() - 120);
-                partidaCST.morreu(qualquercoisa);
+                partidaCST.morreu(qualquercoisa, this);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
             posTeste.setCoordenada(posTeste.getLinha() + 1, posTeste.getColuna());
@@ -204,7 +204,7 @@ public String toString(){
             if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
                 qualquercoisa.setVida(qualquercoisa.getVida() - 120);
-                partidaCST.morreu(qualquercoisa);
+                partidaCST.morreu(qualquercoisa, this);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
         }
             posTeste.setCoordenada(posTeste.getLinha(), posTeste.getColuna() - 1);
@@ -219,7 +219,7 @@ public String toString(){
             if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
                 qualquercoisa.setVida(qualquercoisa.getVida() - 120);
-                partidaCST.morreu(qualquercoisa);
+                partidaCST.morreu(qualquercoisa, this);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
 

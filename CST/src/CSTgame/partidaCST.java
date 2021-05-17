@@ -556,7 +556,7 @@ public class partidaCST implements Serializable{
         }
         return -1;
     }
-    public void morreu(CSTpeca peca){
+    public void morreu(CSTpeca peca, CSTpeca atacante){
         posicao aux = peca.getPosicao();
         if(peca.getVida() <= 0){
             tabuleiro.removerPeca(peca.getPosicao());
@@ -576,9 +576,16 @@ public class partidaCST implements Serializable{
             }else{
             if(peca.getTiminho() == time.ORACULO){
                 pecasOraculo.remove(peca);
+                if(atacante instanceof racoba){
+                    setIndOraculo(getIndOraculo() - 1);
+                }
                 
             }else{
                 pecasTropa.remove(peca);
+                if(atacante instanceof racoba){
+                    setIndTropa(getIndTropa() - 1);
+                }
+                
                 
             }
          }
@@ -739,8 +746,8 @@ public class partidaCST implements Serializable{
 
     private void setupInicial(){
         
-        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 300, 0, 20,5,"henridogT", this), 5, 'A');
-        colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 20, 0, 300,3,"racO", this), 7, 'B');
+        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 300, 0, 20,5,"henridogT", this), 5, 'A');
+        colocarNovaPeca(new racoba(tabuleiro, time.TROPA, 20, 0, 300,3,"racO", this), 7, 'B');
         colocarNovaPeca(new leao(tabuleiro, time.TROPA, 1, 0, 10,3,"leaoO"), 8, 'A');
         
         

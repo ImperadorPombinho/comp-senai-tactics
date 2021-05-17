@@ -141,7 +141,7 @@ public class racoba extends CSTpeca {
                         if(haUmaPecaDoOponente(posTeste)){
                             pecax = (CSTpeca) getTabul().peca(posTeste);
                             pecax.setVida(pecax.getVida() - 50);
-                            partidaCST.morreu(pecax);
+                            partidaCST.morreu(pecax,this);
                             System.out.println("atacado: " +pecax.getNome());
                         }
                     }
