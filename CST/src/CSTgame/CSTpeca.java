@@ -95,6 +95,7 @@ public abstract class CSTpeca extends peca{
         if(getInventario() == null ){
             setInventario(item);
             item.efeito(generico);
+            System.out.println(item.getID());
 
         }else{
             throw new exececaoCST("Inventario do personagem cheio");

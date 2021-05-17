@@ -18,9 +18,9 @@ public class ManipuladorDeArquivo {
         qualquer = new ArrayList<>();
         while (linha != null) {
                 String[] fatiada = linha.split(" ");
-                if(fatiada[0] == "FlexaoPyke"){
+                if(fatiada[0].intern() == "FlexaoPyke"){
                     ID = 1;
-                }else if(fatiada[0] == "Pizza"){
+                }else if(fatiada[0].intern() == "Pizza"){
                     ID = 2;
                 }else{
                     ID = 3;
@@ -35,17 +35,17 @@ public class ManipuladorDeArquivo {
     public static List<itemEquipavel> leitorEquipavel(String nome, List<itemEquipavel> qualquer, partidaCST partidaCST) throws IOException {
         BufferedReader buffRead = new BufferedReader(new FileReader(nome));
         String linha = buffRead.readLine();;
-        int ID = 0;
-        qualquer.clear();
+        int IDS = 0;
+         qualquer.clear();
         qualquer = new ArrayList<>();
         while (linha != null) {
                 String[] fatiada = linha.split(" ");
-                if(fatiada[0] == "CamisaDaPlaystation"){
-                    ID = 1;
-                }else if(fatiada[0] == "TacoDeSinuca"){
-                    ID = 2;
+                if(fatiada[0].intern() == "CamisadaPlaystation"){
+                    IDS = 1;
+                }else if(fatiada[0].intern() == "TacodeSinuca"){
+                    IDS = 2;
                 }
-                qualquer.add(new itemEquipavel(fatiada[0], partidaCST, ID));
+                qualquer.add(new itemEquipavel(fatiada[0], partidaCST, IDS));
 
             linha = buffRead.readLine();
         }

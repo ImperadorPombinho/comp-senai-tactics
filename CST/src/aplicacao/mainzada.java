@@ -22,10 +22,11 @@ public class mainzada {
         String[] nomes = UI.lerNomes(scan);
         boolean[][] possiveisAlgumaCoisa;
         
-
+        partidaCST partidaCST = new partidaCST(linhas, colunas);
         
          while(resp == "S"){
-            partidaCST partidaCST = new partidaCST(linhas, colunas);
+            
+            
             UI.printarSorteioAtqPecas(partidaCST);
             scan.nextLine();
             scan.nextLine();
@@ -34,7 +35,7 @@ public class mainzada {
                 
                 selec = UI.printarPartida(partidaCST, nomes, linhas, scan);
                 if(partidaCST.ispartida() == false){
-                    partidaCST.escreverNoArquivo();
+                    partidaCST.escreverNoArquivo(partidaCST);
                     break;
                 }
                 if(selec == 1){
@@ -109,10 +110,11 @@ public class mainzada {
             }
             System.out.println("Quer jogar de novo[S/N}");
             resp = scan.nextLine();
-            if(resp == "N"){
+            if(resp.intern() == "N"){
                 break;
             }else{
                 resp = "S";
+                partidaCST.resetarPartida(linhas, colunas);
             }
         }
          }   

@@ -146,7 +146,7 @@ public class partidaCST implements Serializable{
         setPartida(true);
         encherListaConsumivel(itensConsumivels);
         encherListaEquipavel(itensEquipavels);
-        lerDoArquivo();
+       
         
     }
 
@@ -219,10 +219,10 @@ public class partidaCST implements Serializable{
                     }
                 }
             }else{
-                if(atacante instanceof racoba){
-                    System.out.println("racobas nao recebem itens :)");
-                }
-                else{
+                
+                    
+                
+                
                     if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
                         pecasOraculo.remove((CSTpeca)capturada);
                         if(itensConsumivelsT.size() <= 3 ){
@@ -241,7 +241,7 @@ public class partidaCST implements Serializable{
                             darItemAleatorioEquipavel(itensEquipavelsO);
                         }
                     }
-                }
+                
             } 
         }
         proximoTurno();
@@ -289,15 +289,15 @@ public class partidaCST implements Serializable{
         }
 
     }
-    public void escreverNoArquivo(){
+    public void escreverNoArquivo(partidaCST partidaCST){
         try {
             time timinho = testaQuemGanhou();
             if(timinho == time.ORACULO){
-                ManipuladorDeArquivo.escritorConsumivel(itensConsumivelsO, "cons.txt", this);
-                ManipuladorDeArquivo.escritorEquipavel(itensEquipavelsO, "equip.txt", this);
+                ManipuladorDeArquivo.escritorConsumivel(itensConsumivelsO, "cons.txt", partidaCST);
+                ManipuladorDeArquivo.escritorEquipavel(itensEquipavelsO, "equip.txt", partidaCST);
             }else{
-                ManipuladorDeArquivo.escritorConsumivel(itensConsumivelsT, "cons.txt", this);
-                ManipuladorDeArquivo.escritorEquipavel(itensEquipavelsT, "equip.txt", this);
+                ManipuladorDeArquivo.escritorConsumivel(itensConsumivelsT, "cons.txt", partidaCST);
+                ManipuladorDeArquivo.escritorEquipavel(itensEquipavelsT, "equip.txt", partidaCST);
             }
             
         } catch (IOException e) {
@@ -306,22 +306,22 @@ public class partidaCST implements Serializable{
         }
 
     }
-    public void lerDoArquivo(){
+    public void lerDoArquivo(partidaCST partidaCST, String nome, String nom1){
         try {
             time timinho = testaQuemGanhou();
             if(timinho == time.ORACULO){
-             setItensConsumivelsO(ManipuladorDeArquivo.leitorConsumivel("cons.txt", itensConsumivelsaux, this));  
-               setItensEquipavelsO(ManipuladorDeArquivo.leitorEquipavel("equip.txt", itensEquipavelsaux, this)); 
+             setItensConsumivelsO(ManipuladorDeArquivo.leitorConsumivel(nome, itensConsumivelsO, partidaCST));  
+               setItensEquipavelsO(ManipuladorDeArquivo.leitorEquipavel(nom1, itensEquipavelsO, partidaCST)); 
             }else{
-                setItensConsumivelsT(ManipuladorDeArquivo.leitorConsumivel("cons.txt", itensConsumivelsaux, this)); 
-            setItensEquipavelsT(ManipuladorDeArquivo.leitorEquipavel("equip.txt", itensEquipavelsaux, this)); 
+                setItensConsumivelsT(ManipuladorDeArquivo.leitorConsumivel(nome, itensConsumivelsT, partidaCST)); 
+            setItensEquipavelsT(ManipuladorDeArquivo.leitorEquipavel(nom1, itensEquipavelsT, partidaCST)); 
             }
             for (itemConsumivel itemConsumivel : itensConsumivelsO) {
                 System.out.println("aeeeee porraa");
                 System.out.println(itemConsumivel.getNome());
             }
         } catch (IOException e) {
-
+            System.out.println("a");
         }
     }
     private void ataque(CSTpeca atacante, CSTpeca atacado){
@@ -358,6 +358,32 @@ public class partidaCST implements Serializable{
                 System.out.println("vida de juao: " + voce.getVida());
                 System.out.println("vida do oponente: " + oponente.getVida());
             }
+    }
+    public void resetarPartida(int linha, int coluna){
+        this.lerDoArquivo(this, "cons.txt", "equip.txt");
+        pecasOraculo.clear();
+        pecasOraculo = new ArrayList<>();
+        pecasTropa.clear();
+        pecasTropa = new ArrayList<>();
+        itensConsumivels.clear();
+        itensConsumivels = new ArrayList<>();
+        itensEquipavels.clear();
+        itensEquipavels = new ArrayList<>();
+        tabuleiro = new tabuleiro(linha, coluna);
+        this.linhaMax = linha;
+        this.ColunaMax = coluna;
+        setTurno(1);
+        jogador.setTimeAtual(time.ORACULO);
+        setupInicial();
+        Collections.shuffle(pecasOraculo);
+        Collections.shuffle(pecasTropa);
+        setIndOraculo(0);
+        setIndTropa(0);
+        jogador.setPecaAtual(pecasOraculo.get(getIndOraculo()));
+        setPartida(true);
+        encherListaConsumivel(itensConsumivels);
+        encherListaEquipavel(itensEquipavels);
+
     }
 
     private int somaVida(List<CSTpeca> qualquer){
@@ -501,7 +527,7 @@ public class partidaCST implements Serializable{
             equipavel = pesquisarListaEquipavel(ID, itensEquipavelsT);
             equipar = itensEquipavelsT.get(equipavel);
         }
-        if(verificarSeEsseItemJaEstaEquipado(equipar.getNomeItem()) == false){
+        if(verificarSeEsseItemJaEstaEquipado(equipar.getNomeItem(), generico) == false){
             generico.equiparItem(equipar, generico);
         }else{
             throw new exececaoCST("este item ja esta equipado em alguma peca");
@@ -509,16 +535,9 @@ public class partidaCST implements Serializable{
 
         
     }
-    private boolean verificarSeEsseItemJaEstaEquipado(String nomeItem){
-        CSTpeca[][] mataux = getPecas();
-        for (int i = 0; i < mataux.length; i++) {
-            for (int j = 0; j < mataux.length; j++) {
-                if(mataux[i][j].getInventario().getNomeItem() == nomeItem){
-                    return true;
-                }
-            }
-        }
-        return false;
+    private boolean verificarSeEsseItemJaEstaEquipado(String nomeItem, CSTpeca generica){
+
+        return generica.getInventario() != null && generica.getInventario().getNomeItem().intern() == nomeItem;
     }
     private int pesquisarListaEquipavel(int ID, List<itemEquipavel> qualquer2){
         for (int i = 0; i < qualquer2.size(); i++) {
@@ -714,7 +733,6 @@ public class partidaCST implements Serializable{
         colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 300, 0, 20,5,"henridogT", this), 5, 'A');
         colocarNovaPeca(new racoba(tabuleiro, time.TROPA, 20, 0, 300,3,"racO", this), 3, 'A');
         
-       
         
         
     }
