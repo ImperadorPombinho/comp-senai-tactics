@@ -732,7 +732,7 @@ public class partidaCST implements Serializable{
         
         colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 300, 0, 20,5,"henridogT", this), 5, 'A');
         colocarNovaPeca(new racoba(tabuleiro, time.TROPA, 20, 0, 300,3,"racO", this), 3, 'A');
-        
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 300,3,"leaoO"), 7, 'A');
         
         
     }

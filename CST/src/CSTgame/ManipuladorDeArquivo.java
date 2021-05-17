@@ -53,7 +53,7 @@ public class ManipuladorDeArquivo {
         return qualquer;
     }
     public static void escritorConsumivel(List<itemConsumivel> qualquer, String nome, partidaCST partidaCST) throws IOException {
-        BufferedWriter buffWrite = new BufferedWriter(new FileWriter(nome));
+        BufferedWriter buffWrite = new BufferedWriter(new FileWriter(nome, false));
         time timevencendor = partidaCST.testaQuemGanhou();
         if(timevencendor == time.ORACULO){
             for (itemConsumivel itemConsumivel : qualquer) {
@@ -68,7 +68,7 @@ public class ManipuladorDeArquivo {
         buffWrite.close();
     }
     public static void escritorEquipavel(List<itemEquipavel> qualquer, String nome, partidaCST partidaCST) throws IOException {
-        BufferedWriter buffWrite = new BufferedWriter(new FileWriter(nome));
+        BufferedWriter buffWrite = new BufferedWriter(new FileWriter(nome, false));
         time timevencendor = partidaCST.testaQuemGanhou();
         if(timevencendor == time.ORACULO){
             for (itemEquipavel itemConsumivel : qualquer) {
