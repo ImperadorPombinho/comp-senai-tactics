@@ -490,9 +490,15 @@ public class partidaCST implements Serializable{
         itemConsumivel itemUsado;
         if(jogador.getTimeAtual() == time.ORACULO){
             item = pesquisarListaConsumivel(IDUI, itensConsumivelsO);
+            if(item == -1){
+                throw new exececaoCST("item nao encontrado");
+            }
             itemUsado = itensConsumivelsO.get(item);
         }else{
             item = pesquisarListaConsumivel(IDUI, itensConsumivelsT);
+            if(item == -1){
+                throw new exececaoCST("item nao encontrado");
+            }
             itemUsado = itensConsumivelsT.get(item);
         }
          
@@ -519,10 +525,15 @@ public class partidaCST implements Serializable{
         itemEquipavel equipar;
         if(generico.getTiminho() == time.ORACULO){
             equipavel = pesquisarListaEquipavel(ID, itensEquipavelsO);
-
+            if(equipavel == -1){
+                throw new exececaoCST("item nao encontrado");
+            }
             equipar = itensEquipavelsO.get(equipavel);
         }else{
             equipavel = pesquisarListaEquipavel(ID, itensEquipavelsT);
+            if(equipavel == -1){
+                throw new exececaoCST("item nao encontrado");
+            }
             equipar = itensEquipavelsT.get(equipavel);
         }
         if(verificarSeEsseItemJaEstaEquipado(equipar.getNomeItem(), generico) == false){
