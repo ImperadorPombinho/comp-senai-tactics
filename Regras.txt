@@ -1,0 +1,55 @@
+Introdução - 
+Bem-vindo(a) ao Comp do Senai Tactics, o rpg em turnos baseado em xadrez. O Comp do Senai Tactics é um jogo de tabuleiro com batalhas e sistema de Vida, 
+Dano e habilidades, que diferem em cada peça. Cada time tem 5 peças: Henridog, Juao, Leão, Miguez e Racoba, cada uma com sua especialidade.
+
+História -
+Por séculos, o reino do Oráculo e o famigerado grupo chamado Tropa do rag disputam pelo domínio do santo graal, um artefato mágico que é capaz de garantir
+qualquer desejo a pessoa que o possui. Portanto, temos o conflito determinado Tactics, hospedado na arena "Comp do Senai", onde o reino do Oráculo e a tropa
+do rag invocam poderosos servos para realizar um confronto em time para a obtenção do santo graal.
+
+Henridog, um lanceiro gentil e humilde, que quando furioso não perdoa ningúem, que se inspira bastante na grandiosa brigada Dai Gurren, puxando seu otimismo. 
+Por possuir um grande amor, a princesa Nagatoro, o cavaleiro Henridog sempre luta com essa pessoa em mente.
+
+Juao, um vampiro assassino muito orgulhoso e egocêntrico, luta por sede de poder, sempre querendo prevalecer. Sua grande inspiração é o Mestre Ney, assim, 
+quando entra em campo, Juao sempre mantém os ideais de seu ídolo na batalha, "O pai ta on".
+
+Leão, bastante conhecido por sua incrível lealdade, ele é um bárbaro com uma história trágica. Apesar de ser bastante leal, constantemente se envolvia em brigas
+com seu mentor, Miguez, em que varias vezes ele costumava perder o controle, assumindo seu modo surtado. Entretanto, sempre se reconciliam, o que o faz o cavaleiro
+mais leal de sua nação e braço direito do seu mentor.
+
+Miguez, um feiticeiro bastante pirracento e irritante. Possui varias alcunhas para esconder as peraltices que cometeu em diversos locais no passado. Também conhecido
+como Galindo, Vermiguez e Homem Pateta, Miguez que possui grande influência em qualquer exército que passe, transmite seus conhecimentos duvidosos para seus
+púpilos, como Leão.
+
+Racoba, um arqueiro que abusa demais de sua sorte. Conhecido em varias cidades por ser o "apostador mais quente", ostenta suas riquezas em todo local que passa.
+Foram encontradas ligações entre Racoba e o "Grupo dos famosos", porém, não se tem 100% de certeza. Por sua personalidade devassa, reza a lenda que ao acabar uma
+batalha, apesar de pensar nas riquezas, o que ele mais quer na verdade são as férias.
+
+
+Explicando os personagens - 
+
+Henridog: Por ser um grande fã da brigada Dai Gurren, henridog possui a sua Broca, que o permite realizar um ataque em formato de cruz. Lembrado por ter aparições 
+como a do personagem Kuririn, sua passiva o revive com 25% de sua vida máxima. Sua movimentação consiste em todas as direções com alcance de 2 casas. Seu ataque
+básico possui o alcance de 2 casas.
+
+Juao: Possui a habilidade transfusantos, que drena 5% da vida da peça inimiga. Sua passiva faz com que ele dê 10% de dano adicional em inimigos que possuem 
+mais vida atual que Juao. Sua movimentação consiste em uma diagonal de 5 casas. Seu ataque básico tem alcance de 4 casas em linha reta.
+
+Leão: Conhecido como escudeiro, ele utiliza de seu escudo, desse modo, sua habilidade aumenta a defesa de seus aliados. O modo surtado, 
+que se ativa quando leão fica irritado, é sua passiva, a cada 3 hits, Leao aumenta seu ataque em +100. Leão pode se mover em 5 casas em linha reta e seu ataque
+básico só atinge inimigos que estão a 5 casas dele.
+
+Miguez: Já famoso por seus ataques DDoS, a sua habilidade impede seus inimigos de se moverem por 1 rodada. Também conhecido por dormir bastante em
+certos momentos, a passiva de miguez tem 10% de chance se ativar, e quando ativada, Miguez continua dormindo, assim perdendo a rodada. Miguez só pode se mover e
+atacar os inimigos que estão na sua frente.
+
+Racoba: O trader e gacha player mais famoso do Comp do Senai, portanto, sua habilidade não poderia deixar de ser baseada em sorte. A habilidade de Racoba é 
+possuir 4 itens dentre seu arsenal, cada uma com sua especialidade. O seu inventário já vem cheio, e ao utilizar sua habilidade pela primeira vez, ele alterna entre
+as armas do seu arsenal. Dentre seu arsenal temos: 
+
+Racofoice - Perde um pouco de dano, recebe mais alcance, maior movimento. Ao reutilizar a foice, realiza um ataque em área que possui mais dano. 
+Ak Trovoada - Possui menos dano, porém, maior alcance de movimentação e muito maior alcance de ataque. 
+Martelobaldo - Menor alcance de ataque e movimento, porém,dano muito maior.
+Bodychain da Gucci - Diminui seu dano, em contraponto, aumenta sua defesa e cura 20% da sua vida atual.
+
+Seu alcance padrão de movimento é de 3 casas e seu ataque é o alcance de movimento - 1 (exceto quando equipado com a Ak Trovoada).

@@ -34,7 +34,7 @@ public class ManipuladorDeArquivo {
     }
     public static List<itemEquipavel> leitorEquipavel(String nome, List<itemEquipavel> qualquer, partidaCST partidaCST) throws IOException {
         BufferedReader buffRead = new BufferedReader(new FileReader(nome));
-        String linha = buffRead.readLine();;
+        String linha = buffRead.readLine();
         int IDS = 0;
          qualquer.clear();
         qualquer = new ArrayList<>();
@@ -51,6 +51,16 @@ public class ManipuladorDeArquivo {
         }
         buffRead.close();
         return qualquer;
+    }
+    public static void lerArquivo(String nome) throws IOException{
+        BufferedReader buffRead = new BufferedReader(new FileReader(nome));
+        String linha = buffRead.readLine();
+
+        while(linha != null){
+            System.out.println(linha);
+            linha = buffRead.readLine();
+        }
+        buffRead.close();
     }
     public static void escritorConsumivel(List<itemConsumivel> qualquer, String nome, partidaCST partidaCST) throws IOException {
         BufferedWriter buffWrite = new BufferedWriter(new FileWriter(nome, false));

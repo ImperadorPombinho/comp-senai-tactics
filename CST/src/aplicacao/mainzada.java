@@ -1,11 +1,13 @@
 package aplicacao;
 
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
 import CSTgame.CSTposicao;
+import CSTgame.ManipuladorDeArquivo;
 import CSTgame.exececaoCST;
 import CSTgame.partidaCST;
 import CSTgame.personagensCST.racoba;
@@ -14,9 +16,33 @@ import CSTgame.personagensCST.racoba;
 
 public class mainzada {
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        boolean pog = true;
+        System.out.println("Seja Bem vindo ao Comp-Senai-Tactics");
+        while(pog){
+        System.out.println("EScolha qual ação quer visualizar: ");
+        System.out.println("1 - Jogar");
+        System.out.println("2 - Ver Regras");
+        System.out.println("3 - Sair do jogo");
+        int selec = scan.nextInt();
+        if(selec == 1){
+            rodarPartida(scan);
+        }else if(selec  == 2){
+            try {
+                ManipuladorDeArquivo.lerArquivo("Regras.txt");
+            } catch (IOException e) {
+            }
+        }else if(selec == 3){
+            System.out.println("Saindo...");
+            pog = false;
+        }
+    }
+      }
+
+      public static void rodarPartida(Scanner scan){
         int selec, linhas, colunas;
         String resp = "S";
-        Scanner scan = new Scanner(System.in);
+       
         linhas = UI.escolhaDoFormato(scan);
         colunas = linhas;
         String[] nomes = UI.lerNomes(scan);
@@ -117,7 +143,7 @@ public class mainzada {
                 partidaCST.resetarPartida(linhas, colunas);
             }
         }
-         }   
+      }
            
 
         

@@ -30,8 +30,6 @@ public class partidaCST implements Serializable{
     private List<CSTpeca> pecasTropa = new ArrayList<>();
     private List<itemEquipavel> itensEquipavels = new ArrayList<>();
     private List<itemConsumivel> itensConsumivels = new ArrayList<>();
-    private List<itemEquipavel> itensEquipavelsaux = new ArrayList<>();
-    private List<itemConsumivel> itensConsumivelsaux = new ArrayList<>();
     private List<itemEquipavel> itensEquipavelsO = new ArrayList<>();
     private List<itemConsumivel> itensConsumivelsO = new ArrayList<>();
     private List<itemEquipavel> itensEquipavelsT = new ArrayList<>();
