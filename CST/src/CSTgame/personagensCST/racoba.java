@@ -16,6 +16,7 @@ public class racoba extends CSTpeca {
         super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
         setTravaMov(false);
         this.partidaCST = partidaCST;
+        setInventario(new gacha("Lucky Wheel", partidaCST, 0));
     }
     
     Random aleatorio = new Random();
@@ -126,9 +127,6 @@ public class racoba extends CSTpeca {
 
     @Override
     public void habilidade(CSTpeca generico) {
-        if(getInventario() == null){
-            setInventario(new gacha("Lucky Wheel", partidaCST, 0));
-        }
         if(getInventario().getNomeItem().equals("Foice")){
             System.out.println(getPosicao().getLinha());
             System.out.println(getPosicao().getLinha()+1);

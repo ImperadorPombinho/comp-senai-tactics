@@ -219,10 +219,10 @@ public class partidaCST implements Serializable{
                     }
                 }
             }else{
-                
-                    
-                
-                
+                if(atacante instanceof racoba){
+                    System.out.println("racobas nao recebem itens :)");
+                }
+                else{
                     if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
                         pecasOraculo.remove((CSTpeca)capturada);
                         if(itensConsumivelsT.size() <= 3 ){
@@ -231,7 +231,7 @@ public class partidaCST implements Serializable{
                         if(itensEquipavelsT.size() <= 2){
                             darItemAleatorioEquipavel(itensEquipavelsT);
                         }
-                        
+
                     }else{
                         pecasTropa.remove((CSTpeca)capturada);
                         if(itensConsumivelsO.size() <= 3){
@@ -241,7 +241,7 @@ public class partidaCST implements Serializable{
                             darItemAleatorioEquipavel(itensEquipavelsO);
                         }
                     }
-                
+                }
             } 
         }
         proximoTurno();
@@ -731,8 +731,8 @@ public class partidaCST implements Serializable{
     private void setupInicial(){
         
         colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 300, 0, 20,5,"henridogT", this), 5, 'A');
-        colocarNovaPeca(new racoba(tabuleiro, time.TROPA, 20, 0, 300,3,"racO", this), 3, 'A');
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 300,3,"leaoO"), 7, 'A');
+        colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 20, 0, 300,3,"racO", this), 7, 'B');
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 1, 0, 10,3,"leaoO"), 7, 'A');
         
         
     }
