@@ -10,12 +10,10 @@ import tabuleiroGame.posicao;
 import tabuleiroGame.tabuleiro;
 
 public class racoba extends CSTpeca {
-    private partidaCST partidaCST;
 
     public racoba(tabuleiro tabul, time timinho, int ataque, int defesa, int vida, int rangeMovimento, String nome, partidaCST partidaCST){
         super(tabul, timinho, ataque, defesa, vida, rangeMovimento, nome);
         setTravaMov(false);
-        this.partidaCST = partidaCST;
         setInventario(new gacha("Lucky Wheel", partidaCST, 0));
     }
     
