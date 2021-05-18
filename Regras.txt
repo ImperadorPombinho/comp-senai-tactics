@@ -47,7 +47,7 @@ Racoba: O trader e gacha player mais famoso do Comp do Senai, portanto, sua habi
 possuir 4 itens dentre seu arsenal, cada uma com sua especialidade. O seu inventário já vem cheio, e ao utilizar sua habilidade pela primeira vez, ele alterna entre
 as armas do seu arsenal. Dentre seu arsenal temos: 
 
-Racofoice - Perde um pouco de dano, recebe mais alcance, maior movimento. Ao reutilizar a foice, realiza um ataque em área que possui mais dano. 
+Racofoice - Perde um pouco de dano, recebe mais alcance, maior movimento. Ao reutilizar a foice, suga alma dos adversarios causando dano e curando a si mesmo. 
 Ak Trovoada - Possui menos dano, porém, maior alcance de movimentação e muito maior alcance de ataque. 
 Martelobaldo - Menor alcance de ataque e movimento, porém,dano muito maior.
 Bodychain da Gucci - Diminui seu dano, em contraponto, aumenta sua defesa e cura 20% da sua vida atual.

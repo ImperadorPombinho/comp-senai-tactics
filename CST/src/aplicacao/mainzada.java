@@ -17,26 +17,34 @@ import CSTgame.personagensCST.racoba;
 public class mainzada {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        try {
-            ManipuladorDeArquivo.lerArquivo("banner.txt");
-        } catch (IOException e1) {
-        }
         boolean pog = true;
         System.out.println("Seja Bem vindo ao Comp-Senai-Tactics");
         while(pog){
         System.out.println("EScolha qual ação quer visualizar: ");
         System.out.println("1 - Jogar");
         System.out.println("2 - Ver Regras");
-        System.out.println("3 - Sair do jogo");
+        System.out.println("3 - Cresditos");
+        System.out.println("4 - Sair do jogo");
         int selec = scan.nextInt();
         if(selec == 1){
             rodarPartida(scan);
         }else if(selec  == 2){
             try {
                 ManipuladorDeArquivo.lerArquivo("Regras.txt");
+                scan.nextLine();
+                scan.nextLine();
+                UI.limparTelaConsole();
             } catch (IOException e) {
             }
         }else if(selec == 3){
+            try {
+                ManipuladorDeArquivo.lerArquivo("creditos.txt");
+                scan.nextLine();
+                scan.nextLine();
+                UI.limparTelaConsole();
+            } catch (IOException e) {
+            }
+        }else if(selec == 4){
             System.out.println("Saindo...");
             pog = false;
         }
