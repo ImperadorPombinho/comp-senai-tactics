@@ -131,22 +131,22 @@ public class leao extends CSTpeca{
         boolean[][] matAux = new boolean[getTabul().getLinha()][getTabul().getColuna()];
         posicao posTeste = new posicao(0, 0);
         //acima
-        posTeste.setCoordenada(getPosicao().getLinha() - 5, getPosicao().getColuna());
+        posTeste.setCoordenada(getPosicao().getLinha() - 1, getPosicao().getColuna());
         if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
         //baixo
-        posTeste.setCoordenada(getPosicao().getLinha() + 5, getPosicao().getColuna());
+        posTeste.setCoordenada(getPosicao().getLinha() + 1, getPosicao().getColuna());
         if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
         //esquerda
-        posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 5);
+        posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 1);
         if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste) && getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
         //direita
-        posTeste.setCoordenada(getPosicao().getLinha() , getPosicao().getColuna() + 5);
+        posTeste.setCoordenada(getPosicao().getLinha() , getPosicao().getColuna() + 1);
         if(getTabul().posicaoExiste(posTeste) && haUmaPecaDoOponente(posTeste)&& getTabul().istoEhUmaPeca(posTeste)){
             matAux[posTeste.getLinha()][posTeste.getColuna()] = true;
         }
