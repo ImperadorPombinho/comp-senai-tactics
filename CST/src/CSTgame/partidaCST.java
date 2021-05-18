@@ -229,27 +229,28 @@ public class partidaCST implements Serializable{
                 else{
                     if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
                         pecasOraculo.remove((CSTpeca)capturada);
-                        if(itensConsumivelsT.size() <= 3 ){
+                        if(itensConsumivelsT.size() <= 3  && ! (atacante instanceof racoba)){
                             darItemAleatorioConsumivel(itensConsumivelsT);
                         }
-                        if(itensEquipavelsT.size() <= 2){
+                        if(itensEquipavelsT.size() <= 2 && ! (atacante instanceof racoba)){
                             darItemAleatorioEquipavel(itensEquipavelsT);
                         }
 
                     }else{
                         pecasTropa.remove((CSTpeca)capturada);
-                        if(itensConsumivelsO.size() <= 3){
+                        if(itensConsumivelsO.size() <= 3 && ! (atacante instanceof racoba)){
                             darItemAleatorioConsumivel(itensConsumivelsO);
                         }
-                        if(itensEquipavelsO.size() <= 2){
+                        if(itensEquipavelsO.size() <= 2 && ! (atacante instanceof racoba)){
                             darItemAleatorioEquipavel(itensEquipavelsO);
                         }
                     }
-                }
+                
             } 
         }
         proximoTurno();
     }
+}
     public void perfomaceHabilidade(CSTposicao posicaoVoce, CSTposicao posicaoAliado){
         posicao posicaooVoce = posicaoVoce.toPosicao();
         posicao posicaooAliado = posicaoAliado.toPosicao();
@@ -581,15 +582,17 @@ public class partidaCST implements Serializable{
                     }
                 }
             }else{
-            if(peca.getTiminho() == time.ORACULO){
-                pecasOraculo.remove(peca);
-                
-            }else{
-                pecasTropa.remove(peca);
+                if(peca.getTiminho() == time.ORACULO){
+                    pecasOraculo.remove(peca);
+
+                    
+                }else{
+                    pecasTropa.remove(peca);
+                }
             }
-         }
         }
-    }
+    }   
+
     private void validacaoHabilidadeGenericaPosicao(posicao posicao){
         if(!tabuleiro.istoEhUmaPeca(posicao)){
             throw new exececaoCST("isto nao eh uma peca");
@@ -744,12 +747,14 @@ public class partidaCST implements Serializable{
     }
 
     private void setupInicial(){
-        colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 20, 5, 100,3,"racO", this), 8, 'D');
-        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 20, 5, 100,3,"racO", this), 8, 'D');
-        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 1, 0, 20,5,"henridogT", this), 7, 'D');
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 1, 0, 100,3,"leaoO"), 8, 'E');
-        colocarNovaPeca(new juao(tabuleiro, time.TROPA, 1, 0, 100,3,"lea22"), 9, 'D');
-        //colocarNovaPeca(new racoba(tabuleiro, time.TROPA, 1, 0, 100,3,"racoT", this), 8, 'C');
+        
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 300, 0, 1,5,"henridogT"), 7, 'B');
+        colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 20, 0, 300,3,"racO", this), 7, 'A');
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 1, 0, 10,3,"leaoO"), 8, 'A');
+        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 1, 0, 10,3,"leaoO", this), 16, 'D');
+        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 300, 0, 20,5,"henridogT", this), 7, 'C');
+        colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 20, 0, 300,3,"racO", this), 8, 'A');
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 1, 0, 10,3,"leaoO"), 7, 'A');
         
         
     }

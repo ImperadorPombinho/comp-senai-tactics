@@ -173,7 +173,7 @@ public String toString(){
         while (cont <= rangehab  && getTabul().posicaoExiste(posTeste)) {
             if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
-                qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                qualquercoisa.setVida(qualquercoisa.getVida() - 400);
                 partidaCST.morreu(qualquercoisa, this);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
@@ -188,7 +188,7 @@ public String toString(){
         while ( cont <= rangehab && getTabul().posicaoExiste(posTeste)) {
             if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
-                qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                qualquercoisa.setVida(qualquercoisa.getVida() - 400);
                 partidaCST.morreu(qualquercoisa, this);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
@@ -203,7 +203,7 @@ public String toString(){
         while (cont <= rangehab && getTabul().posicaoExiste(posTeste)) {
             if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
-                qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                qualquercoisa.setVida(qualquercoisa.getVida() - 400);
                 partidaCST.morreu(qualquercoisa, this);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
         }
@@ -218,7 +218,7 @@ public String toString(){
         while ( cont <= rangehab && getTabul().posicaoExiste(posTeste)) {
             if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
                 qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
-                qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                qualquercoisa.setVida(qualquercoisa.getVida() - 400);
                 partidaCST.morreu(qualquercoisa, this);
                 System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
             }
