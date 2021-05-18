@@ -22,7 +22,18 @@ import tabuleiroGame.tabuleiro;
 public class partidaCST implements Serializable{
     private tabuleiro tabuleiro;
     private int linhaMax;
+    private int IDmapa;
     private int ColunaMax;
+    public int getIDmapa() {
+        return IDmapa;
+    }
+
+    public void setIDmapa(int iDmapa) {
+        IDmapa = iDmapa;
+    }
+
+
+
     private boolean partida;
     private boolean trava;
     private jogador jogador = new jogador();
@@ -129,10 +140,11 @@ public class partidaCST implements Serializable{
         this.trava = trava;
     }
 
-    public partidaCST(int linha, int coluna) {
+    public partidaCST(int linha, int coluna, int ID) {
         tabuleiro = new tabuleiro(linha, coluna);
         this.linhaMax = linha;
         this.ColunaMax = coluna;
+        this.IDmapa = ID;
         setTurno(1);
         jogador.setTimeAtual(time.ORACULO);
         setupInicial();
@@ -236,7 +248,7 @@ public class partidaCST implements Serializable{
                             darItemAleatorioEquipavel(itensEquipavelsT);
                         }
 
-                    }else{
+                    }else if(((CSTpeca)capturada).getTiminho() == time.TROPA){
                         pecasTropa.remove((CSTpeca)capturada);
                         if(itensConsumivelsO.size() <= 3 ){
                             darItemAleatorioConsumivel(itensConsumivelsO);
@@ -365,7 +377,7 @@ public class partidaCST implements Serializable{
                 System.out.println("vida do oponente: " + oponente.getVida());
             }
     }
-    public void resetarPartida(int linha, int coluna){
+    public void resetarPartida(int linha, int coluna, int ID){
         this.lerDoArquivo(this, "cons.txt", "equip.txt");
         pecasOraculo.clear();
         pecasOraculo = new ArrayList<>();
@@ -378,6 +390,7 @@ public class partidaCST implements Serializable{
         tabuleiro = new tabuleiro(linha, coluna);
         this.linhaMax = linha;
         this.ColunaMax = coluna;
+        this.IDmapa = ID;
         setTurno(1);
         jogador.setTimeAtual(time.ORACULO);
         setupInicial();
@@ -748,6 +761,30 @@ public class partidaCST implements Serializable{
     }
 
     private void setupInicial(){
+        
+        if(getIDmapa() == 1){
+            colocarNovaPeca(new obstaculo(tabuleiro, time.OBSTACULO, 0, 0, 10,5,"obsT"), 6, 'B');
+            colocarNovaPeca(new obstaculo(tabuleiro, time.OBSTACULO, 0, 0, 10,5,"obsT"), 15, 'E');
+            colocarNovaPeca(new obstaculo(tabuleiro, time.OBSTACULO, 0, 0, 10,5,"obsO"), 8, 'L');
+            colocarNovaPeca(new obstaculo(tabuleiro, time.OBSTACULO, 0, 0, 10,5,"obsT"), 16, 'Q');
+            colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 0, 120,5,"leaoT"), 8, 'B');
+            colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 120,5,"leaoT"), 8, 'D');
+
+        }else if(getIDmapa() == 2){
+            colocarNovaPeca(new obstaculo(tabuleiro, time.OBSTACULO, 0, 0, 10,5,"obsT"), 6, 'B');
+            colocarNovaPeca(new obstaculo(tabuleiro, time.OBSTACULO, 0, 0, 10,5,"obsT"), 10, 'G');
+            colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 0, 120,5,"leaoT"), 8, 'B');
+            colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 120,5,"leaoT"), 8, 'D');
+        }else{
+            colocarNovaPeca(new obstaculo(tabuleiro, time.OBSTACULO, 0, 0, 10,5,"obsT"), 6, 'A');
+            colocarNovaPeca(new obstaculo(tabuleiro, time.OBSTACULO, 0, 0, 10,5,"obsT"), 10, 'Z');
+            colocarNovaPeca(new obstaculo(tabuleiro, time.OBSTACULO, 0, 0, 10,5,"obsT"), 14, 'F');
+            colocarNovaPeca(new obstaculo(tabuleiro, time.OBSTACULO, 0, 0, 10,5,"obsT"), 22, 'H');
+            colocarNovaPeca(new obstaculo(tabuleiro, time.OBSTACULO, 0, 0, 10,5,"obsT"), 7, 'S');
+            colocarNovaPeca(new obstaculo(tabuleiro, time.OBSTACULO, 0, 0, 10,5,"obsT"), 3, 'G');
+            colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 0, 120,5,"leaoT"), 8, 'B');
+            colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 120,5,"leaoT"), 8, 'D');
+        }
         //LEAO
         /*colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 120,5,"leaoT"), 8, 'B');
         colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 0, 120,5,"leaoO"), 7, 'B');
@@ -768,19 +805,12 @@ public class partidaCST implements Serializable{
         colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 300,5,"leaoT"), 6, 'B');*/
         //OBSTACULO
         /*colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 120,5,"leaoT"), 16, 'D');
-        colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 10,5,"obsT"), 6, 'B');
+        colocarNovaPeca(new obstaculo(tabuleiro, time.OBSTACULO, 0, 0, 10,5,"obsT"), 6, 'B');
         colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 0, 120,5,"leaoO"), 7, 'B');*/
         //TESTAR ITEM COM VENCEDOR
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 120,5,"leaoT"), 8, 'B');
+        /*colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 120,5,"leaoT"), 8, 'B');
         colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 300, 0, 120,5,"leaoO"), 7, 'B');
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 120,5,"leaoT"), 6, 'C');
-        /*colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 300, 0, 1,5,"leaoO"), 7, 'B');
-        colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 20, 0, 300,3,"racO", this), 7, 'A');
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 1, 0, 10,3,"leaoO"), 9, 'A');
-        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 1, 0, 10,3,"leaoO", this), 16, 'D');
-        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 300, 0, 20,5,"henridogT", this), 7, 'C');
-        colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 20, 0, 300,3,"racO", this), 8, 'A');
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 1, 0, 10,3,"leaoO"), 6, 'A');*/
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 120,5,"leaoT"), 6, 'C');*/
         
         
     }

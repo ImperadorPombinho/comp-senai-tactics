@@ -12,7 +12,7 @@ public class obstaculo extends CSTpeca{
     }
 
     public String toString(){
-        return "👽";
+        return "#";
     }
 
     @Override

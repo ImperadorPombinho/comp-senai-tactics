@@ -138,16 +138,19 @@ public class racoba extends CSTpeca {
                     if(getTabul().posicaoExiste(posTeste)){
                         if(haUmaPecaDoOponente(posTeste)){
                             pecax = (CSTpeca) getTabul().peca(posTeste);
-                            System.out.println("~~~~~Ceifador de almas~~~~~");
-                            System.out.println("Oponente em alcance: " +pecax.getNome()
-                            +"\nVida oponente: "+pecax.getVida());
-                            setVida(getVida() + (pecax.getVida()/10));
-                            pecax.setVida(pecax.getVida() - (pecax.getVida()/10));
-                            if(pecax.getVida() <= 0){
-                                pecax.setVida(1);
+                            if(!(pecax instanceof obstaculo)){
+                                System.out.println("~~~~~Ceifador de almas~~~~~");
+                                System.out.println("Oponente em alcance: " +pecax.getNome()
+                                +"\nVida oponente: "+pecax.getVida());
+                                setVida(getVida() + (pecax.getVida()/10));
+                                pecax.setVida(pecax.getVida() - (pecax.getVida()/10));
+                                if(pecax.getVida() <= 0){
+                                    pecax.setVida(1);
+                                }
+                                System.out.println("absorveu: " +pecax.getNome());
+                                System.out.println("vida atual do alvo: " +pecax.getVida());
                             }
-                            System.out.println("absorveu: " +pecax.getNome());
-                            System.out.println("vida atual do alvo: " +pecax.getVida());
+
                         }
                     }
                 }

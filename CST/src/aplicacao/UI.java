@@ -263,6 +263,8 @@ public class UI {
         }else{
             if(peca.getTiminho() == time.ORACULO){
                 System.out.print(ANSI_BLUE + peca + ANSI_RESET);
+            }else if(peca.getTiminho() == time.OBSTACULO){
+                System.out.print(ANSI_YELLOW + peca + ANSI_RESET);
             }else{
                 System.out.print(ANSI_RED + peca + ANSI_RESET);
             }

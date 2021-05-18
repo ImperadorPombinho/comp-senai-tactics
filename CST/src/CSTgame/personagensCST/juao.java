@@ -1,6 +1,7 @@
 package CSTgame.personagensCST;
 
 import CSTgame.CSTpeca;
+import CSTgame.exececaoCST;
 import CSTgame.time;
 import tabuleiroGame.posicao;
 import tabuleiroGame.tabuleiro;
@@ -111,14 +112,18 @@ public class juao extends CSTpeca{
 
         @Override
     public void habilidade(CSTpeca alvo) {
+        int dano = 0;
         if(Math.abs(alvo.getPosicao().getLinha() - this.getPosicao().getLinha()) <= 5 && Math.abs(alvo.getPosicao().getColuna() - this.getPosicao().getColuna()) <= 5){
-            int dano;
-            dano = alvo.getVida()/20;
-            if(dano == 0){
-                dano = 1;
-            }
+            if(alvo.getTiminho() == time.OBSTACULO){
+                throw new exececaoCST("nao eh possivel sugar o obstaculo");
+            }else{
+             dano = alvo.getVida()/20;
+             if(dano == 0){
+                   dano = 1;
+             }
             
-            this.setVida(this.getVida() + dano);
+             this.setVida(this.getVida() + dano);
+          }
         }else{
             System.out.println("peça fora do alcance de ataque! tente novamente");
             

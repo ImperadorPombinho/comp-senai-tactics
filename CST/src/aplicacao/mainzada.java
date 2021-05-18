@@ -23,7 +23,7 @@ public class mainzada {
         System.out.println("EScolha qual ação quer visualizar: ");
         System.out.println("1 - Jogar");
         System.out.println("2 - Ver Regras");
-        System.out.println("3 - Cresditos");
+        System.out.println("3 - Creditos");
         System.out.println("4 - Sair do jogo");
         int selec = scan.nextInt();
         if(selec == 1){
@@ -52,15 +52,22 @@ public class mainzada {
       }
 
       public static void rodarPartida(Scanner scan){
-        int selec, linhas, colunas;
+        int selec, linhas, colunas, ID = 1;
         String resp = "S";
        
         linhas = UI.escolhaDoFormato(scan);
+        if(linhas == 20){
+            ID = 1;
+        }else if(linhas == 10){
+            ID = 2;
+        }else if(linhas == 26){
+            ID = 3;
+        }
         colunas = linhas;
         String[] nomes = UI.lerNomes(scan);
         boolean[][] possiveisAlgumaCoisa;
         
-        partidaCST partidaCST = new partidaCST(linhas, colunas);
+        partidaCST partidaCST = new partidaCST(linhas, colunas, ID);
         
          while(resp == "S"){
             
@@ -152,7 +159,7 @@ public class mainzada {
                 break;
             }else{
                 resp = "S";
-                partidaCST.resetarPartida(linhas, colunas);
+                partidaCST.resetarPartida(linhas, colunas, ID);
             }
         }
       }

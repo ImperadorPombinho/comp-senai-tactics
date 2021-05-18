@@ -25,8 +25,8 @@ public class CSTposicao {
 
  
     public CSTposicao(char coluna, int linha, int linhaMax) {
-        if(coluna < 'A' || coluna > 'U' || linha < 1 || linha > linhaMax){
-            throw new exececaoCST("erro instanciando CSTposiçao, valores permitidos de A1 ate T"+linhaMax);
+        if(coluna < 'A' || coluna > 'Z' || linha < 1 || linha > linhaMax){
+            throw new exececaoCST("erro instanciando CSTposiçao, valores permitidos de A1 ate Z"+linhaMax);
         }
         this.coluna = coluna;
         this.linha = linha;
