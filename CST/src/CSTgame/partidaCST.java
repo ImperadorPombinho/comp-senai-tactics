@@ -229,19 +229,19 @@ public class partidaCST implements Serializable{
                 else{
                     if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
                         pecasOraculo.remove((CSTpeca)capturada);
-                        if(itensConsumivelsT.size() <= 3  && ! (atacante instanceof racoba)){
+                        if(itensConsumivelsT.size() <= 3  ){
                             darItemAleatorioConsumivel(itensConsumivelsT);
                         }
-                        if(itensEquipavelsT.size() <= 2 && ! (atacante instanceof racoba)){
+                        if(itensEquipavelsT.size() <= 2){
                             darItemAleatorioEquipavel(itensEquipavelsT);
                         }
 
                     }else{
                         pecasTropa.remove((CSTpeca)capturada);
-                        if(itensConsumivelsO.size() <= 3 && ! (atacante instanceof racoba)){
+                        if(itensConsumivelsO.size() <= 3 ){
                             darItemAleatorioConsumivel(itensConsumivelsO);
                         }
-                        if(itensEquipavelsO.size() <= 2 && ! (atacante instanceof racoba)){
+                        if(itensEquipavelsO.size() <= 2){
                             darItemAleatorioEquipavel(itensEquipavelsO);
                         }
                     }
