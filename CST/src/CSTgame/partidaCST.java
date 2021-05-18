@@ -217,29 +217,29 @@ public class partidaCST implements Serializable{
                     }
                 }
             }else{
-                if(atacante instanceof racoba){
-                    System.out.println("racobas nao recebem itens :)");
-                }
-                else{
+                
+                    
+                
+                
                     if(((CSTpeca)capturada).getTiminho() == time.ORACULO){
                         pecasOraculo.remove((CSTpeca)capturada);
-                        if(itensConsumivelsT.size() <= 3 ){
+                        if(itensConsumivelsT.size() <= 3  && ! (atacante instanceof racoba)){
                             darItemAleatorioConsumivel(itensConsumivelsT);
                         }
-                        if(itensEquipavelsT.size() <= 2){
+                        if(itensEquipavelsT.size() <= 2 && ! (atacante instanceof racoba)){
                             darItemAleatorioEquipavel(itensEquipavelsT);
                         }
 
                     }else{
                         pecasTropa.remove((CSTpeca)capturada);
-                        if(itensConsumivelsO.size() <= 3){
+                        if(itensConsumivelsO.size() <= 3 && ! (atacante instanceof racoba)){
                             darItemAleatorioConsumivel(itensConsumivelsO);
                         }
-                        if(itensEquipavelsO.size() <= 2){
+                        if(itensEquipavelsO.size() <= 2 && ! (atacante instanceof racoba)){
                             darItemAleatorioEquipavel(itensEquipavelsO);
                         }
                     }
-                }
+                
             } 
         }
         proximoTurno();
@@ -576,15 +576,11 @@ public class partidaCST implements Serializable{
             }else{
             if(peca.getTiminho() == time.ORACULO){
                 pecasOraculo.remove(peca);
-                if(atacante instanceof racoba){
-                    setIndOraculo(getIndOraculo() - 1);
-                }
+
                 
             }else{
                 pecasTropa.remove(peca);
-                if(atacante instanceof racoba){
-                    setIndTropa(getIndTropa() - 1);
-                }
+
                 
                 
             }
@@ -746,10 +742,10 @@ public class partidaCST implements Serializable{
 
     private void setupInicial(){
         
-        colocarNovaPeca(new henridog(tabuleiro, time.ORACULO, 300, 0, 20,5,"henridogT", this), 5, 'A');
-        colocarNovaPeca(new racoba(tabuleiro, time.TROPA, 20, 0, 300,3,"racO", this), 7, 'B');
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 300, 0, 1,5,"henridogT"), 7, 'B');
+        colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 20, 0, 300,3,"racO", this), 7, 'A');
         colocarNovaPeca(new leao(tabuleiro, time.TROPA, 1, 0, 10,3,"leaoO"), 8, 'A');
-        
+        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 1, 0, 10,3,"leaoO", this), 16, 'D');
         
     }
     protected boolean euSouInimigo(CSTpeca generico){

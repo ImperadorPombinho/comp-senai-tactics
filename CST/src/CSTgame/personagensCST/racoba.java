@@ -130,26 +130,150 @@ public class racoba extends CSTpeca {
         if(getInventario().getNomeItem().equals("Foice")){
             System.out.println(getPosicao().getLinha());
             System.out.println(getPosicao().getLinha()+1);
+            CSTpeca qualquercoisa;
             posicao posTeste = new posicao (0, 0);
-            CSTpeca pecax;
-            int lin;
-            int col;
-            for(lin = getPosicao().getLinha()+1; lin > getPosicao().getLinha()-2; lin--){
+            int rangehab = 7;
+            int cont = 1;
+            // cima
+        
+            posTeste.setCoordenada(getPosicao().getLinha() - 1, getPosicao().getColuna());
+            while (cont <= rangehab  && getTabul().posicaoExiste(posTeste)) {
+                if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
+                    qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
+                    qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                    partidaCST.morreu(qualquercoisa, this);
+                    System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
+                }
+                posTeste.setCoordenada(posTeste.getLinha() - 1, posTeste.getColuna());
+    
+                cont++;
+            }
+            
+            // baixo
+            cont = 1;
+            posTeste.setCoordenada(getPosicao().getLinha() + 1, getPosicao().getColuna());
+            while ( cont <= rangehab && getTabul().posicaoExiste(posTeste)) {
+                if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
+                    qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
+                    qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                    partidaCST.morreu(qualquercoisa, this);
+                    System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
+                }
+                posTeste.setCoordenada(posTeste.getLinha() + 1, posTeste.getColuna());
+    
+                cont++;
+            }
+            
+            // esquerda
+           cont = 1;
+            posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() - 1);
+            while (cont <= rangehab && getTabul().posicaoExiste(posTeste)) {
+                if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
+                    qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
+                    qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                    partidaCST.morreu(qualquercoisa, this);
+                    System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
+            }
+                posTeste.setCoordenada(posTeste.getLinha(), posTeste.getColuna() - 1);
+    
+                cont++;
+            }
+            
+            // direita
+            cont = 1;
+            posTeste.setCoordenada(getPosicao().getLinha(), getPosicao().getColuna() + 1);
+            while ( cont <= rangehab && getTabul().posicaoExiste(posTeste)) {
+                if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
+                    qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
+                    qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                    partidaCST.morreu(qualquercoisa, this);
+                    System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
+                }
+    
+                posTeste.setCoordenada(posTeste.getLinha(), posTeste.getColuna() + 1);
+    
+                cont++;
+            }
+            // sup erquera
+            cont = 1;
+            posTeste.setCoordenada(getPosicao().getLinha() - 1, getPosicao().getColuna() - 1);
+            while ( cont <= rangehab && getTabul().posicaoExiste(posTeste)) {
+                if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
+                    qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
+                    qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                    partidaCST.morreu(qualquercoisa, this);
+                    System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
+                }
+    
+                posTeste.setCoordenada(posTeste.getLinha() - 1, posTeste.getColuna() - 1);
+    
+                cont++;
+            }
+            //inf esquerda
+            cont = 1;
+            posTeste.setCoordenada(getPosicao().getLinha() + 1, getPosicao().getColuna() - 1);
+            while ( cont <= rangehab && getTabul().posicaoExiste(posTeste)) {
+                if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
+                    qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
+                    qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                    partidaCST.morreu(qualquercoisa, this);
+                    System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
+                }
+    
+                posTeste.setCoordenada(posTeste.getLinha() + 1, posTeste.getColuna() - 1);
+    
+                cont++;
+            }
+            //sup direita
+            cont = 1;
+            posTeste.setCoordenada(getPosicao().getLinha() - 1, getPosicao().getColuna() + 1);
+            while ( cont <= rangehab && getTabul().posicaoExiste(posTeste)) {
+                if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
+                    qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
+                    qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                    partidaCST.morreu(qualquercoisa, this);
+                    System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
+                }
+    
+                posTeste.setCoordenada(posTeste.getLinha() - 1, posTeste.getColuna() + 1);
+    
+                cont++;
+            }
+            //inf direita
+            cont = 1;
+            posTeste.setCoordenada(getPosicao().getLinha() + 1, getPosicao().getColuna() + 1);
+            while ( cont <= rangehab && getTabul().posicaoExiste(posTeste)) {
+                if (haUmaPecaDoOponente(posTeste) && getTabul().posicaoExiste(posTeste)) {
+                    qualquercoisa = (CSTpeca) getTabul().peca(posTeste);
+                    qualquercoisa.setVida(qualquercoisa.getVida() - 120);
+                    partidaCST.morreu(qualquercoisa, this);
+                    System.out.println("vida do qualquer coisa: " + qualquercoisa.getVida());
+                }
+    
+                posTeste.setCoordenada(posTeste.getLinha() + 1, posTeste.getColuna() + 1);
+    
+                cont++;
+            }
+            //posicao posTeste = new posicao (0, 0);
+            //CSTpeca pecax;
+            //int lin;
+            //int col;
+            /*for(lin = getPosicao().getLinha()+1; lin > getPosicao().getLinha()-2; lin--){
                 for(col = getPosicao().getColuna()-1; col < getPosicao().getColuna()+2; col++){
                     posTeste.setCoordenada(lin, col);
                     if(getTabul().posicaoExiste(posTeste)){
                         if(haUmaPecaDoOponente(posTeste)){
                             pecax = (CSTpeca) getTabul().peca(posTeste);
-                            pecax.setVida(pecax.getVida() - 50);
+                            pecax.setVida(pecax.getVida() - 300);
                             partidaCST.morreu(pecax,this);
                             System.out.println("atacado: " +pecax.getNome());
                         }
                     }
                 }
-            }
+            }*/
             System.out.println("A racofoice atual foi quebrada!");
         }
-        ((gacha)getInventario()).atributos(this, aleatorio.nextInt(4)+1);
+        ((gacha)getInventario()).atributos(this, aleatorio.nextInt(1)+1);
     }
     
     
