@@ -62,7 +62,7 @@ public class gacha extends itemEquipavel implements gachaRollIf {
                 this.setNomeItem("Foice");
                 generico.setInventario(this);
                 efeitoFoice(generico);
-                System.out.println("Racofoice!! Agora é possível utilizar o giro mortal!");
+                System.out.println("Racofoice!! Preparado para roubar almas!!");
                 break;
             case 2:
                 this.setNomeItem("AK Trovoada");

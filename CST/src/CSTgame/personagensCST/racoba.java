@@ -140,14 +140,22 @@ public class racoba extends CSTpeca {
                     if(getTabul().posicaoExiste(posTeste)){
                         if(haUmaPecaDoOponente(posTeste)){
                             pecax = (CSTpeca) getTabul().peca(posTeste);
-                            pecax.setVida(pecax.getVida() - 50);
-                            partidaCST.morreu(pecax,this);
-                            System.out.println("atacado: " +pecax.getNome());
+                            System.out.println("~~~~~Ceifador de almas~~~~~");
+                            System.out.println("Oponente em alcance: " +pecax.getNome()
+                            +"\nVida oponente: "+pecax.getVida());
+                            setVida(getVida() + (pecax.getVida()/10));
+                            pecax.setVida(pecax.getVida() - (pecax.getVida()/10));
+                            if(pecax.getVida() <= 0){
+                                pecax.setVida(1);
+                            }
+                            System.out.println("absorveu: " +pecax.getNome());
+                            System.out.println("vida atual do alvo: " +pecax.getVida());
                         }
                     }
                 }
             }
-            System.out.println("A racofoice atual foi quebrada!");
+            System.out.println(getNome() +" absorveu vida dos inimigos ao redor e agora seu HP esta em: " +getVida());
+            System.out.println("A racofoice atual foi quebrada devido ao poder!");
         }
         ((gacha)getInventario()).atributos(this, aleatorio.nextInt(4)+1);
     }

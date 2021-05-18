@@ -295,7 +295,7 @@ public class partidaCST implements Serializable{
     }
     public void escreverNoArquivo(partidaCST partidaCST){
         try {
-            time timinho = testaQuemGanhou();
+            time timinho = testaQuemGanhou();   
             if(timinho == time.ORACULO){
                 ManipuladorDeArquivo.escritorConsumivel(itensConsumivelsO, "cons.txt", partidaCST);
                 ManipuladorDeArquivo.escritorEquipavel(itensEquipavelsO, "equip.txt", partidaCST);
@@ -565,6 +565,7 @@ public class partidaCST implements Serializable{
     public void morreu(CSTpeca peca, CSTpeca atacante){
         posicao aux = peca.getPosicao();
         if(peca.getVida() <= 0){
+            
             tabuleiro.removerPeca(peca.getPosicao());
             if(peca instanceof henridog){
                 if(((henridog)peca).isRENASCEU() == false){
@@ -582,17 +583,9 @@ public class partidaCST implements Serializable{
             }else{
             if(peca.getTiminho() == time.ORACULO){
                 pecasOraculo.remove(peca);
-                if(atacante instanceof racoba){
-                    setIndOraculo(getIndOraculo() - 1);
-                }
                 
             }else{
                 pecasTropa.remove(peca);
-                if(atacante instanceof racoba){
-                    setIndTropa(getIndTropa() - 1);
-                }
-                
-                
             }
          }
         }
@@ -752,9 +745,11 @@ public class partidaCST implements Serializable{
 
     private void setupInicial(){
         
-        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 300, 0, 20,5,"henridogT", this), 7, 'C');
-        colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 20, 0, 300,3,"racO", this), 8, 'A');
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 1, 0, 10,3,"leaoO"), 7, 'A');
+        colocarNovaPeca(new henridog(tabuleiro, time.TROPA, 1, 0, 20,5,"henridogT", this), 7, 'D');
+        colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 20, 0, 300,3,"racO", this), 8, 'D');
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 1, 0, 100,3,"leaoO"), 8, 'E');
+        colocarNovaPeca(new juao(tabuleiro, time.TROPA, 1, 0, 100,3,"lea22"), 9, 'D');
+        colocarNovaPeca(new racoba(tabuleiro, time.TROPA, 1, 0, 100,3,"racoT", this), 8, 'C');
         
         
     }
