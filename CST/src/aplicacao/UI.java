@@ -210,7 +210,7 @@ public class UI {
             System.out.print((numeroLinhas-i) + " ");
             }
             for (int j = 0; j < pecas.length; j++) {
-                printarPeca(pecas[i][j], false);
+                printarPeca(pecas[i][j], false, j);
             }
             
             System.out.println();
@@ -231,7 +231,7 @@ public class UI {
         for (int i = 0; i < pecas.length; i++) {
             System.out.print((numeroLinhas - i) + " ");
             for (int j = 0; j < pecas.length; j++) {
-                printarPeca(pecas[i][j], possiveisAtaques[i][j]);
+                printarPeca(pecas[i][j], possiveisAtaques[i][j], j);
             }
             System.out.println();
         }
@@ -250,11 +250,15 @@ public class UI {
 
 
 
-    private static void printarPeca(CSTpeca peca, boolean telaDeFundo){
+    private static void printarPeca(CSTpeca peca, boolean telaDeFundo, int coluna){
         if(telaDeFundo == true){
             System.out.print(ANSI_PURPLE_BACKGROUND);
-        }
-        if(peca == null){
+        } 
+        /*if(peca == null && telaDeFundo == false && coluna % 2 == 0){
+            System.out.print(ANSI_CYAN_BACKGROUND + "-" + ANSI_RESET);
+        }else if(peca == null && telaDeFundo == false && coluna % 2 == 1){
+            System.out.print(ANSI_BLUE_BACKGROUND + "-" + ANSI_RESET);
+        }else*/ if(peca == null){
             System.out.print("-" + ANSI_RESET);
         }else{
             if(peca.getTiminho() == time.ORACULO){
