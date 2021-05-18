@@ -749,7 +749,7 @@ public class partidaCST implements Serializable{
 
     private void setupInicial(){
         //LEAO
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 120,5,"leaoT"), 8, 'B');
+        /*colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 120,5,"leaoT"), 8, 'B');
         colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 0, 120,5,"leaoO"), 7, 'B');
         colocarNovaPeca(new miguez(tabuleiro, time.ORACULO, 20, 0, 1,5,this,"miguezO"), 7, 'C');
         //JUAO
@@ -765,7 +765,11 @@ public class partidaCST implements Serializable{
         //RACOBA
         colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 300,5,"leaoT"), 8, 'B');
         colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 20, 0, 300,5,"racobaO", this), 7, 'B');
-        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 300,5,"leaoT"), 6, 'B');
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 300,5,"leaoT"), 6, 'B');*/
+        //OBSTACULO
+        colocarNovaPeca(new leao(tabuleiro, time.TROPA, 20, 0, 120,5,"leaoT"), 16, 'D');
+        colocarNovaPeca(new obstaculo(tabuleiro, time.TROPA, 0, 0, 10,5,"obsT"), 6, 'B');
+        colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 20, 0, 120,5,"leaoO"), 7, 'B');
         /*colocarNovaPeca(new leao(tabuleiro, time.ORACULO, 300, 0, 1,5,"leaoO"), 7, 'B');
         colocarNovaPeca(new racoba(tabuleiro, time.ORACULO, 20, 0, 300,3,"racO", this), 7, 'A');
         colocarNovaPeca(new leao(tabuleiro, time.TROPA, 1, 0, 10,3,"leaoO"), 9, 'A');
